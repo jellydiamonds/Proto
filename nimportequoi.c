@@ -1,4 +1,7 @@
+#inlude <stdio.h>
+
 int main()
 {
-  return 0;
+	printf("NIMPORTE QUOI\n");
+  	return 0;
 }  
