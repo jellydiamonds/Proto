@@ -1,0 +1,1 @@
+Source code of Java EE projects will be stored in this folder.
