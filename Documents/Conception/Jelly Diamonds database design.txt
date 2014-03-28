@@ -1,11 +1,8 @@
 Database: DB_JELLY
-
-Tables:
-	- GEM_ID
 	
 1. Table GEM_ID:
-	- id			: BIGINT(20) UNSIGNED	NOT NULL	AUTO_INCREMENT PRIMARY KEY
-	- date			: DATETIME				NOT NULL
+	- id			: BIGINT(20) UNSIGNED		NOT NULL	AUTO_INCREMENT PRIMARY KEY
+	- date			: DATETIME			NOT NULL
 	- reference		: VARCHAR(10)			NOT NULL
 	- species		: VARCHAR(50)			NOT NULL
 	- color			: VARCHAR(20)			NOT NULL
@@ -16,11 +13,22 @@ Tables:
 	- size_y		: DECIMAL(5,1)			NOT NULL
 	- size_z		: DECIMAL(5,1)			
 	- clarity		: VARCHAR(20)			NOT NULL
-	- enhancement	: VARCHAR(10)
+	- enhancement		: VARCHAR(10)
 	- origin		: VARCHAR(50)
-	- certificate	: VARCHAR(50)
+	- certificate		: VARCHAR(50)
 	- comments		: VARCHAR(1000)
 	- price			: DECIMAL(15,2)
 	- supplier		: BIGINT UNSIGNED	(FOREIGN KEY to be associated later with a USER_PRO table)
 	- photo			: VARCHAR(20)
 	- light			: VARCHAR(20)
+
+2. TABLE USER_PRO:
+	- id			: BIGINT(20) UNSIGNED		NOT NULL	AUTO_INCREMENT PRIMARY KEY
+	- signup_date		: DATETIME			NOT NULL
+	- first_name		: VARCHAR(40)			NOT NULL
+	- last_name		: VARCHAR(40)			NOT NULL
+	- display_name		: VARCHAR(40)			NOT NULL UNIQUE
+	- email			: VARCHAR(50)			NOT NULL UNIQUE
+	- phone			: VARCHAR(20)			NOT NULL
+	- country		: VARCHAR(40)			NOT NULL
+	- city			: VARCHAR(40)
