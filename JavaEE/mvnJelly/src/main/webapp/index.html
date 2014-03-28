@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Jelly Diamonds</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link type="text/css" rel="stylesheet" href="css/jellyIndex.css" />
+        <script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+		<script type="text/javascript" src="js/jelly.js"></script>
+    </head>
+    <body>
+    <div id="mainContent">
+        <h1>ПРИВЕТ!</h1>
+        <p>
+        	Welcome to the <span id="jellyText">Jelly Diamonds</span> project.<br/>
+        	To access RESTful web services, type URL in the following form:
+        </p>
+        <div class="urlBlock" id="testApiURL" >http://jelly.diamonds/jellyDiamonds-1.0/api<span id="resource">/resource</span></div>
+        <p>where <b>/resource</b> has to be replaced by one of the proposed web services:</p>
+        <ul>
+        	<li>
+        		<span class="api">test API:</span>
+        		<ul>
+        			<li><a id="helloLink">/hello</a> - prints hello message [plain text]</li>
+        			<li><a id="randomLink">/random</a> - returns the random integer between 1 and 10 [plain text]</li>
+        		</ul>
+        	</li>
+        	<li>
+        		<span class="api" id="gemAPI">Gem API:</span>
+        		<ul>
+        			<li><span class="url">/gems/addGem/{type}/{color}</span> - adds a gem to the database. <br/>
+        			Replace {type} and {color} by strings OR use the following form:</li>
+        		</ul>
+        	</li>
+        </ul> 
+        <div class="urlBlock" id="addGemURL">
+        	http://jelly.diamonds/jellyDiamonds-1.0/api<br/>
+        	/gems/addGem/<input type="text" id="inlineGemSpecies" size="20"></input>/<input type="text" id="inlineGemColor" size="10"></input>
+        	<input type="button" id="saveAddGemURL" value="save URL" />		
+       	</div>
+       	<p><a id="addGemLink"></a></p>
+    
+    </div>
+    </body>
+</html>
