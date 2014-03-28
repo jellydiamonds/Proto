@@ -1,7 +1,7 @@
 Database: DB_JELLY
 	
 1. Table GEM_ID:
-	- id			: BIGINT(20) UNSIGNED		NOT NULL	AUTO_INCREMENT PRIMARY KEY
+	- gem_id			: BIGINT(20) UNSIGNED		NOT NULL	AUTO_INCREMENT PRIMARY KEY
 	- date			: DATETIME			NOT NULL
 	- reference		: VARCHAR(10)			NOT NULL
 	- species		: VARCHAR(50)			NOT NULL
@@ -18,12 +18,12 @@ Database: DB_JELLY
 	- certificate		: VARCHAR(50)
 	- comments		: VARCHAR(1000)
 	- price			: DECIMAL(15,2)
-	- supplier		: BIGINT UNSIGNED	(FOREIGN KEY to be associated later with a USER_PRO table)
+	- supplier		: BIGINT UNSIGNED		NOT NULL(FOREIGN KEY to be associated later with a USER_PRO table)
 	- photo			: VARCHAR(20)
 	- light			: VARCHAR(20)
 
 2. TABLE USER_PRO:
-	- id			: BIGINT(20) UNSIGNED		NOT NULL	AUTO_INCREMENT PRIMARY KEY
+	- user_id			: BIGINT(20) UNSIGNED		NOT NULL	AUTO_INCREMENT PRIMARY KEY
 	- signup_date		: DATETIME			NOT NULL
 	- first_name		: VARCHAR(40)			NOT NULL
 	- last_name		: VARCHAR(40)			NOT NULL
@@ -32,3 +32,24 @@ Database: DB_JELLY
 	- phone			: VARCHAR(20)			NOT NULL
 	- country		: VARCHAR(40)			NOT NULL
 	- city			: VARCHAR(40)
+
+!!!! LINK : http://stackoverflow.com/questions/1723808/nullable-foreign-key-bad-practice !!!
+3. TABLE CURRENT_TRADINGs:
+	- trade_id		: BIGINT(20) UNSIGNED		NOT NULL	AUTO_INCREMENT PRIMARY KEY
+	- sale_or_ask		: VARCHAR(4)			NOT NULL
+	- bid_or_direct		: VARCHAR(6)			NOT NULL
+	- posted_date		: DATETIME			NOT NULL
+	- end_date		: DATETIME			NOT NULL
+	- supplier		: BIGINT(20) UNSIGNED		NOT NULL(FOREIGN KEY to be associated later with a USER_PRO table)
+	- gem_ID		: BIGINT(20) UNSIGNED		NOT NULL(FOREIGN KEY to be associated later with a GEM_ID table)
+	- price			: DECIMAL(15,2) 		(default : GemID price)		
+
+4. TRADED:
+	- trade_id		: BIGINT(20) UNSIGNED		NOT NULL	AUTO_INCREMENT PRIMARY KEY
+	- reciever		: BIGINT(20) UNSIGNED		NOT NULL (FOREIGN KEY to be associated later with a USER_PRO table)
+	- sale_or_ask		: VARCHAR(4)			NOT NULL
+	- posted_date		: DATETIME			NOT NULL
+	- end_date		: DATETIME			NOT NULL
+	- supplier		: BIGINT(20) UNSIGNED		NOT NULL (FOREIGN KEY to be associated later with a USER_PRO table)
+	- gem_ID		: BIGINT(20) UNSIGNED		NOT NULL (FOREIGN KEY to be associated later with a GEM_ID table)
+	- price			: DECIMAL(15,2) 		(default : GemID price)
