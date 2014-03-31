@@ -1,0 +1,6 @@
+C:\C_Sharp\JellyDiamondsTraitement\JellyDiamondsTraitement\bin\Debug\JellyDiamondsTraitement.exe.config
+C:\C_Sharp\JellyDiamondsTraitement\JellyDiamondsTraitement\bin\Debug\JellyDiamondsTraitement.exe
+C:\C_Sharp\JellyDiamondsTraitement\JellyDiamondsTraitement\bin\Debug\JellyDiamondsTraitement.pdb
+C:\C_Sharp\JellyDiamondsTraitement\JellyDiamondsTraitement\obj\Debug\JellyDiamondsTraitement.csprojResolveAssemblyReference.cache
+C:\C_Sharp\JellyDiamondsTraitement\JellyDiamondsTraitement\obj\Debug\JellyDiamondsTraitement.exe
+C:\C_Sharp\JellyDiamondsTraitement\JellyDiamondsTraitement\obj\Debug\JellyDiamondsTraitement.pdb
