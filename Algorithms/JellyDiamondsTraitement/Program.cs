@@ -30,8 +30,11 @@ namespace JellyDiamondsTraitement
                     var fusionImage = new FusionImage();
                     var reductionColorFilter = new ReductionCouleur();
 
+                    Console.WriteLine("Traitement (1/3) : Redimensionnement de l'image");
                     Bitmap imageResized = imageResizer.doFilter(imageSource);
+                    Console.WriteLine("Traitement (2/3) : Creation de l'image de contour");
                     Bitmap imageFiltered = contourFilter.doFilter(reductionColorFilter.doFilter(blurryFilter.doFilter(imageResized)));
+                    Console.WriteLine("Traitement (3/3) : Fusion des images");
                     Bitmap imageDestination = fusionImage.doContour(imageResized, imageFiltered);
                     imageDestination.Save(args[1], System.Drawing.Imaging.ImageFormat.Jpeg);
                 }

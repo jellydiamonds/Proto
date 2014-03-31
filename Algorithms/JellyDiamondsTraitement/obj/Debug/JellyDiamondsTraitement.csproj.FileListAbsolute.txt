@@ -4,3 +4,9 @@ C:\C_Sharp\JellyDiamondsTraitement\JellyDiamondsTraitement\bin\Debug\JellyDiamon
 C:\C_Sharp\JellyDiamondsTraitement\JellyDiamondsTraitement\obj\Debug\JellyDiamondsTraitement.csprojResolveAssemblyReference.cache
 C:\C_Sharp\JellyDiamondsTraitement\JellyDiamondsTraitement\obj\Debug\JellyDiamondsTraitement.exe
 C:\C_Sharp\JellyDiamondsTraitement\JellyDiamondsTraitement\obj\Debug\JellyDiamondsTraitement.pdb
+C:\Users\Martin\Documents\GitHub\Proto\Algorithms\JellyDiamondsTraitement\bin\Debug\JellyDiamondsTraitement.exe.config
+C:\Users\Martin\Documents\GitHub\Proto\Algorithms\JellyDiamondsTraitement\obj\Debug\JellyDiamondsTraitement.exe
+C:\Users\Martin\Documents\GitHub\Proto\Algorithms\JellyDiamondsTraitement\obj\Debug\JellyDiamondsTraitement.pdb
+C:\Users\Martin\Documents\GitHub\Proto\Algorithms\JellyDiamondsTraitement\bin\Debug\JellyDiamondsTraitement.exe
+C:\Users\Martin\Documents\GitHub\Proto\Algorithms\JellyDiamondsTraitement\bin\Debug\JellyDiamondsTraitement.pdb
+C:\Users\Martin\Documents\GitHub\Proto\Algorithms\JellyDiamondsTraitement\obj\Debug\JellyDiamondsTraitement.csprojResolveAssemblyReference.cache
