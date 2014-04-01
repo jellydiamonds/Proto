@@ -27,20 +27,21 @@ public class MainActivity extends Activity {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.activity_main);
 	        
+	        mFrameLayout = (FrameLayout)findViewById(R.id.preview);
 	    }
 
 	    @Override
 	    protected void onDestroy() {
 	        // TODO Auto-generated method stub
 	        super.onDestroy();
-	        releaseCamera();
+	        releasePreview();
 	    }
 
 	    @Override
 	    protected void onPause() {
 	        // TODO Auto-generated method stub
 	        super.onPause();
-	        releaseCamera();
+	        releasePreview();
 	    }
 
 	    @Override
@@ -51,6 +52,13 @@ public class MainActivity extends Activity {
 	        if( ! safeCameraOpen() )
 	        	return;
 	        Log.println(Log.INFO, "[onResume()]", "Camera Opened !");
+	        
+	        /*Camera.Parameters l_param = mCamera.getParameters();
+	        l_param.setRotation(270);
+	        mCamera.setParameters(l_param);*/
+	        mCamera.setDisplayOrientation(90);
+	        mSurfaceView = new Preview(this, mCamera);
+	        mFrameLayout.addView(mSurfaceView);
 //	        Camera.Parameters p = mCamera.getParameters();
 //	        Size size = p.getPreviewSize();
 //	        int width = size.width;
@@ -82,7 +90,7 @@ public class MainActivity extends Activity {
 	    	return l_opened;
 	    
 	    try {
-	    	releaseCamera();
+	    	releasePreview();
 	        mCamera = Camera.open();
 	        l_opened = (mCamera != null);
 	    } catch (Exception e) {
@@ -93,72 +101,21 @@ public class MainActivity extends Activity {
 	    return l_opened;    
 	}
 
-	void releaseCamera()
+	void releasePreview()
 	{
-		mSurfaceView = null;
+		if( mSurfaceView != null )
+			mSurfaceView.getHolder().removeCallback(mSurfaceView);
+		
+		
 	    if (mCamera != null) {
+	        mCamera.setPreviewCallback(null);
 	        mCamera.release();
 	        mCamera = null;
 	    }
+	    
+	    
 	}
 	
 }
-
-//	private Camera mCamera = null;
-//	private Preview mPreview = null;
-//	
-//	@Override
-//	protected void onCreate(Bundle savedInstanceState) {
-//		super.onCreate(savedInstanceState);
-//		setContentView(R.layout.activity_main);
-//		mPreview = new Preview( getApplicationContext() );
-//		
-//	}
-//
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.main, menu);
-//		return true;
-//	}
-//	
-//	@Override
-//	protected void onResume() {
-//		// TODO Auto-generated method stub
-//		super.onResume();
-//		safeCameraOpen();
-//		if( mCamera != null )
-//			mPreview.setCamera(mCamera);
-//	}
-//	
-//	@Override
-//	protected void onPause() {
-//		// TODO Auto-generated method stub
-//		super.onPause();
-//		releaseCameraAndPreview();
-//	}
-//	
-//	private boolean safeCameraOpen() {
-//	    boolean qOpened = false;
-//	  
-//	    try {
-//	        releaseCameraAndPreview();
-//	        mCamera = Camera.open();
-//	        qOpened = (mCamera != null);
-//	    } catch (Exception e) {
-//	        Log.e(getString(R.string.app_name), "failed to open Camera");
-//	        e.printStackTrace();
-//	    }
-//	    
-//	    return qOpened;    
-//	}
-//
-//	private void releaseCameraAndPreview() {
-//	    mPreview.setCamera(null);
-//	    if (mCamera != null) {
-//	        mCamera.release();
-//	        mCamera = null;
-//	    }
-//	}
 
 

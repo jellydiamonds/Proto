@@ -1,4 +1,5 @@
 package com.jellydiamonds.android.camera;
+
 import java.io.IOException;
 import android.content.Context;
 import android.hardware.Camera;
@@ -8,16 +9,16 @@ import android.view.SurfaceView;
 
 /** A basic Camera preview class */
 public class Preview extends SurfaceView implements SurfaceHolder.Callback {
-    private SurfaceHolder mHolder;
-    private Camera mCamera;
+   
+    private Camera mCamera = null;
+    private SurfaceHolder mHolder = null;
 
     public Preview(Context context, Camera camera) {
         super(context);
         mCamera = camera;
-
+        mHolder = this.getHolder();
         // Install a SurfaceHolder.Callback so we get notified when the
         // underlying surface is created and destroyed.
-        mHolder = getHolder();
         mHolder.addCallback(this);
         // deprecated setting, but required on Android versions prior to 3.0
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
@@ -35,6 +36,15 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
 
     public void surfaceDestroyed(SurfaceHolder holder) {
         // empty. Take care of releasing the Camera preview in your activity.
+        
+//        this.mHolder.removeCallback(this);
+//        this.getHolder().removeCallback(this);
+//        mCamera.stopPreview();
+//        mCamera.release();
+//        mCamera = null;
+    	if(mCamera != null)
+    		mCamera.stopPreview();
+    	
     }
 
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
