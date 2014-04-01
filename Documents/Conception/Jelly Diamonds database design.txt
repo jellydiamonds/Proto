@@ -1,8 +1,8 @@
 Database: DB_JELLY
 	
 1. Table GEM_ID:
-	- gem_id			: BIGINT(20) UNSIGNED		NOT NULL	AUTO_INCREMENT PRIMARY KEY
-	- date			: DATETIME			NOT NULL
+	- id			: BIGINT(20) UNSIGNED		NOT NULL	AUTO_INCREMENT PRIMARY KEY
+	- creation_date		: DATETIME			NOT NULL
 	- reference		: VARCHAR(10)			NOT NULL
 	- species		: VARCHAR(50)			NOT NULL
 	- color			: VARCHAR(20)			NOT NULL
@@ -17,9 +17,10 @@ Database: DB_JELLY
 	- origin		: VARCHAR(50)
 	- certificate		: VARCHAR(50)
 	- comments		: VARCHAR(1000)
-	- price			: DECIMAL(15,2)
-	- supplier		: BIGINT UNSIGNED		NOT NULL(FOREIGN KEY to be associated later with a USER_PRO table)
-	- photo			: VARCHAR(20)
+	- price_currency	: CHAR(3)
+	- price_value		: DECIMAL(15,2)
+	- supplier_id		: BIGINT UNSIGNED		NOT NULL(FOREIGN KEY to be associated later with a USER_PRO table)
+	- photo_link		: VARCHAR(20)
 	- light			: VARCHAR(20)
 
 2. TABLE USER_PRO:
