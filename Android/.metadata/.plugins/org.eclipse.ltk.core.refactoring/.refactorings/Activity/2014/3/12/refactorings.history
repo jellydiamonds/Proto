@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move package &apos;com.jellydiamonds.android.logger&apos; to &apos;CameraPreview/src&apos;&#x0A;- Original project: &apos;Activity&apos;&#x0A;- Destination element: &apos;CameraPreview/src&apos;&#x0A;- Original element: &apos;Activity/src/com.jellydiamonds.android.logger&apos;&#x0A;- Update references to refactored element" description="Move package" destination="=CameraPreview/src" element1="/src&lt;com.jellydiamonds.android.logger" flags="589830" fragments="1" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.movePackages" stamp="1395429819456" version="1.0"/>
+</session>
