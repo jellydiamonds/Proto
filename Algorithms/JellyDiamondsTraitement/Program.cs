@@ -26,9 +26,12 @@ namespace JellyDiamondsTraitement
                                                       {4.0/33.0,5.0/33.0,4.0/33.0},
                                                       {3.0/33.0,4.0/33.0,3.0/33.0}};
 
-                    var blurryFilter = new ImageFilter(3, 1, 1, gaussianBlurryMatrix);
-                    var contourFilter = new SobelFilter();
+                    var blurryFilter = new ImageFilter(3, 1, 1, gaussianBlurryMatrix,20);
+                    var contourFilter = new SobelFilter(20);
                     var fusionImage = new FusionImage();
+
+                    int height = imageSource.Height;
+                    int width = imageSource.Width;
 
                     Console.WriteLine("Traitement (1/3) : Reduction du bruit");
                     Bitmap blurryImage = blurryFilter.doFilter(imageSource);
@@ -37,7 +40,7 @@ namespace JellyDiamondsTraitement
                     Bitmap contourImage = contourFilter.doFilter(blurryImage);
 
                     Console.WriteLine("Traitement (3/3) : Fusion des images");
-                    Bitmap imageDestination = fusionImage.doContour(imageSource, contourImage);
+                    Bitmap imageDestination = fusionImage.doFusion(imageSource, contourImage);
 
                     imageDestination.Save(args[1], System.Drawing.Imaging.ImageFormat.Jpeg);
                 }

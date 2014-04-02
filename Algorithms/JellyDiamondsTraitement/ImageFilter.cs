@@ -13,14 +13,16 @@ namespace JellyDiamondsTraitement
         private double[,] convolutionMatrix;
         private int xCenter;
         private int yCenter;
+        private int reduction;
 
-        public ImageFilter(byte size, int xCenter, int yCenter, double[,] convolutionMatrix)
+        public ImageFilter(byte size, int xCenter, int yCenter, double[,] convolutionMatrix, int reduction)
         {
             // TODO: Complete member initialization
             this.size = size;
             this.xCenter = xCenter;
             this.yCenter = yCenter;
             this.convolutionMatrix = convolutionMatrix;
+            this.reduction = reduction;
         }
 
         public byte Size
@@ -80,7 +82,15 @@ namespace JellyDiamondsTraitement
             // Application du filtre  
             for (int i = 0; i < filteredImageRgbValues.Length; i++)
             {
-                filteredImageRgbValues[i] = applyFilter(imageRgbValues,i,imageData.Stride);
+                // Reduction avec 1% de securite (pour les filtres suivants)
+                if (i % imageData.Stride > imageData.Stride * (reduction -1) / 100 &&
+                    i % imageData.Stride < (100 - reduction +1) * imageData.Stride / 100 &&
+                    i / imageData.Stride > imageData.Height * (reduction -1) / 100 &&
+                    i / imageData.Stride < (100 - reduction +1) * imageData.Height / 100
+                    )
+                {
+                    filteredImageRgbValues[i] = applyFilter(imageRgbValues, i, imageData.Stride);
+                }
             }
 
             // Copie des valeurs RGB dans filteredImage
