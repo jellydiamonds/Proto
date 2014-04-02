@@ -20,7 +20,7 @@
       <PdhCountersRate>500</PdhCountersRate>
       <PdhCounters>
         <PdhCounter>\Disque physique(_Total)\Longueur moyenne de file d’attente du disque</PdhCounter>
-        <PdhCounter>\M&amp;amp;amp;#233;moire\Pages/s</PdhCounter>
+        <PdhCounter>\M&amp;amp;amp;amp;amp;#233;moire\Pages/s</PdhCounter>
         <PdhCounter>\Processeur(_Total)\% temps processeur</PdhCounter>
       </PdhCounters>
     </PdhSettings>
@@ -50,7 +50,7 @@
       <LaunchMethod>Executable</LaunchMethod>
       <ExecutablePath>JellyDiamondsTraitement\bin\Debug\JellyDiamondsTraitement.exe</ExecutablePath>
       <StartupDirectory>ImageTest</StartupDirectory>
-      <Arguments>20140313_161908.jpg resultat.jpg</Arguments>
+      <Arguments>20140313_121812.jpg resultat.jpg</Arguments>
       <NetAppHost>IIS</NetAppHost>
       <NetBrowser>InternetExplorer</NetBrowser>
       <ExcludeSmallFuncs>true</ExcludeSmallFuncs>
@@ -78,6 +78,15 @@
     </Report>
     <Report>
       <Path>JellyDiamondsTraitement140401(3).vsp</Path>
+    </Report>
+    <Report>
+      <Path>JellyDiamondsTraitement140402.vsp</Path>
+    </Report>
+    <Report>
+      <Path>JellyDiamondsTraitement140402(1).vsp</Path>
+    </Report>
+    <Report>
+      <Path>JellyDiamondsTraitement140402(2).vsp</Path>
     </Report>
   </Reports>
   <Launches>

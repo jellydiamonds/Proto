@@ -12,6 +12,6 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartWorkingDirectory>C:\Users\Martin\Documents\GitHub\Proto\Algorithms\ImageTest</StartWorkingDirectory>
-    <StartArguments>20140313_161908.jpg resultat</StartArguments>
+    <StartArguments>20140313_121812.jpg resultat.jpg</StartArguments>
   </PropertyGroup>
 </Project>

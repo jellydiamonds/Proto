@@ -9,17 +9,13 @@ namespace JellyDiamondsTraitement
     class SobelFilter:IFilter
     {
 
-        int[,] sobelHMatrix = { { 0, -1, -2, -1, 0 },
-                                 { -1, -2, -6, -2, -1 },
-                                 { 0, 0, 0, 0, 0 },
-                                 { 1, 2, 6, 2, 1 },
-                                 { 0, 1, 2, 1, 0 } };
+        int[,] sobelHMatrix = { { -1, -2, -1 },
+                                { 0, 0, 0 },
+                                { 1, 2, 1 } };
 
-        int[,] sobelVMatrix = { { 0, -1, 0, 1, 0 },
-                                 { -1, -2, 0, 2, 1 },  
-                                 { -2, -6, 0, 6, 2 }, 
-                                 { -1, -2, 0, 2, 1 },  
-                                 { 0, -1, 0, 1, 0 } };
+        int[,] sobelVMatrix = { { -1, 0, 1 },
+                                { -2, 0, 2 },  
+                                { -1, 0, 1 } };
 
         public Bitmap doFilter(Bitmap image)
         {
@@ -78,14 +74,14 @@ namespace JellyDiamondsTraitement
  * posTreatment = pos - stride*(j-yCenter) + 4*(i-xCenter)
  * Il est nécessaire pour le calcul de chaque point du filtre de vérifier qu'on n'essaie de lire un pixel hors de l'image.
  */
-            for (int j = 0; j < 5; j++)
+            for (int j = 0; j < 3; j++)
             {
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 3; i++)
                 {
-                    posTreatment = pos - stride * (j - 2) + 4 * (i - 2);
+                    posTreatment = pos - stride * (j - 1) + 4 * (i - 1);
                     if(posTreatment < 0 || posTreatment >= image.Length) continue; // Pixel hors image
                     delta = Math.Abs((posTreatment % stride) - (pos % stride));
-                    if (delta > Math.Abs(i-2)*4) continue; // Pixel non adjacent
+                    if (delta > Math.Abs(i-1)*4) continue; // Pixel non adjacent
                     valueH += image[posTreatment] * sobelHMatrix[i,j];
                     valueV += image[posTreatment] * sobelVMatrix[i,j];
                 }

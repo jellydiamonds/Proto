@@ -22,13 +22,11 @@ namespace JellyDiamondsTraitement
                 {
                     var imageSource = new Bitmap(args[0]);
 
-                    double[,] gaussianBlurryMatrix = {{2.0/159.0,4.0/159.0,5.0/159.0,4.0/159.0,2.0/159.0},
-                                                      {4.0/159.0,9.0/159.0,12.0/159.0,9.0/159.0,4.0/159.0},
-                                                      {5.0/159.0,12.0/159.0,15.0/159.0,12.0/159.0,5.0/159.0},
-                                                      {4.0/159.0,9.0/159.0,12.0/159.0,9.0/159.0,4.0/159.0},
-                                                      {2.0/159.0,4.0/159.0,5.0/159.0,4.0/159.0,2.0/159.0} };
+                    double[,] gaussianBlurryMatrix = {{3.0/33.0,4.0/33.0,3.0/33.0},
+                                                      {4.0/33.0,5.0/33.0,4.0/33.0},
+                                                      {3.0/33.0,4.0/33.0,3.0/33.0}};
 
-                    var blurryFilter = new ImageFilter(5, 2, 2, gaussianBlurryMatrix);
+                    var blurryFilter = new ImageFilter(3, 1, 1, gaussianBlurryMatrix);
                     var contourFilter = new SobelFilter();
                     var fusionImage = new FusionImage();
 
