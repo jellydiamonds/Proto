@@ -1,0 +1,62 @@
+#recapTable {
+	margin: 0px;
+	padding: 5px;
+	background-color: #000;
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px; 
+	border-radius: 5px;
+}
+#gemIDcontainer {
+	border: 5px solid #2af;
+	-moz-border-radius: 10px; 
+	-webkit-border-radius: 10px; 
+	border-radius: 10px;
+}
+#recapTable .field_title {
+	color: #fff;
+	font-weight: bold;
+	font-family: Verdana, Helvetica;
+	font-size: 12pt; 
+	text-align: right;
+    width: 130px;
+    padding-right: 1em;
+}	
+#recapTable .field_value {
+	width:250px;
+	font-family: Verdana, Helvetica;
+	font-size: 14pt; 
+	text-align: left;
+	padding: 5px;
+	color: #2af;
+	margin-left: 10px;
+	margin-right: 10px;	
+}
+
+/*---------------------------------*/
+body, p, legend, label, input {
+	font: normal 10pt verdana, helvetica, sans-serif;
+}
+h1 {
+	font: 14pt verdana, helvetica, sans-serif;
+	color: #0568CD;
+	margin: 10px 10px 10px 10px;
+	text-align: center;
+	text-decoration: none;
+}
+/*--------------------- Styles et colors ---------------------*/
+.required {
+	color: #c00;
+}
+.error {
+	color: #d00;
+	margin-left: 10px;
+	float: center;
+}
+.success {
+	color: #0b0;
+	font-weight: bold;
+}
+.info {
+	color: #E8A22B;
+	font-style: italic;
+}

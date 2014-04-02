@@ -1,0 +1,73 @@
+/*--------------------- General ---------------------*/
+body, p, legend, label, input {
+	font: normal 10pt verdana, helvetica, sans-serif;
+}
+h1 {
+	font: 14pt verdana, helvetica, sans-serif;
+	color: #000;
+	margin: 0px 0px 0px 0px;
+	text-align: center;
+	text-decoration: none;
+}
+/*--------------------- Styles et colors ---------------------*/
+.required {
+	color: #c00;
+}
+.error {
+	color: #d00;
+	margin-left: 10px;
+	float: center;
+}
+.success {
+	color: #0b0;
+}
+.info {
+	color: #E8A22B;
+	font-style: italic;
+}
+/*------------------- List --------------------*/
+table {
+	font: normal 10pt verdana, helvetica, sans-serif;
+	border-collapse: collapse;
+	margin: 10px;	
+}
+th {
+	border: 1px solid #0568CD; #05f;
+	color: #0568CD; #05f;
+	padding: 5px;
+}
+th.delete {
+	color: #d00;
+	border: 1px solid #900;
+}
+td {
+	border: 1px solid #ddd;
+	padding: 5px;
+	text-align: center;
+	cursor: pointer;
+}
+td.action {
+	width: 25px;
+	text-align: center;
+}
+td.image {
+	text-align: center;	
+}
+tr.whiteLine {
+	background-color: #fff;
+}
+tr.whiteLine:hover {
+	background-color: #ffa;
+}
+tr.grayLine {
+	background-color: #efefef;
+}
+tr.grayLine:hover {
+	background-color: #ffa;
+}
+.gemSpecies {
+	width: 200px;
+}
+.gemColor {
+	width: 70px;
+}

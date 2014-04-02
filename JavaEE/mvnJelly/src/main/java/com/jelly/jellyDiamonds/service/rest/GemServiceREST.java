@@ -32,12 +32,12 @@ public class GemServiceREST {
 
     @GET
     @POST
-    @Path( "/addGem/{type}/{color}" )
+    @Path( "/addGem/{species}/{color}" )
     public void ws_addGem(
-            @PathParam( value = "type" ) String type,
+            @PathParam( value = "species" ) String species,
             @PathParam( value = "color" ) String color ) {
         Gem gem = new Gem();
-        gem.setType( type );
+        gem.setSpecies( species );
         gem.setColor( color );
         gemBeanLocal.addGem( gem );
     }

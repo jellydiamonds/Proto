@@ -1,0 +1,110 @@
+.formGem {
+	background: #ddddff;
+	width: 450px;
+	border: 2px solid #000;
+	margin: 0 auto;
+	padding-left: 10px;
+	padding-top: 10px;
+}
+/*.form input[type="text"] {
+	width: 400px;
+}
+.form. input[type="text"].dimensions {
+	width: 60px;
+}*/
+.form input:focus, textarea:focus { 
+	border: 1px solid #ff5400; 
+	background-color: rgba(255, 255, 255, 1); 
+}
+.formGem input.button { 
+	background: #4b8df9; 
+	display: inline-block; 
+	padding: 5px 10px 6px; 
+	color: #fbf7f7; 
+	text-decoration: none; 
+	font-weight: bold; 
+	line-height: 1; 
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px; 
+	border-radius: 5px; 
+	-moz-box-shadow: 0 1px 3px #999; 
+	-webkit-box-shadow: 0 1px 3px #999; 
+	box-shadow: 0 1px 3px #999; 
+	text-shadow: 0 -1px 1px #222; 
+	border: none; 
+	position: relative; 
+	cursor: pointer; 
+	font-size: 14px; 
+	font-family: Verdana, Geneva, sans-serif;
+}
+.formGem input.button:hover { 
+	background-color: #2a78f6; 
+}
+.buttons {
+	text-align: center;
+}
+#createGemTable, #recapTable {
+	border: 0px;
+	margin: 0px;
+	padding: 5px;
+}
+.field_title {
+	color: #000;
+	font-weight: bold;
+	font-family: Verdana, Helvetica;
+	font-size: 10pt; 
+	text-align: right;
+    width: 130px;
+    padding-right: 1em;
+}	
+.field_value {
+	width:250px;
+	padding: 5px;
+	color: #000;
+	margin-left: 10px;
+	margin-right: 10px;	
+}
+.field_value input, select, textarea {
+	display: block;
+    width: 200px;
+    float: left;
+    margin-bottom: 0em;
+}
+.field_value select {
+	width: 205px;
+}
+#gemPriceValue {
+	width: 100px;
+}
+#gemPriceCurrency {
+	width: 90px;
+	margin-left: 10px;
+}
+/*---------------------------------*/
+body, p, legend, label, input {
+	font: normal 10pt verdana, helvetica, sans-serif;
+}
+h1 {
+	font: 14pt verdana, helvetica, sans-serif;
+	color: #0568CD;
+	margin: 10px 10px 10px 10px;
+	text-align: center;
+	text-decoration: none;
+}
+/*--------------------- Styles et colors ---------------------*/
+.required {
+	color: #c00;
+}
+.error {
+	color: #d00;
+	margin-left: 10px;
+	float: center;
+}
+.success {
+	color: #0b0;
+	font-weight: bold;
+}
+.info {
+	color: #E8A22B;
+	font-style: italic;
+}

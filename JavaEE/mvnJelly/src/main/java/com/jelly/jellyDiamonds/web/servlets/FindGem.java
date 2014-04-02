@@ -17,7 +17,6 @@ import com.jelly.jellyDiamonds.ejb.forms.FormGem;
 public class FindGem extends HttpServlet {
     public static final String ATT_GEM      = "currentGem";
     public static final String ATT_FORM     = "form";
-
     public static final String VIEW_FORM    = "/WEB-INF/find_gem.jsp";
     public static final String VIEW_SUCCESS = "/WEB-INF/gem_found.jsp";
 
@@ -35,7 +34,6 @@ public class FindGem extends HttpServlet {
     @Override
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-
         /* Préparation de l'objet de traitement. */
         FormGem form = new FormGem( gemBeanLocal );
         /* Recherche de la gemme. */

@@ -1,0 +1,32 @@
+/*------------------- Menu --------------------*/
+.mainTable {
+	border: 0px;
+	margin: 0px 0px 0px 0px;
+	vertical-align: top;
+}
+.mainContainer form {
+	float: left;	
+}
+div#menu {
+	/*height: 140px;*/
+	margin-left: 10px;
+	margin-right: 10px;
+	border: 2px #000 solid;
+	background-color: #0568CD;
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px; 
+	border-radius: 5px;
+}
+div#menu a {
+	font-size: 12pt;
+	font-family: helvetica verdana;
+	font-weight: bold;
+	margin-left: 10px;
+	margin-right: 10px;
+	color:	#fff;  
+	text-decoration: none;
+	cursor: pointer;
+}
+div#menu a:hover {
+	color: #ff4;
+}
