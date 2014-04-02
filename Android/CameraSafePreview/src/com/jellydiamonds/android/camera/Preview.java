@@ -10,6 +10,7 @@ import android.view.SurfaceView;
 /** A basic Camera preview class */
 public class Preview extends SurfaceView implements SurfaceHolder.Callback {
    
+	private static final String TAG = "[CAMERASAFEPREVIEW: Preview]";
     private Camera mCamera = null;
     private SurfaceHolder mHolder = null;
 
@@ -22,6 +23,7 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
         mHolder.addCallback(this);
         // deprecated setting, but required on Android versions prior to 3.0
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+        
     }
 
     public void surfaceCreated(SurfaceHolder holder) {
@@ -30,7 +32,7 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
             mCamera.setPreviewDisplay(holder);
             mCamera.startPreview();
         } catch (IOException e) {
-            Log.d("[surfaceCreated()]", "Error setting camera preview: " + e.getMessage());
+            Log.d(TAG, "ERROR :  setting camera preview: " + e.getMessage());
         }
     }
 
@@ -72,7 +74,7 @@ public class Preview extends SurfaceView implements SurfaceHolder.Callback {
             mCamera.startPreview();
 
         } catch (Exception e){
-            Log.d("[surfaceChanged()]", "Error starting camera preview: " + e.getMessage());
+            Log.d(TAG, "ERROR :  starting camera preview: " + e.getMessage());
         }
     }
 }
