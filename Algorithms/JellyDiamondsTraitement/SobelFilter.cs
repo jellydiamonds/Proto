@@ -2,51 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 
 namespace JellyDiamondsTraitement
 {
-    public class ImageFilter:IFilter
+    class SobelFilter:IFilter
     {
-        private byte size;
-        private double[,] convolutionMatrix;
-        private int xCenter;
-        private int yCenter;
 
-        public ImageFilter(byte size, int xCenter, int yCenter, double[,] convolutionMatrix)
-        {
-            // TODO: Complete member initialization
-            this.size = size;
-            this.xCenter = xCenter;
-            this.yCenter = yCenter;
-            this.convolutionMatrix = convolutionMatrix;
-        }
+        int[,] sobelHMatrix = { { 0, -1, -2, -1, 0 },
+                                 { -1, -2, -6, -2, -1 },
+                                 { 0, 0, 0, 0, 0 },
+                                 { 1, 2, 6, 2, 1 },
+                                 { 0, 1, 2, 1, 0 } };
 
-        public byte Size
-        {
-            get { return size; }
-            set { size = value; }
-        }
+        int[,] sobelVMatrix = { { 0, -1, 0, 1, 0 },
+                                 { -1, -2, 0, 2, 1 },  
+                                 { -2, -6, 0, 6, 2 }, 
+                                 { -1, -2, 0, 2, 1 },  
+                                 { 0, -1, 0, 1, 0 } };
 
-        public int XCenter
-        {
-            get { return xCenter; }
-            set { xCenter = value; }
-        }
-
-        public int YCenter
-        {
-            get{ return yCenter; }
-            set { yCenter = value; }
-        }
-
-        public double[,] ConvolutionMatrix
-        {
-            get { return convolutionMatrix; }
-            set { convolutionMatrix = value; }
-        }
-        
         public Bitmap doFilter(Bitmap image)
         {
             Bitmap filteredImage = new Bitmap(image);
@@ -95,7 +69,8 @@ namespace JellyDiamondsTraitement
 
         private byte applyFilter(byte[] image, int pos, int stride)
         {
-            double value = 0;
+            int valueH = 0;
+            int valueV = 0;
             int posTreatment = 0;
             int delta = 0;
 /* Le centre du filtre par rapport à l'image doit faire correspondre (xCenter,yCenter) avec pos.
@@ -103,17 +78,21 @@ namespace JellyDiamondsTraitement
  * posTreatment = pos - stride*(j-yCenter) + 4*(i-xCenter)
  * Il est nécessaire pour le calcul de chaque point du filtre de vérifier qu'on n'essaie de lire un pixel hors de l'image.
  */
-            for (int j = 0; j < size; j++)
+            for (int j = 0; j < 5; j++)
             {
-                for (int i = 0; i < size; i++)
+                for (int i = 0; i < 5; i++)
                 {
-                    posTreatment = pos - stride * (j - yCenter) + 4 * (i - xCenter);
+                    posTreatment = pos - stride * (j - 2) + 4 * (i - 2);
                     if(posTreatment < 0 || posTreatment >= image.Length) continue; // Pixel hors image
                     delta = Math.Abs((posTreatment % stride) - (pos % stride));
-                    if (delta > Math.Abs(i-xCenter)*4) continue; // Pixel non adjacent
-                    value += image[posTreatment] * convolutionMatrix[i,j];
+                    if (delta > Math.Abs(i-2)*4) continue; // Pixel non adjacent
+                    valueH += image[posTreatment] * sobelHMatrix[i,j];
+                    valueV += image[posTreatment] * sobelVMatrix[i,j];
                 }
             }
+
+            double value = Math.Sqrt(valueH * valueH + valueV * valueV);
+
             if (value < 0) value = 0; else if (value > 255) value = 255;
 
             return (byte)value;

@@ -20,7 +20,7 @@ namespace JellyDiamondsTraitement
                 {
                     pixel = imageContour.GetPixel(i, j);
                     // On considere qu'il s'agit d'un bord si c'est un gris clair
-                    if (pixel.R > 20 && pixel.G > 20 && pixel.B > 20)
+                    if (pixel.R > 127 && pixel.G > 127 && pixel.B > 127)
                     {
                         imageWithContour.SetPixel(i, j, Color.FromArgb(255, 0, 255));
                     }
