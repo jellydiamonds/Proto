@@ -4,5 +4,7 @@
     <string name="app_name">CameraSafePreview</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="snap_button">SNAP</string>
+    <string name="consigne_picture">Gem should stay into the frame !</string>
 
 </resources>

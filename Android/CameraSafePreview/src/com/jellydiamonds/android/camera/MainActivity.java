@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -21,7 +22,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
@@ -35,8 +36,10 @@ public class MainActivity extends Activity {
 		 */
 		
 	    private FrameLayout 		mFrameLayout = null;
-	    private RelativeLayout		mRelativeLayout = null;
+	    //private RelativeLayout		mRelativeLayoutSnap = null;
+	    private FrameLayout  		mFrameLayoutSelection = null;
 	    private Button				mButtonSnap = null;
+	    private LinearLayout		mConsignZone = null;
 	    
 		/**
 		 * Camera Members
@@ -48,7 +51,7 @@ public class MainActivity extends Activity {
 	    private int					mLandscapeHeight = 0;
 	    
 	    /**
-	     * Audio functionnalities
+	     * Audio functionalities
 	     */	    
 	    private AudioManager		mAudioManager = null;
 	    private MediaPlayer			mCameraShutterSound = null;
@@ -62,11 +65,17 @@ public class MainActivity extends Activity {
 	        // TODO Auto-generated method stub
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.preview);
+	        
+	        // Orientation should be still in portrait mode
+	        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 	        // Get Widgets
 	        mFrameLayout = (FrameLayout)findViewById(R.id.camera_preview);
-	        mRelativeLayout = (RelativeLayout)findViewById(R.id.controls_layout);
-	        mButtonSnap = (Button)findViewById(R.id.button_photo);
+	        //mRelativeLayoutSnap = (RelativeLayout)findViewById(R.id.controls_layout);
+	        mFrameLayoutSelection = (FrameLayout)findViewById(R.id.selection_layout);
+	        mButtonSnap = (Button)findViewById(R.id.button_selection);
+	        //mButtonSnap = (Button)findViewById(R.id.button_photo);
+	        mConsignZone = (LinearLayout)findViewById(R.id.consigne_zone_layout);
 	        
 	        // Get audio manager and camera sound
 	        mAudioManager = (AudioManager) getApplicationContext().getSystemService( Context.AUDIO_SERVICE );
@@ -91,7 +100,11 @@ public class MainActivity extends Activity {
 	        	mLandscapeHeight = mScreenInfo.heightPixels;
 	        	mLandscapeWidth = mScreenInfo.widthPixels;
 	        }
+	        FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams)mFrameLayoutSelection.getLayoutParams();
+	        lp.height = mScreenInfo.heightPixels*50/100;
+	        lp.width = mScreenInfo.widthPixels*75/100;
 	        
+	        mFrameLayoutSelection.setLayoutParams(lp);
 	        Log.d(TAG,"Info : Screen landscape size is : " + mLandscapeWidth + "x" + mLandscapeHeight);
 	    }
 	    
@@ -127,8 +140,10 @@ public class MainActivity extends Activity {
 	        	Log.d(TAG,"Info : Camera successfully opened.");
 	        
 	        	mSurfaceView = new Preview(this, mCamera);
-	        	mFrameLayout.addView(mSurfaceView); // Display Preview
-		        mRelativeLayout.bringToFront();		// Display control on Top
+	        	mFrameLayout.addView(mSurfaceView); 		// Display Preview
+		        //mRelativeLayoutSnap.bringToFront();			// Display control on Top
+		        mFrameLayoutSelection.bringToFront(); 	// Display selection Frame on top
+		        mConsignZone.bringToFront();
 	        }
 	    }
 	    
@@ -201,13 +216,10 @@ public class MainActivity extends Activity {
 				 	 *	jpeg 	:   the callback for JPEG image data, or null 
 					 */
 					Log.d(TAG,"Saving picture to : " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES));
-					//mButtonSnap.setClickable(false);										// Disable button
-					//mCamera.stopPreview();												// Disable Preview
+
 					mButtonSnap.setVisibility(View.GONE);
 					mCamera.takePicture( mCALLBACK_Shutter, null, mCALLBACK_Picture );		// Take Picture
 					mButtonSnap.setVisibility(View.VISIBLE);
-					//mCamera.startPreview();													// Re-Enable Preview
-					//mButtonSnap.setClickable(true);											// Re-Enable button
 					Toast.makeText( getApplicationContext(), 				
 									"Picture have been saved into : " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), 
 									Toast.LENGTH_LONG)
@@ -215,6 +227,7 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
+		 
 	 }
 	    
 	/**

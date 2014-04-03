@@ -14,7 +14,7 @@
 			    android:layout_centerHorizontal="true"
 			    android:layout_marginBottom="40dp"
 			    android:alpha="0.7"
-				android:text="Snap"
+				android:text="@string/snap_button"
 				android:textColor="#fff"
 				 />
  

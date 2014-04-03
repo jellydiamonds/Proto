@@ -10,9 +10,13 @@
 		<include
 					android:id="@+id/controls_layout"
 					layout="@layout/control" />
+		
+		<include 
+		    		android:id="@+id/selection_layout"
+		    		layout="@layout/selection" />
  
-		<!-- <include
-					android:id="@+id/sensors_data_layout"
-					layout="@layout/sensors_data" /> -->
+		 <include
+					android:id="@+id/consigne_zone_layout"
+					layout="@layout/consigne" />
  
 </FrameLayout>
