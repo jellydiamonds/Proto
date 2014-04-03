@@ -21,13 +21,14 @@ namespace JellyDiamondsTraitement
                 try
                 {
                     var imageSource = new Bitmap(args[0]);
+                    int reduction = 20;
 
                     double[,] gaussianBlurryMatrix = {{3.0/33.0,4.0/33.0,3.0/33.0},
                                                       {4.0/33.0,5.0/33.0,4.0/33.0},
                                                       {3.0/33.0,4.0/33.0,3.0/33.0}};
 
-                    var blurryFilter = new ImageFilter(3, 1, 1, gaussianBlurryMatrix,20);
-                    var contourFilter = new SobelFilter(20);
+                    var blurryFilter = new ImageFilter(3, 1, 1, gaussianBlurryMatrix, reduction);
+                    var contourFilter = new SobelFilter(reduction);
                     var fusionImage = new FusionImage();
 
                     int height = imageSource.Height;
@@ -43,6 +44,17 @@ namespace JellyDiamondsTraitement
                     Bitmap imageDestination = fusionImage.doFusion(imageSource, contourImage);
 
                     imageDestination.Save(args[1], System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                   /* Console.WriteLine("Calcul des zones de couleurs");
+                    ColorComputer calculCouleur = new ColorComputer(reduction);
+                    Dictionary<int,int> proportionCouleur = calculCouleur.doCompute(imageDestination);
+
+                    foreach (var key in proportionCouleur.Keys)
+                    {
+                        Console.WriteLine("Zone {0} : {1:X}",key,proportionCouleur[key]);
+                    }
+
+                    Console.ReadLine();*/
                 }
                 catch (SystemException e)
                 {

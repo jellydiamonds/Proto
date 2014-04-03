@@ -58,7 +58,7 @@ namespace JellyDiamondsTraitement
             System.Runtime.InteropServices.Marshal.Copy(filteredImageRgbValues, 0, ptrFilteredImage, bytes);
 
             // Deverrouillage de la memoire
-            imageContour.UnlockBits(imageWithContourData);
+            imageContour.UnlockBits(imageContourData);
             imageWithContour.UnlockBits(imageWithContourData);
 
             return imageWithContour;

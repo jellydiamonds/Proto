@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColorComputer.cs" />
     <Compile Include="Filter.cs" />
     <Compile Include="FusionImage.cs" />
     <Compile Include="ImageFilter.cs" />
