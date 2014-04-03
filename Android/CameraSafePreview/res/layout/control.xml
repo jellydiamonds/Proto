@@ -4,14 +4,6 @@
 						android:layout_height="match_parent"
 						android:orientation="horizontal" >
  
-			<!-- <ImageButton
-			    android:id="@+id/button_snapshot"
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			    android:layout_alignParentBottom="true"
-			    android:layout_centerHorizontal="true"
-			    android:contentDescription="Photo snapshot"
-			    android:src="@android:drawable/ic_menu_camera" /> -->
 			
 			<Button
 			    android:id="@+id/button_photo"

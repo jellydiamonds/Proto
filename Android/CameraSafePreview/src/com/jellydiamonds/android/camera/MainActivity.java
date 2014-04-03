@@ -1,22 +1,34 @@
 package com.jellydiamonds.android.camera;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
+
 import android.hardware.Camera;
-import android.os.Build;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
-import android.annotation.TargetApi;
+import android.os.Environment;
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
-@TargetApi(Build.VERSION_CODES.GINGERBREAD)
+
 public class MainActivity extends Activity {
 	
 		private static final String TAG = "[CAMERASAFEPREVIEW: MainActivity]";
-
+		private static final int    DISPLAY_AND_PICTURE_ORIENTATION = 90;
 		
 		/**
 		 * UI
@@ -27,25 +39,44 @@ public class MainActivity extends Activity {
 	    private Button				mButtonSnap = null;
 	    
 		/**
-		 * 
+		 * Camera Members
 		 */
 	 	private Camera 				mCamera = null;
 	    private Preview 			mSurfaceView = null;
 	    private DisplayMetrics		mScreenInfo = null;
 	    private int					mLandscapeWidth = 0;
 	    private int					mLandscapeHeight = 0;
-
+	    
+	    /**
+	     * Audio functionnalities
+	     */	    
+	    private AudioManager		mAudioManager = null;
+	    private MediaPlayer			mCameraShutterSound = null;
+	    
+	    /**
+	     * Activity entry point function 
+	     */
+	    
 	    @Override
 	    protected void onCreate(Bundle savedInstanceState) {
 	        // TODO Auto-generated method stub
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.preview);
-	        //setContentView(R.layout.activity_main);
-	        
+
+	        // Get Widgets
 	        mFrameLayout = (FrameLayout)findViewById(R.id.camera_preview);
 	        mRelativeLayout = (RelativeLayout)findViewById(R.id.controls_layout);
 	        mButtonSnap = (Button)findViewById(R.id.button_photo);
 	        
+	        // Get audio manager and camera sound
+	        mAudioManager = (AudioManager) getApplicationContext().getSystemService( Context.AUDIO_SERVICE );
+	        mCameraShutterSound = MediaPlayer.create( 	getApplicationContext(), 
+	        											Uri.parse("file:///system/media/audio/ui/camera_click.ogg"));
+	        
+	        // Set control callbacks
+	        setControlCallbacks();
+	        
+	        // Get information about screen
 	        mScreenInfo = new DisplayMetrics();
 	        getWindowManager().getDefaultDisplay().getMetrics(mScreenInfo);
 	        
@@ -106,11 +137,93 @@ public class MainActivity extends Activity {
 	 * 
 	 */
 	    
+	    private Camera.ShutterCallback mCALLBACK_Shutter = new Camera.ShutterCallback() {
+			
+			@Override
+			public void onShutter() {
+				// TODO Auto-generated method stub
+				int l_volume = mAudioManager.getStreamVolume( AudioManager.STREAM_NOTIFICATION );
+				
+				if( ( mCameraShutterSound != null ) && (l_volume != 0) )
+				{
+					mCameraShutterSound.start();
+				}
+				
+			}
+		};
+		
+	    private Camera.PictureCallback mCALLBACK_Picture = new Camera.PictureCallback() {
+
+			@Override
+			public void onPictureTaken(byte[] data, Camera camera) {
+				// TODO Auto-generated method stub
+				
+				File pictureFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),System.currentTimeMillis() + "-test.jpg");	
+
+		        try {
+		            FileOutputStream fos = new FileOutputStream(pictureFile);
+		            fos.write(data);
+		            fos.close();
+		        } catch (FileNotFoundException e) {
+		            Log.d(TAG, "File not found: " + e.getMessage());
+		        } catch (IOException e) {
+		            Log.d(TAG, "Error accessing file: " + e.getMessage());
+		        }
+		        mCamera.startPreview();
+
+			}
+	    	
+	    };
+	    
+	/**
+	 * Control utilities
+	 */
+	    
+	 private void setControlCallbacks()
+	 {
+		 /*
+		  * Snapshot button
+		  */
+		 this.mButtonSnap.setOnClickListener( new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				/*
+				 * Check if camera is operational
+				 */
+				if( mCamera != null )
+				{
+					/*
+					 *  shutter : 	the callback for image capture moment, or null
+					 *	raw 	:   the callback for raw (uncompressed) image data, or null
+					 *	postview: 	callback with postview image data, may be null
+				 	 *	jpeg 	:   the callback for JPEG image data, or null 
+					 */
+					Log.d(TAG,"Saving picture to : " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES));
+					//mButtonSnap.setClickable(false);										// Disable button
+					//mCamera.stopPreview();												// Disable Preview
+					mButtonSnap.setVisibility(View.GONE);
+					mCamera.takePicture( mCALLBACK_Shutter, null, mCALLBACK_Picture );		// Take Picture
+					mButtonSnap.setVisibility(View.VISIBLE);
+					//mCamera.startPreview();													// Re-Enable Preview
+					//mButtonSnap.setClickable(true);											// Re-Enable button
+					Toast.makeText( getApplicationContext(), 				
+									"Picture have been saved into : " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), 
+									Toast.LENGTH_LONG)
+									.show();								// Inform user
+				}
+			}
+		});
+	 }
+	    
+	/**
+	 *  Camera utilities   
+	 * 
+	 */
 	private boolean safeCameraOpen() {
 		
-	    Camera  			l_camera = null;   
-	    Camera.Parameters 	l_param = null;
-	    boolean 		  	l_found = false;		
+	    Camera  			l_camera = null;   	
 	  
 	    /**
 	     * Check if camera device is available on system.
@@ -120,38 +233,24 @@ public class MainActivity extends Activity {
 	    
 	    try 
 	    {
+	    	/**
+	    	 * Releasing previous camera instanciation
+	    	 */
 	    	releasePreview();
+	    	
+	    	/**
+	    	 * Opening device
+	    	 */
 	        l_camera = Camera.open();
 	        
 	        /**
-	         * Set the optimal preview size ( according to the screen size )
+	         * Set the optimal preview and picture size ( according to the screen size )
 	         */
-	        
-	        l_param = l_camera.getParameters();
-	        
-	        for( Camera.Size l_size : l_param.getSupportedPreviewSizes())
-	        {
-	        	Log.d(TAG,"Info : Preiview size available : " + l_size.width + "x" + l_size.height);
-	        	if(  l_size.width == mLandscapeWidth )
-	        	{
-	        		l_found = true;
-	        		Log.d(TAG,"Info : Landscape size available in supported preview and picture size.");
-	        		break;
-	        	}
-	        }
-	        
-	        if( l_found )
-        		l_param.setPreviewSize(mLandscapeWidth, mLandscapeHeight);
-	        else
-	        	l_param.setPreviewSize(	l_param.getSupportedPreviewSizes().get(0).width, 
-	        							l_param.getSupportedPreviewSizes().get(0).height );
-	        
-	        l_camera.setParameters(l_param);
+	        setCameraConfig( l_camera );
 	        
 	        /**
-	         * Set the normal orientation
+	         * Setting the camera
 	         */
-	        l_camera.setDisplayOrientation(90);
 	        mCamera = l_camera;
 	        
 	    } 
@@ -183,31 +282,94 @@ public class MainActivity extends Activity {
 	    
 	}
 	
+	private void setCameraConfig( Camera camera )
+	{
+		Camera.Parameters l_param = camera.getParameters();
+		List<Camera.Size> l_preview_sizes = l_param.getSupportedPreviewSizes();
+		List<Camera.Size> l_picture_sizes = l_param.getSupportedPictureSizes();
+		
+		Camera.Size l_tmp_size	   = null;
+		Camera.Size l_optimal_size = null;
+		Camera.Size l_maximal_size = null;
+		
+		for( int l_index = 0 ; l_index < l_preview_sizes.size() ; l_index++ )
+		{
+			l_tmp_size = l_preview_sizes.get( l_index );
+			Log.i(TAG, "Preview size available : " + l_tmp_size.width + "x" + l_tmp_size.height);
+			if( l_tmp_size.width == mLandscapeWidth )
+			{
+				l_optimal_size = l_tmp_size;
+				if( l_tmp_size.height == mLandscapeHeight )
+				{
+					// Exact size have been found !
+					break;
+				}
+			}
+			
+			if( 	( l_maximal_size == null ) ||  
+					( 	( l_maximal_size.height*l_maximal_size.width ) < 
+						( l_tmp_size.height * l_tmp_size.width) ) 			)
+			{
+				l_maximal_size = l_tmp_size;
+			}
+		}
+		
+		if( l_optimal_size != null )
+		{
+			l_param.setPreviewSize( l_optimal_size.width, l_optimal_size.height);
+		}
+		else
+		{
+			l_param.setPreviewSize( l_maximal_size.width, l_maximal_size.height);
+		}
+		
+		l_maximal_size = null;
+		l_optimal_size = null;
+		l_tmp_size = null;
+		
+		
+		for( int l_index = 0 ; l_index < l_picture_sizes.size() ; l_index++ )
+		{
+			l_tmp_size = l_picture_sizes.get( l_index );
+			Log.i(TAG, "Picture size available : " + l_tmp_size.width + "x" + l_tmp_size.height);
+			if( l_tmp_size.width == mLandscapeWidth )
+			{
+				l_optimal_size = l_tmp_size;
+				if( l_tmp_size.height == mLandscapeHeight )
+				{
+					// Exact size have been found !
+					break;
+				}
+			}
+			
+			if( 	( l_maximal_size == null ) ||  
+					( 	( l_maximal_size.height*l_maximal_size.width ) < 
+						( l_tmp_size.height * l_tmp_size.width) ) 			)
+			{
+				l_maximal_size = l_tmp_size;
+			}
+		}
+		
+		if( l_optimal_size != null )
+		{
+			l_param.setPictureSize( l_optimal_size.width, l_optimal_size.height);
+		}
+		else
+		{
+			l_param.setPictureSize( l_maximal_size.width, l_maximal_size.height);
+		}
+		l_param.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+		l_param.setRotation( DISPLAY_AND_PICTURE_ORIENTATION );
+		camera.setDisplayOrientation( DISPLAY_AND_PICTURE_ORIENTATION );
+		camera.setParameters( l_param );
+		
+		Log.d(TAG,"Info : Preview size selected : " + l_param.getPreviewSize().width + "x" +  l_param.getPreviewSize().height);
+		Log.d(TAG,"Info : Picture size selected : " + l_param.getPictureSize().width + "x" + l_param.getPictureSize().height);
+		Log.d(TAG,"Info : Camera orientation set to : " + DISPLAY_AND_PICTURE_ORIENTATION + " degrees.");
+		
+		
+	}
+	
 }
 
-
-
-//--------------------------------------------------------------------
-//Camera.Parameters p = mCamera.getParameters();
-//Size size = p.getPreviewSize();
-//int width = size.width;
-//int height = size.height;
-//p.setPreviewFormat(ImageFormat.JPEG);
-//mCamera.setParameters(p);
-
-
-//mSurfaceView = new Preview(this);
-//
-//ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-//
-//mSurfaceView.setLayoutParams(layoutParams);
-//
-//mFrameLayout = (FrameLayout)findViewById(R.id.preview);
-//
-//mFrameLayout.addView(mSurfaceView);
-
-//for(int t_preview : p.getSupportedPreviewFormats() )
-//{
-//	Log.d("[CAMERASAFEPREVIEW]", "SupportedPreviewFormat : " + t_preview);
-//}
 
