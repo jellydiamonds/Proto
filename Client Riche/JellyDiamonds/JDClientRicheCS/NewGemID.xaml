@@ -1,0 +1,21 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Models="clr-namespace:JellyDiamondsCRicheC.Models" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="window" x:Class="JellyDiamondsCRicheCS.NewGemID"
+        Title="NewGemID" Height="480" Width="650">
+    <Grid x:Name="Grille" HorizontalAlignment="Left" Margin="10,10,-8,-20" VerticalAlignment="Top" Width="{Binding ActualWidth, ElementName=window, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=window, Mode=OneWay}" Grid.RowSpan="2" Grid.ColumnSpan="2">
+        <Grid.DataContext>
+            <Models:GemID/>
+        </Grid.DataContext>
+        <Image x:Name="imagepierre" HorizontalAlignment="Left" Height="174" Margin="10,10,0,0" VerticalAlignment="Top" Width="180" RenderTransformOrigin="0.128,0.139"/>
+        <ComboBox Margin="0,238,354,0" VerticalAlignment="Top" Height="22" HorizontalAlignment="Right" Width="81"/>
+        <ComboBox x:Name="Certificate" IsEditable="True" IsReadOnly="True" Text="Certificates" Margin="0,211,440,0" ItemsSource="{Binding ListCertificate}" VerticalAlignment="Top" Height="22" HorizontalAlignment="Right" Width="97"/>
+        <ComboBox Margin="0,0,354,247" VerticalAlignment="Bottom" Height="22" HorizontalAlignment="Right" Width="81"/>
+        <ComboBox x:Name="shapes"  IsEditable="True" IsReadOnly="True" Text="Shapes" Margin="0,211,542,0" VerticalAlignment="Top" ItemsSource="{Binding Listshapes}" Height="22" HorizontalAlignment="Right" Width="98"/>
+        <ComboBox x:Name="Cutting" IsEditable="True" IsReadOnly="True" Text="Cutting" Margin="0,238,440,0" ItemsSource="{Binding ListCutting}" VerticalAlignment="Top" Height="22" HorizontalAlignment="Right" Width="96"/>
+        <ComboBox x:Name="Lights" IsEditable="True" IsReadOnly="True" Text="Lights" Margin="0,238,542,0" VerticalAlignment="Top" Height="22" HorizontalAlignment="Right" Width="97" ItemsSource="{Binding ListCutting}"/>
+        <Button Content="Photo" HorizontalAlignment="Left" Margin="10,184,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="File" HorizontalAlignment="Left" Margin="102,184,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+        <Button Content="Test color dialog" HorizontalAlignment="Left" Margin="315,184,0,0" VerticalAlignment="Top" Width="174" Click="Button_Click_2"/>
+    </Grid>
+</Window>
