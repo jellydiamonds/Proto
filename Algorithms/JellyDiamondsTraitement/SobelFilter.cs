@@ -22,11 +22,13 @@ namespace JellyDiamondsTraitement
                                 { 0, -1, 0, 1, 0 }};
         
         //Reduction correspond à la portion (en pourcentage) sur les bords qui n'est pas prise en compte
-        private int reduction;
+        private int reductionX;
+        private int reductionY;
 
-        public SobelFilter(int reduction)
+        public SobelFilter(int reductionX, int reductionY)
         {
-            this.reduction = reduction;
+            this.reductionX = reductionX;
+            this.reductionY = reductionY;
         }
 
         public Bitmap doFilter(Bitmap image)
@@ -62,10 +64,10 @@ namespace JellyDiamondsTraitement
             // Application du filtre  
             for (int i = 0; i < filteredImageRgbValues.Length; i++)
             {
-                if (i % imageData.Stride > imageData.Stride * reduction / 100 &&
-                    i % imageData.Stride < (100-reduction) * imageData.Stride / 100 &&
-                    i / imageData.Stride > imageData.Height * reduction / 100 &&
-                    i / imageData.Stride < (100-reduction) * imageData.Height / 100
+                if (i % imageData.Stride > imageData.Stride * reductionX / 100 &&
+                    i % imageData.Stride < (100-reductionX) * imageData.Stride / 100 &&
+                    i / imageData.Stride > imageData.Height * reductionY / 100 &&
+                    i / imageData.Stride < (100-reductionY) * imageData.Height / 100
                     )
                 {
                     filteredImageRgbValues[i] = applyFilter(imageRgbValues, i, imageData.Stride);

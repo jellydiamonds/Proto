@@ -43,9 +43,9 @@ namespace JellyDiamondsTraitement
             // Application du filtre  
             for (int i = 0; i < filteredImageRgbValues.Length; i+=4)
             {
-                if (imageRgbValues[i] > 96 &&
-                    imageRgbValues[i + 1] > 96 &&
-                    imageRgbValues[i + 2] > 96)
+                if (imageRgbValues[i] > 127 &&
+                    imageRgbValues[i + 1] > 127 &&
+                    imageRgbValues[i + 2] > 127)
                 {
                     filteredImageRgbValues[i] = 255;
                     filteredImageRgbValues[i+1] = 0;

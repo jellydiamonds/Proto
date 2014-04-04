@@ -9,26 +9,27 @@ namespace JellyDiamondsTraitement
 {
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             if (args.Length != 2)
             {
                 Console.WriteLine(@"ERREUR : Nombre d'arguments incorrect");
                 Console.WriteLine(@"         Mettre le chemin de l'image source et le chemin de l'image de destination");
+                return -1;
             }
             else
             {
                 try
                 {
                     var imageSource = new Bitmap(args[0]);
-                    int reduction = 20;
+                    int reductionX = 30;
+                    int reductionY = 25;
+                    double[,] gaussianBlurryMatrix = {{1.0/16.0,2.0/16.0,1.0/16.0},
+                                                      {2.0/16.0,4.0/16.0,2.0/16.0},
+                                                      {1.0/16.0,2.0/16.0,1.0/16.0}};
 
-                    double[,] gaussianBlurryMatrix = {{3.0/33.0,4.0/33.0,3.0/33.0},
-                                                      {4.0/33.0,5.0/33.0,4.0/33.0},
-                                                      {3.0/33.0,4.0/33.0,3.0/33.0}};
-
-                    var blurryFilter = new ImageFilter(3, 1, 1, gaussianBlurryMatrix, reduction);
-                    var contourFilter = new SobelFilter(reduction);
+                    var blurryFilter = new ImageFilter(3, 1, 1, gaussianBlurryMatrix, reductionX, reductionY);
+                    var contourFilter = new SobelFilter(reductionX,reductionY);
                     var fusionImage = new FusionImage();
 
                     int height = imageSource.Height;
@@ -45,21 +46,21 @@ namespace JellyDiamondsTraitement
 
                     imageDestination.Save(args[1], System.Drawing.Imaging.ImageFormat.Jpeg);
 
-                   /* Console.WriteLine("Calcul des zones de couleurs");
-                    ColorComputer calculCouleur = new ColorComputer(reduction);
-                    Dictionary<int,int> proportionCouleur = calculCouleur.doCompute(imageDestination);
+                    Console.WriteLine("Calcul de la couleur de la pierre");
+                    ColorComputer calculCouleur = new ColorComputer(reductionX, reductionY);
+                    int couleur = calculCouleur.doCompute(imageDestination);
 
-                    foreach (var key in proportionCouleur.Keys)
-                    {
-                        Console.WriteLine("Zone {0} : {1:X}",key,proportionCouleur[key]);
-                    }
+                    Console.WriteLine("Couleur de la pierre : {0:X}", couleur);
 
-                    Console.ReadLine();*/
+                    imageDestination.Save(args[1], System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                    return couleur;
                 }
                 catch (SystemException e)
                 {
                     Console.WriteLine(@"ERREUR : " + e.Message);
                     Console.ReadLine();
+                    return -1;
                 }
             }
         }

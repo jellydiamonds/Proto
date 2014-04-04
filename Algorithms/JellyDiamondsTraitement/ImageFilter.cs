@@ -13,16 +13,18 @@ namespace JellyDiamondsTraitement
         private double[,] convolutionMatrix;
         private int xCenter;
         private int yCenter;
-        private int reduction;
+        private int reductionX;
+        private int reductionY;
 
-        public ImageFilter(byte size, int xCenter, int yCenter, double[,] convolutionMatrix, int reduction)
+        public ImageFilter(byte size, int xCenter, int yCenter, double[,] convolutionMatrix, int reductionX, int reductionY)
         {
             // TODO: Complete member initialization
             this.size = size;
             this.xCenter = xCenter;
             this.yCenter = yCenter;
             this.convolutionMatrix = convolutionMatrix;
-            this.reduction = reduction;
+            this.reductionX = reductionX;
+            this.reductionY = reductionY;
         }
 
         public byte Size
@@ -83,10 +85,10 @@ namespace JellyDiamondsTraitement
             for (int i = 0; i < filteredImageRgbValues.Length; i++)
             {
                 // Reduction avec 1% de securite (pour les filtres suivants)
-                if (i % imageData.Stride > imageData.Stride * (reduction -1) / 100 &&
-                    i % imageData.Stride < (100 - reduction +1) * imageData.Stride / 100 &&
-                    i / imageData.Stride > imageData.Height * (reduction -1) / 100 &&
-                    i / imageData.Stride < (100 - reduction +1) * imageData.Height / 100
+                if (i % imageData.Stride > imageData.Stride * (reductionX - 1) / 100 &&
+                    i % imageData.Stride < (100 - reductionX + 1) * imageData.Stride / 100 &&
+                    i / imageData.Stride > imageData.Height * (reductionY -1) / 100 &&
+                    i / imageData.Stride < (100 - reductionY + 1) * imageData.Height / 100
                     )
                 {
                     filteredImageRgbValues[i] = applyFilter(imageRgbValues, i, imageData.Stride);
