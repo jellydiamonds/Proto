@@ -1,9 +1,6 @@
 INDEX VERSION 1.126+/Users/MoZ/Documents/Code/repositories/SNU/Proto/Android/.metadata/.plugins/org.eclipse.jdt.core
-161056056.index
 2421166800.index
-703323291.index
 79052013.index
-2083913284.index
 3114823673.index
 2338450873.index
 4269833437.index

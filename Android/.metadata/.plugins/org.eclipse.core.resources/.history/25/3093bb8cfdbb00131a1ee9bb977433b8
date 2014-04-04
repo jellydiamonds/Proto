@@ -1,0 +1,54 @@
+package com.jellydiamonds.android.camera;
+
+import java.util.List;
+
+import android.hardware.Camera;
+
+public class CameraConfigurator {
+	
+	public static final int DEFAULT_DISPLAY_ORIENTATION_DEGREE = 90;
+	public static final int DEFAULT_PICTURE_ORIENTATION_DEGREE = 90;
+	
+	private static Camera.Parameters smParameter = null;
+	private static int				 smWidthArea = 0;
+	private static int				 smHeightArea = 0;
+	private static float			 smAspectRatio = 0.0f;
+	
+	
+	public static boolean setOptimalDefaultConfiguration( Camera camera, int widthZone, int heightZone )
+	{
+		Camera.Parameters 		l_tmp_parameter = null;
+		float				  	l_aspect_ratio = 0.0f;
+		
+		if( 	( camera == null ) || 
+				( widthZone == 0 ) || 
+				( heightZone == 0 ) 	)
+			return false;
+		
+		camera.setDisplayOrientation( DEFAULT_DISPLAY_ORIENTATION_DEGREE );
+		
+		if( 	( smParameter != null ) &&
+				( widthZone == smWidthArea) &&
+				( heightZone == smHeightArea) )
+		{
+			camera.setParameters( smParameter );
+			return true;
+		}
+		
+		l_aspect_ratio = ( (float)widthZone ) / ( (float)heightZone );
+		l_tmp_parameter = camera.getParameters();
+		
+		return true;
+		
+	}
+	
+	private static Camera.Size getBestPreviewSize( List<Camera.Size> previewSize, int widthZone, int heightZone, float aspectRatio )
+	{
+		Camera.Size l_result = null;
+		float 		l_smallestRatio = Float.MAX_VALUE;
+	}
+	
+	
+	
+
+}

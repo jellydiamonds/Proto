@@ -7,9 +7,9 @@
 					android:layout_weight="1"
 					android:orientation="horizontal" >
  
-		<include
+		<!-- <include
 					android:id="@+id/controls_layout"
-					layout="@layout/control" />
+					layout="@layout/control" />-->
 		
 		<include 
 		    		android:id="@+id/selection_layout"

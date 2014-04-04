@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
 
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -29,7 +31,6 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 	
 		private static final String TAG = "[CAMERASAFEPREVIEW: MainActivity]";
-		private static final int    DISPLAY_AND_PICTURE_ORIENTATION = 90;
 		
 		/**
 		 * UI
@@ -172,13 +173,27 @@ public class MainActivity extends Activity {
 			@Override
 			public void onPictureTaken(byte[] data, Camera camera) {
 				// TODO Auto-generated method stub
+				Bitmap l_origin_data = BitmapFactory.decodeByteArray(data, 0,data.length );
 				
-				File pictureFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),System.currentTimeMillis() + "-test.jpg");	
+				int l_NewWidth = ( l_origin_data.getWidth()*3 )/4;
+				int l_NewHeight = ( l_origin_data.getHeight()/2 );
+				int l_NewTopLeftEdgeX = (l_origin_data.getWidth()/2) - ( l_NewWidth/2 );
+				int l_NewTopLeftEdgeY = (l_origin_data.getHeight()/2) - ( l_NewHeight/2 );
+				
+				Bitmap l_final_data = Bitmap.createBitmap( 
+						l_origin_data, 
+						l_NewTopLeftEdgeX, 
+						l_NewTopLeftEdgeY, 
+						l_NewWidth,
+						l_NewHeight);
+				File l_pictureFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),System.currentTimeMillis() + "-test.jpg");	
 
 		        try {
-		            FileOutputStream fos = new FileOutputStream(pictureFile);
-		            fos.write(data);
-		            fos.close();
+		            FileOutputStream l_fos = new FileOutputStream( l_pictureFile );
+		            l_final_data.compress(CompressFormat.JPEG, 100, l_fos);
+		            //fos.write(data);
+		            l_fos.flush();
+		            l_fos.close();
 		        } catch (FileNotFoundException e) {
 		            Log.d(TAG, "File not found: " + e.getMessage());
 		        } catch (IOException e) {
@@ -259,7 +274,8 @@ public class MainActivity extends Activity {
 	        /**
 	         * Set the optimal preview and picture size ( according to the screen size )
 	         */
-	        setCameraConfig( l_camera );
+	        //setCameraConfig( l_camera );
+	        CameraConfigurator.setOptimalDefaultConfiguration( l_camera, mLandscapeWidth, mLandscapeHeight);
 	        
 	        /**
 	         * Setting the camera
@@ -295,94 +311,91 @@ public class MainActivity extends Activity {
 	    
 	}
 	
-	private void setCameraConfig( Camera camera )
-	{
-		Camera.Parameters l_param = camera.getParameters();
-		List<Camera.Size> l_preview_sizes = l_param.getSupportedPreviewSizes();
-		List<Camera.Size> l_picture_sizes = l_param.getSupportedPictureSizes();
-		
-		Camera.Size l_tmp_size	   = null;
-		Camera.Size l_optimal_size = null;
-		Camera.Size l_maximal_size = null;
-		
-		for( int l_index = 0 ; l_index < l_preview_sizes.size() ; l_index++ )
-		{
-			l_tmp_size = l_preview_sizes.get( l_index );
-			Log.i(TAG, "Preview size available : " + l_tmp_size.width + "x" + l_tmp_size.height);
-			if( l_tmp_size.width == mLandscapeWidth )
-			{
-				l_optimal_size = l_tmp_size;
-				if( l_tmp_size.height == mLandscapeHeight )
-				{
-					// Exact size have been found !
-					break;
-				}
-			}
-			
-			if( 	( l_maximal_size == null ) ||  
-					( 	( l_maximal_size.height*l_maximal_size.width ) < 
-						( l_tmp_size.height * l_tmp_size.width) ) 			)
-			{
-				l_maximal_size = l_tmp_size;
-			}
-		}
-		
-		if( l_optimal_size != null )
-		{
-			l_param.setPreviewSize( l_optimal_size.width, l_optimal_size.height);
-		}
-		else
-		{
-			l_param.setPreviewSize( l_maximal_size.width, l_maximal_size.height);
-		}
-		
-		l_maximal_size = null;
-		l_optimal_size = null;
-		l_tmp_size = null;
-		
-		
-		for( int l_index = 0 ; l_index < l_picture_sizes.size() ; l_index++ )
-		{
-			l_tmp_size = l_picture_sizes.get( l_index );
-			Log.i(TAG, "Picture size available : " + l_tmp_size.width + "x" + l_tmp_size.height);
-			if( l_tmp_size.width == mLandscapeWidth )
-			{
-				l_optimal_size = l_tmp_size;
-				if( l_tmp_size.height == mLandscapeHeight )
-				{
-					// Exact size have been found !
-					break;
-				}
-			}
-			
-			if( 	( l_maximal_size == null ) ||  
-					( 	( l_maximal_size.height*l_maximal_size.width ) < 
-						( l_tmp_size.height * l_tmp_size.width) ) 			)
-			{
-				l_maximal_size = l_tmp_size;
-			}
-		}
-		
-		if( l_optimal_size != null )
-		{
-			l_param.setPictureSize( l_optimal_size.width, l_optimal_size.height);
-		}
-		else
-		{
-			l_param.setPictureSize( l_maximal_size.width, l_maximal_size.height);
-		}
-		l_param.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
-		l_param.setRotation( DISPLAY_AND_PICTURE_ORIENTATION );
-		camera.setDisplayOrientation( DISPLAY_AND_PICTURE_ORIENTATION );
-		camera.setParameters( l_param );
-		
-		Log.d(TAG,"Info : Preview size selected : " + l_param.getPreviewSize().width + "x" +  l_param.getPreviewSize().height);
-		Log.d(TAG,"Info : Picture size selected : " + l_param.getPictureSize().width + "x" + l_param.getPictureSize().height);
-		Log.d(TAG,"Info : Camera orientation set to : " + DISPLAY_AND_PICTURE_ORIENTATION + " degrees.");
-		
-		
-	}
-	
 }
 
-
+//private void setCameraConfig( Camera camera )
+//{
+//	Camera.Parameters l_param = camera.getParameters();
+//	List<Camera.Size> l_preview_sizes = l_param.getSupportedPreviewSizes();
+//	List<Camera.Size> l_picture_sizes = l_param.getSupportedPictureSizes();
+//	
+//	Camera.Size l_tmp_size	   = null;
+//	Camera.Size l_optimal_size = null;
+//	Camera.Size l_maximal_size = null;
+//	
+//	for( int l_index = 0 ; l_index < l_preview_sizes.size() ; l_index++ )
+//	{
+//		l_tmp_size = l_preview_sizes.get( l_index );
+//		Log.i(TAG, "Preview size available : " + l_tmp_size.width + "x" + l_tmp_size.height);
+//		if( l_tmp_size.width == mLandscapeWidth )
+//		{
+//			l_optimal_size = l_tmp_size;
+//			if( l_tmp_size.height == mLandscapeHeight )
+//			{
+//				// Exact size have been found !
+//				break;
+//			}
+//		}
+//		
+//		if( 	( l_maximal_size == null ) ||  
+//				( 	( l_maximal_size.height*l_maximal_size.width ) < 
+//					( l_tmp_size.height * l_tmp_size.width) ) 			)
+//		{
+//			l_maximal_size = l_tmp_size;
+//		}
+//	}
+//	
+//	if( l_optimal_size != null )
+//	{
+//		l_param.setPreviewSize( l_optimal_size.width, l_optimal_size.height);
+//	}
+//	else
+//	{
+//		l_param.setPreviewSize( l_maximal_size.width, l_maximal_size.height);
+//	}
+//	l_maximal_size = null;
+//	l_optimal_size = null;
+//	l_tmp_size = null;
+//	
+//	
+//	for( int l_index = 0 ; l_index < l_picture_sizes.size() ; l_index++ )
+//	{
+//		l_tmp_size = l_picture_sizes.get( l_index );
+//		Log.i(TAG, "Picture size available : " + l_tmp_size.width + "x" + l_tmp_size.height);
+//		if( l_tmp_size.width == mLandscapeWidth )
+//		{
+//			l_optimal_size = l_tmp_size;
+//			if( l_tmp_size.height == mLandscapeHeight )
+//			{
+//				// Exact size have been found !
+//				break;
+//			}
+//		}
+//		
+//		if( 	( l_maximal_size == null ) ||  
+//				( 	( l_maximal_size.height*l_maximal_size.width ) < 
+//					( l_tmp_size.height * l_tmp_size.width) ) 			)
+//		{
+//			l_maximal_size = l_tmp_size;
+//		}
+//	}
+//	
+//	if( l_optimal_size != null )
+//	{
+//		l_param.setPictureSize( l_optimal_size.width, l_optimal_size.height);
+//	}
+//	else
+//	{
+//		l_param.setPictureSize( l_maximal_size.width, l_maximal_size.height);
+//	}
+//	l_param.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+//	l_param.setRotation( DISPLAY_AND_PICTURE_ORIENTATION );
+//	camera.setDisplayOrientation( DISPLAY_AND_PICTURE_ORIENTATION );
+//	camera.setParameters( l_param );
+//	
+//	Log.d(TAG,"Info : Preview size selected : " + l_param.getPreviewSize().width + "x" +  l_param.getPreviewSize().height);
+//	Log.d(TAG,"Info : Picture size selected : " + l_param.getPictureSize().width + "x" + l_param.getPictureSize().height);
+//	Log.d(TAG,"Info : Camera orientation set to : " + DISPLAY_AND_PICTURE_ORIENTATION + " degrees.");
+//	
+//	
+//}
