@@ -33,3 +33,4 @@ D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JDClientRich
 D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JDClientRicheCS\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
 D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JDClientRicheCS\bin\Debug\WPFColorPickerLib.dll
 D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JDClientRicheCS\bin\Debug\WPFColorPickerLib.pdb
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JDClientRicheCS\bin\Debug\ColorPicker.dll
