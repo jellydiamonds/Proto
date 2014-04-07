@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="file:///C:/PROGRAM FILES (X86)/MICROSOFT VISUAL STUDIO 11.0/COMMON7/IDE/EXTENSIONS/MICROSOFT/ARCHITECTURE TOOLS/EXTENSIBILITY/Logging/CodeGenLog.xslt"?>
+<Log xmlns="http://schemas.microsoft.com/VisualStudio/2010/CodeGen.RE.Log" Label="Génération de code/Journal de transformation de texte">
+  <MessageClass Name="Message" Label="Message" Option="Afficher les messages d'information" />
+  <MessageClass Name="Warning" Label="Avertissement" Option="Afficher les avertissements" />
+  <MessageClass Name="Error" Label="Erreur" Option="Afficher les erreurs" />
+  <MessageClass Name="Property" Label="Propriété" Option="Afficher les métadonnées" />
+  <MessageClass Name="Diagnostic" Label="Message" Option="Afficher les messages de diagnostic" />
+  <Message Timestamp="2014-04-07T16:14:30" Importance="High" Text="Génération du code ou transformation du texte démarrées." />
+  <Message Timestamp="2014-04-07T16:14:31" Importance="Diagnostic" Text="Nom = ClassTemplate" />
+  <Message Timestamp="2014-04-07T16:14:31" Importance="Diagnostic" Text="Remplacer = True" />
+  <Message Timestamp="2014-04-07T16:14:31" Importance="Diagnostic" Text="ProjectPath = ..\ModelingProject1Lib\ModelingProject1Lib.csproj" />
+  <Message Timestamp="2014-04-07T16:14:31" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
+  <Message Timestamp="2014-04-07T16:14:31" Importance="Diagnostic" Text="TargetName = {Name}" />
+  <Message Timestamp="2014-04-07T16:14:31" Importance="Diagnostic" Text="TemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 11.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\ClassTemplate.t4" />
+  <Message Timestamp="2014-04-07T16:14:31" Importance="Diagnostic" Text="ResolvedTemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 11.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\ClassTemplate.t4" />
+  <Message Timestamp="2014-04-07T16:14:31" Importance="Medium" Text="La liaison de modèle de texte 'ClassTemplate' de ModelingProject1 appliquera ClassTemplate.t4 à 'ModelingProject1::GemID' -  (Class), 'ModelingProject1::User' -  (Class), 'ModelingProject1::Collection' -  (Class), 'ModelingProject1::View' -  (Class), 'ModelingProject1::Status' -  (Class), 'ModelingProject1::ForSale' -  (Class), 'ModelingProject1::TradeInProgress' -  (Class), 'ModelingProject1::Default' -  (Class), 'ModelingProject1::Deleted' -  (Class), 'ModelingProject1::Licence' -  (Class) " />
+  <Message Timestamp="2014-04-07T16:14:49" Importance="Medium" Text="Projet ajouté : C:\C_Sharp\ConceptionJellyDiamonds\ModelingProject1Lib\ModelingProject1Lib.csproj" />
+  <Message Timestamp="2014-04-07T16:14:49" Importance="Medium" Text="'ModelingProject1::GemID' -  (Class) : réussite (fichier créé) - C:\C_Sharp\ConceptionJellyDiamonds\ModelingProject1Lib\GeneratedCode\GemID.cs" />
+  <Message Timestamp="2014-04-07T16:14:51" Importance="Medium" Text="'ModelingProject1::User' -  (Class) : réussite (fichier créé) - C:\C_Sharp\ConceptionJellyDiamonds\ModelingProject1Lib\GeneratedCode\User.cs" />
+  <Message Timestamp="2014-04-07T16:14:51" Importance="Medium" Text="'ModelingProject1::Collection' -  (Class) : réussite (fichier créé) - C:\C_Sharp\ConceptionJellyDiamonds\ModelingProject1Lib\GeneratedCode\Collection.cs" />
+  <Message Timestamp="2014-04-07T16:14:52" Importance="Medium" Text="'ModelingProject1::View' -  (Class) : réussite (fichier créé) - C:\C_Sharp\ConceptionJellyDiamonds\ModelingProject1Lib\GeneratedCode\View.cs" />
+  <Message Timestamp="2014-04-07T16:14:52" Importance="Medium" Text="'ModelingProject1::Status' -  (Class) : réussite (fichier créé) - C:\C_Sharp\ConceptionJellyDiamonds\ModelingProject1Lib\GeneratedCode\Status.cs" />
+  <Message Timestamp="2014-04-07T16:14:52" Importance="Medium" Text="'ModelingProject1::ForSale' -  (Class) : réussite (fichier créé) - C:\C_Sharp\ConceptionJellyDiamonds\ModelingProject1Lib\GeneratedCode\ForSale.cs" />
+  <Message Timestamp="2014-04-07T16:14:52" Importance="Medium" Text="'ModelingProject1::TradeInProgress' -  (Class) : réussite (fichier créé) - C:\C_Sharp\ConceptionJellyDiamonds\ModelingProject1Lib\GeneratedCode\TradeInProgress.cs" />
+  <Message Timestamp="2014-04-07T16:14:52" Importance="Medium" Text="'ModelingProject1::Default' -  (Class) : réussite (fichier créé) - C:\C_Sharp\ConceptionJellyDiamonds\ModelingProject1Lib\GeneratedCode\Default.cs" />
+  <Message Timestamp="2014-04-07T16:14:53" Importance="Medium" Text="'ModelingProject1::Deleted' -  (Class) : réussite (fichier créé) - C:\C_Sharp\ConceptionJellyDiamonds\ModelingProject1Lib\GeneratedCode\Deleted.cs" />
+  <Message Timestamp="2014-04-07T16:14:53" Importance="Medium" Text="'ModelingProject1::Licence' -  (Class) : réussite (fichier créé) - C:\C_Sharp\ConceptionJellyDiamonds\ModelingProject1Lib\GeneratedCode\Licence.cs" />
+  <Message Timestamp="2014-04-07T16:14:53" Importance="Diagnostic" Text="Nom = StructTemplate" />
+  <Message Timestamp="2014-04-07T16:14:53" Importance="Diagnostic" Text="Remplacer = True" />
+  <Message Timestamp="2014-04-07T16:14:53" Importance="Diagnostic" Text="ProjectPath = ..\ModelingProject1Lib\ModelingProject1Lib.csproj" />
+  <Message Timestamp="2014-04-07T16:14:53" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
+  <Message Timestamp="2014-04-07T16:14:53" Importance="Diagnostic" Text="TargetName = {Name}" />
+  <Message Timestamp="2014-04-07T16:14:53" Importance="Diagnostic" Text="TemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 11.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\StructTemplate.t4" />
+  <Message Timestamp="2014-04-07T16:14:53" Importance="Diagnostic" Text="ResolvedTemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 11.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\StructTemplate.t4" />
+  <Message Timestamp="2014-04-07T16:14:53" Importance="Medium" Text="La liaison de modèle de texte 'StructTemplate' de ModelingProject1 appliquera StructTemplate.t4 à 'ModelingProject1::GemID' -  (Class), 'ModelingProject1::User' -  (Class), 'ModelingProject1::Collection' -  (Class), 'ModelingProject1::View' -  (Class), 'ModelingProject1::Status' -  (Class), 'ModelingProject1::ForSale' -  (Class), 'ModelingProject1::TradeInProgress' -  (Class), 'ModelingProject1::Default' -  (Class), 'ModelingProject1::Deleted' -  (Class), 'ModelingProject1::Licence' -  (Class) " />
+  <Message Timestamp="2014-04-07T16:14:53" Importance="Diagnostic" Text="'ModelingProject1::GemID' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'StructTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="'ModelingProject1::User' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'StructTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="'ModelingProject1::Collection' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'StructTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="'ModelingProject1::View' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'StructTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="'ModelingProject1::Status' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'StructTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="'ModelingProject1::ForSale' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'StructTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="'ModelingProject1::TradeInProgress' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'StructTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="'ModelingProject1::Default' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'StructTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="'ModelingProject1::Deleted' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'StructTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="'ModelingProject1::Licence' -  (Class) : aucun fichier n'a été généré, car la méthode 'AppliesToElement' du modèle 'StructTemplate.t4' a été évaluée comme false." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="La sélection comprenait 12 éléments qui n'étaient pas liés à un modèle." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="'ModelingProject1::' -  (Association) : aucun modèle lié." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="'ModelingProject1::' -  (Association) : aucun modèle lié." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="'ModelingProject1::' -  (Association) : aucun modèle lié." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="'ModelingProject1::' -  (Association) : aucun modèle lié." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="'ModelingProject1::' -  (Association) : aucun modèle lié." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="'ModelingProject1::' -  (Association) : aucun modèle lié." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="'ModelingProject1::' -  (Association) : aucun modèle lié." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="'50b25d1d-913d-4fb6-9d48-dc18c78ba526' -  (Generalization) : aucun modèle lié." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="'f684f0aa-4a59-4fd6-85a9-b8b55a60dd83' -  (Generalization) : aucun modèle lié." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="'1f8e1587-12ea-45ec-93a4-c1aee9abfeea' -  (Generalization) : aucun modèle lié." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="'00914561-b28d-47da-b0f3-4d3365ddd77e' -  (Generalization) : aucun modèle lié." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="Diagnostic" Text="'ModelingProject1::' -  (Association) : aucun modèle lié." />
+  <Message Timestamp="2014-04-07T16:14:54" Importance="High" Text="Génération du code terminée. Erreurs : 0. Avertissements : 0." />
+</Log>
