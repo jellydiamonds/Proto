@@ -22,8 +22,8 @@ namespace JellyDiamondsTraitement
                 try
                 {
                     var imageSource = new Bitmap(args[0]);
-                    int reductionX = 30;
-                    int reductionY = 25;
+                    int reductionX = 15;
+                    int reductionY = 15;
                     double[,] gaussianBlurryMatrix = {{1.0/16.0,2.0/16.0,1.0/16.0},
                                                       {2.0/16.0,4.0/16.0,2.0/16.0},
                                                       {1.0/16.0,2.0/16.0,1.0/16.0}};
@@ -35,22 +35,23 @@ namespace JellyDiamondsTraitement
                     int height = imageSource.Height;
                     int width = imageSource.Width;
 
-                    Console.WriteLine("Traitement (1/3) : Reduction du bruit");
+                    Console.WriteLine("Traitement (1/4) : Reduction du bruit");
                     Bitmap blurryImage = blurryFilter.doFilter(imageSource);
 
-                    Console.WriteLine("Traitement (2/3) : Calcul des contours");
+                    Console.WriteLine("Traitement (2/4) : Calcul des contours");
                     Bitmap contourImage = contourFilter.doFilter(blurryImage);
 
-                    Console.WriteLine("Traitement (3/3) : Fusion des images");
+                    Console.WriteLine("Traitement (3/4) : Fusion des images");
                     Bitmap imageDestination = fusionImage.doFusion(imageSource, contourImage);
 
                     imageDestination.Save(args[1], System.Drawing.Imaging.ImageFormat.Jpeg);
 
-                    Console.WriteLine("Calcul de la couleur de la pierre");
+                    Console.WriteLine("Traitement (4/4) : Calcul de la couleur de la pierre");
                     ColorComputer calculCouleur = new ColorComputer(reductionX, reductionY);
                     int couleur = calculCouleur.doCompute(imageDestination);
 
-                    Console.WriteLine("Couleur de la pierre : {0:X}", couleur);
+                    if(couleur < 0x100000) Console.WriteLine("0{0:X}", couleur);
+                    else Console.WriteLine("{0:X}", couleur);
 
                     imageDestination.Save(args[1], System.Drawing.Imaging.ImageFormat.Jpeg);
 
