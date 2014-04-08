@@ -20,7 +20,7 @@ public class Gems extends HttpServlet {
     public static final String ATT_FORM     = "form";
     public static final String PARAM_GEMID  = "id";
     public static final String VIEW_FORM    = "/WEB-INF/find_gem.jsp";
-    public static final String VIEW_SUCCESS = "/WEB-INF/gem_found.jsp";
+    public static final String VIEW_SUCCESS = "/WEB-INF/gemID.jsp";
 
     /* Injection de l'objet métier */
     @EJB

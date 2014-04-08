@@ -1,8 +1,57 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<form method="post" action="<c:url value="/createGem"/>" accept-charset="UTF-8" name="GemForm" id="GemForm">
+<c:set var="gem" scope="request" value="${ requestScope.currentGem }" />
+<c:set var="formGem" scope="request" value="${ requestScope.form }" />
+
+<c:set var="arraySpecies" scope="request" value='${ 
+					["---","Agate","Alexandrite","Almandine","Amazonite","Amber","Amethyst","Ametrine","Andalusite",
+                    "Apatite","Aquamarine","Beryl","Bixbite","Chalcedony","Chrome tourmaline","Chrysoberyl",
+                    "Citrine","Color change garnet","Color change sapphire","Cubic zirconia","Demantoid",
+                    "Diamond","Diopside","Emerald","Fluorite","Goshenite","Hessonite","Iolite","Kunzite",
+                    "Kyanite","Lapis lazuli","Malaia garnet","Moonstone","Morganite","Opal","Peridot",
+                    "Pezzottaite","Prehnite","Pyrope","Rhodochrosite","Rhodolite","Rhodonite","Rose quartz",
+                    "Rubelite","Ruby","Sapphire","Scapolite","Smoky quartz","Spessartite","Sphene","Spinel",
+                    "Star ruby","Star sapphire","Tanzanite","Topaz","Tourmaline","Tsavorite","Turquoise","Zircon"] }'/>
+                    
+<c:set var="arrayShape" scope="request" value='${ 
+					["---","Camer","Cushion","Fancy","Heart","Marquise","Octagon","Oval","Pear",
+	               "Rectangle","Round","Ruff","Square","Trillion"] }' />
+
+<c:set var="arrayCut" scope="request" value='${ 
+					["---","Asscher","Baguette","Briolette","Cabashian","Checker-board","Concave","Diamond",
+                	"Fancy","Millenium","Mixte","Portugueese","Princess","Radiant","Ruff","Step-cut"] }' />
+
+<c:set var="arrayClarity" scope="request" value='${
+					["---","Loupe Clean","Eye Clean","Eyes Clean to Slightly Included","Slightly Included",
+                    "Moderately Included","Heavily Included","Translucent","Opaque"] }' />
+
+<c:set var="arrayEnhancement" scope="request" value='${
+					["---","High Pressure","High Temperature","Unknown"] }' />
+
+<c:set var="arrayOrigin" scope="request" value='${
+					["---","Madagascar","some country (will add a list)"] }' />
+
+<c:set var="arrayCertificate" scope="request" value='${
+					["---", "GIA (Gemological Institut of America)","Güblin Gem Lab",
+                    "AIGS (Asian Institute Of Gemological Sciences)","HRD Antwerp"] }' />
+
+<c:set var="arrayCurrency" scope="request" value='${
+					["---","EUR","USD","CAD","RUR","UAH"] }' />
+
+<c:set var="arrayLight" scope="request" value='${
+					["---","Daylight","Fluorescent light","Incandescent light"] }' />
+       
+<c:set var="actionServlet" value="${ requestScope.action }" />       
+<form method="post" action="<c:url value="${ actionServlet }"/>" accept-charset="UTF-8" name="GemForm" id="GemForm"  enctype="multipart/form-data">
 	<h1 class = "maintitle">
-		Create a new Gem-ID
+	<c:choose>
+		<c:when test="${ requestScope.action == '/createGem' }">
+			Create a new Gem-ID
+		</c:when>
+		<c:otherwise>
+			Edit a Gem-ID #${ gem.id }
+		</c:otherwise>
+	</c:choose>
 	</h1>
 	
 	<table id="createGemTable">
@@ -11,71 +60,22 @@
 				<span class="required">*</span> Gem species
 			</td>
 			<td class="field_value">
-				<select id="gemSpecies" name="gemSpecies" value="${ requestScope.currentGem.species }" tabindex="1">
-		<option value=""></option>
-		<option value="Agate">Agate</option>
-		<option value="Alexandrite">Alexandrite</option>
-		<option value="Almandine">Almandine</option>
-		<option value="Amazonite">Amazonite</option>
-		<option value="Amber">Amber</option>
-		<option value="Amber">Amethyst</option>
-		<option value="Ametrine">Ametrine</option>
-		<option value="Ametrine">Andalusite</option>
-		<option value="Apatite">Apatite</option>
-		<option value="Aquamarine">Aquamarine</option>
-		<option value="Beryl">Beryl</option>
-		<option value="Bixbite">Bixbite</option>
-		<option value="Chalcedony">Chalcedony</option>
-		<option value="Chrome tourmaline">Chrome tourmaline</option>
-		<option value="Chrysoberyl">Chrysoberyl</option>
-		<option value="Citrine">Citrine</option>
-		<option value="Color change garnet">Color change garnet</option>
-		<option value="Color change sapphire">Color change sapphire</option>
-		<option value="Cubic zirconia">Cubic zirconia</option>
-		<option value="Demantoid">Demantoid</option>
-		<option value="Diamond">Diamond</option>/**/
-		<option value="Diopside">Diopside</option>
-		<option value="Emerald">Emerald</option>
-		<option value="Fluorite">Fluorite</option>
-		<option value="Goshenite">Goshenite</option>
-		<option value="Hessonite">Hessonite</option>
-		<option value="Iolite">Iolite</option>
-		<option value="Kunzite">Kunzite</option>
-		<option value="Kyanite">Kyanite</option>
-		<option value="Lapis lazuli">Lapis lazuli</option>
-		<option value="Malaia garnet">Malaia garnet</option>
-		<option value="Moonstone">Moonstone</option>
-		<option value="Morganite">Morganite</option>
-		<option value="Opal">Opal</option>
-		<option value="Peridot">Peridot</option>
-		<option value="Pezzottaite">Pezzottaite</option>
-		<option value="Prehnite">Prehnite</option>
-		<option value="Pyrope">Pyrope</option>
-		<option value="Rhodochrosite">Rhodochrosite</option>
-		<option value="Rhodolite">Rhodolite</option>
-		<option value="Rhodonite">Rhodonite</option>
-		<option value="Rose quartz">Rose quartz</option>
-		<option value="Rubelite">Rubelite</option>
-		<option value="Ruby">Ruby</option>
-		<option value="Sapphire">Sapphire</option>
-		<option value="Scapolite">Scapolite</option>
-		<option value="Smoky quartz">Smoky quartz</option>
-		<option value="Spessartite">Spessartite</option>
-		<option value="Sphene">Sphene</option>
-		<option value="Spinel">Spinel</option>
-		<option value="Star ruby">Star ruby</option>
-		<option value="Star sapphire">Star sapphire</option>
-		<option value="Tanzanite">Tanzanite</option>
-		<option value="Topaz">Topaz</option>
-		<option value="Tourmaline">Tourmaline</option>
-		<option value="Tsavorite">Tsavorite</option>
-		<option value="Turquoise">Turquoise</option>
-		<option value="Zircon">Zircon</option>
-		<option value="other">other</option>
-			</select>
-			<span class="error">
-				${ requestScope.form.errors['gemSpecies'] }
-			</span>
+				<select id="gemSpeciesSelect" name="gemSpecies" tabindex="1">
+					<c:forEach var="species" items="${ requestScope.arraySpecies }" varStatus="loop">
+						<option value="${ loop.index }" <c:if test="${ loop.index == gem.species }">selected</c:if>>
+						<!--<c:choose>
+							<c:when test="${ loop.index == gem.species }">
+								<option value="${ loop.index }" selected="selected">
+							</c:when>
+							<c:otherwise>
+								<option value="${ loop.index }">
+							</c:otherwise>
+						</c:choose>-->
+							${ species }
+						</option>
+					</c:forEach>
+				</select>
+			<span class="error">${ requestScope.form.errors['gemSpecies'] }</span>
 			</td>	
 		</tr>
 		<tr>
@@ -84,10 +84,8 @@
 			</td>
 			<td class="field_value">
 				<input type="text" id="gemColor" name="gemColor" placeholder="color code" 
-					value="<c:out value="${ requestScope.currentGem.color }"/>" maxlength="20" tabindex="2"> 
-				<span class="error">
-					${ requestScope.form.errors['gemColor'] }
-				</span>
+					value="<c:out value="${ gem.color }"/>" maxlength="20" tabindex="2"> 
+				<span class="error">${ requestScope.form.errors['gemColor'] }</span>
 			</td>
 		</tr>
 		<tr>
@@ -95,25 +93,21 @@
 				<span class="required">*</span> Shape
 			</td>
 			<td class="field_value">
-				<select id="gemShape" name="gemShape" value="${ requestScope.currentGem.shape }" tabindex="3">
-					<option value=""></option>
-					<option value="Camer">Camer</option>
-					<option value="Cushion">Cushion</option>	
-					<option value="Fancy">Fancy</option>
-					<option value="Heart">Heart</option>
-					<option value="Marquise">Marquise</option>
-					<option value="Octagon">Octagon</option>
-					<option value="Oval">Oval</option>
-					<option value="Pear">Pear</option>
-					<option value="Rectangle">Rectangle</option>
-					<option value="Round">Round</option>
-					<option value="Ruff">Ruff</option>
-					<option value="Square">Square</option>
-					<option value="Trillion">Trillion</option>
+				<select id="gemShapeSelect" name="gemShape" tabindex="3">
+					<c:forEach var="shape" items="${ requestScope.arrayShape }" varStatus="loop">
+						<c:choose>
+							<c:when test="${ loop.index == gem.shape }">
+								<option value="${ loop.index }" selected="selected">
+							</c:when>
+							<c:otherwise>
+								<option value="${ loop.index }">
+							</c:otherwise>
+						</c:choose>
+							${ shape }
+						</option>
+					</c:forEach>
 				</select>
-				<span class="error">
-					${ requestScope.form.errors['gemShape'] }
-				</span>
+				<span class="error">${ requestScope.form.errors['gemShape'] }</span>
 			</td>
 		</tr>
 		<tr>
@@ -121,39 +115,31 @@
 				<span class="required">*</span> Cut
 			</td>
 			<td class="field_value">
-				<select id="gemCut" name="gemCut" value="${ requestScope.currentGem.cut }" tabindex="4">
-					<option value=""></option>
-					<option value="Asscher">Asscher</option>
-					<option value="Baguette">Baguette</option>
-					<option value="Briolette">Briolette</option>
-					<option value="Cabashian">Cabashian</option>
-					<option value="Checker-board">Checker-board</option>
-					<option value="Concave">Concave</option>
-					<option value="Diamond">Diamond</option>
-					<option value="Fancy">Fancy</option>
-					<option value="Millenium">Millenium</option>
-					<option value="Mixte">Mixte</option>
-					<option value="Portugueese">Portugueese</option>
-					<option value="Princess">Princess</option>
-					<option value="Radiant">Radiant</option>
-					<option value="Ruff">Ruff</option>
-					<option value="Step-cut">Step-cut</option>**/**/
+				<select id="gemCutSelect" name="gemCut" tabindex="4">
+					<c:forEach var="cut" items="${ requestScope.arrayCut }" varStatus="loop">
+						<c:choose>
+							<c:when test="${ loop.index == gem.cut }">
+								<option value="${ loop.index }" selected="selected">
+							</c:when>
+							<c:otherwise>
+								<option value="${ loop.index }">
+							</c:otherwise>
+						</c:choose>
+							${ cut }
+						</option>
+					</c:forEach>
 				</select>
-				<span class="error">
-					${ requestScope.form.errors['gemCut'] }
-				</span>
+				<span class="error">${ requestScope.form.errors['gemCut'] }</span>
 			</td>
 		</tr>
 		<tr>
 			<td class="field_title">
-				Mass
+				<span class="required">*</span> Mass
 			</td>
 			<td class="field_value">
 				<input type="text" id="gemMass" name="gemMass" placeholder="mass in cts" 
-					value="<c:out value="${ requestScope.currentGem.mass }"/>" maxlength="10" tabindex="5"> 
-				<span class="error">
-					${ requestScope.form.errors['gemMass'] }
-				</span>		
+					value="<c:out value="${ gem.mass }"/>" maxlength="10" tabindex="5"> 
+				<span class="error">${ requestScope.form.errors['gemMass'] }</span>		
 			</td>
 		</tr>
 		<tr>
@@ -167,10 +153,8 @@
 							</td>
 							<td class="field_value">
 								<input type="text" class="dimensions" id="gemSizeX" name="gemSizeX" placeholder="mm"
-								value="<c:out value="${ requestScope.currentGem.sizeX }"/>" maxlength="10" tabindex="6">
-								<span class="error">
-									${ requestScope.form.errors['gemSizeX'] }
-								</span>
+								value="<c:out value="${ gem.sizeX }"/>" maxlength="10" tabindex="6">
+								<span class="error">${ requestScope.form.errors['gemSizeX'] }</span>
 							</td>		
 						</tr>
 						<tr>
@@ -179,10 +163,8 @@
 							</td>
 							<td class="field_value">
 								<input type="text" class="dimensions" id="gemSizeY" name="gemSizeY" placeholder="mm" 
-								value="<c:out value="${ requestScope.currentGem.sizeY }"/>" maxlength="10" tabindex="7">
-								<span class="error">
-									${ requestScope.form.errors['gemSizeY'] }
-								</span>
+								value="<c:out value="${ gem.sizeY }"/>" maxlength="10" tabindex="7">
+								<span class="error">${ requestScope.form.errors['gemSizeY'] }</span>
 							</td>		
 						</tr>
 						<tr>
@@ -191,10 +173,8 @@
 							</td>
 							<td class="field_value">
 								<input type="text" class="dimensions" id="gemSizeZ" name="gemSizeZ" placeholder="mm"
-	 							value="<c:out value="${ requestScope.currentGem.sizeZ }"/>" maxlength="10" tabindex="8"><br>
-	 							<span class="error">
-									${ requestScope.form.errors['gemSizeZ'] }
-								</span>
+	 							value="<c:out value="${ gem.sizeZ }"/>" maxlength="10" tabindex="8"><br>
+	 							<span class="error">${ requestScope.form.errors['gemSizeZ'] }</span>
 							</td>		
 						</tr>
 					</table>
@@ -206,21 +186,21 @@
 				<span class="required">*</span> Clarity
 			</td>
 			<td class="field_value">
-				<select id="gemClarity" name="gemClarity" value="${ requestScope.currentGem.clarity }" tabindex="9">
-					<option value=""></option>
-					<option value="Loupe Clean">Loupe Clean</option>
-					<option value="Eye Clean">Eye Clean</option>
-					<option value="Eyes Clean to Slightly Included">Eyes Clean to Slightly Included</option>
-					<option value="Slightly Included">Slightly Included</option>
-					<option value="Moderately Included">Moderately Included</option>
-					<option value="Heavily Included">Heavily Included</option>
-					<option value="Translucent">Translucent</option>
-					<option value="Opaque">Opaque</option>
+				<select id="gemClaritySelect" name="gemClarity" tabindex="9">
+					<c:forEach var="clarity" items="${ requestScope.arrayClarity }" varStatus="loop">
+						<c:choose>
+							<c:when test="${ loop.index == gem.clarity }">
+								<option value="${ loop.index }" selected="selected">
+							</c:when>
+							<c:otherwise>
+								<option value="${ loop.index }">
+							</c:otherwise>
+						</c:choose>
+							${ clarity }
+						</option>
+					</c:forEach>
 				</select>
-				<span class="error">
-					${ requestScope.form.errors['gemClarity'] }
-				</span>
-					
+				<span class="error">${ requestScope.form.errors['gemClarity'] }</span>
 			</td>
 		</tr>
 		<tr>
@@ -228,16 +208,21 @@
 				Enhancement
 			</td>
 			<td class="field_value">
-				<!-- TO DO: add a possibility to choose several enhancements. -->
-				<select id="gemEnhancement" name="gemEnhancement" value="${ requestScope.currentGem.enhancement }" tabindex="10">
-					<option value=""></option>
-					<option value="HP">HP (High Pressure)</option>
-					<option value="HT">HT (High Temperature)</option>
-					<option value="Unknown">Unknown</option>
+				<select id="gemEnhancementSelect" name="gemEnhancement" multiple  tabindex="10">
+					<c:forEach var="enhancement" items="${ requestScope.arrayEnhancement }" varStatus="loop">
+						<c:choose>
+							<c:when test="${ loop.index == gem.enhancement }">
+								<option value="${ loop.index }" selected="selected">
+							</c:when>
+							<c:otherwise>
+								<option value="${ loop.index }">
+							</c:otherwise>
+						</c:choose>
+							${ enhancement }
+						</option>
+					</c:forEach>
 				</select>
-				<span class="error">
-					${ requestScope.form.errors['gemEnhancement'] }
-				</span>			
+				<span class="error">${ requestScope.form.errors['gemEnhancement'] }</span>			
 			</td>
 		</tr>
 		<tr>
@@ -245,13 +230,21 @@
 				Origin	
 			</td>
 			<td class="field_value">
-				<select id="gemOrigin" name="gemOrigin" value="${ requestScope.currentGem.origin }" tabindex="11">
-					<option value=""></option>
-					<option value="Madagascar">Madagascar</option>
+				<select id="gemOriginSelect" name="gemOrigin" tabindex="11">
+					<c:forEach var="origin" items="${ requestScope.arrayOrigin }" varStatus="loop">
+						<c:choose>
+							<c:when test="${ loop.index == gem.origin }">
+								<option value="${ loop.index }" selected="selected">
+							</c:when>
+							<c:otherwise>
+								<option value="${ loop.index }">
+							</c:otherwise>
+						</c:choose>
+							${ origin }
+						</option>
+					</c:forEach>
 				</select>
-				<span class="error">
-					${ requestScope.form.errors['gemOrigin'] }
-				</span>
+				<span class="error">${ requestScope.form.errors['gemOrigin'] }</span>
 			</td>
 		</tr>
 		<tr>
@@ -259,16 +252,21 @@
 				Certificate	
 			</td>
 			<td class="field_value">
-				<select id="gemCertificate" name="gemCertificate" value="${ requestScope.currentGem.certificate }" tabindex="12">
-					<option value=""></option>
-					<option value="GIA">GIA (Gemological Institute of America)</option>
-					<option value="AIGS">AIGS (Asian Institute of Gemological Sciences)</option>
-					<option value="Güblin">Güblin</option>
-					<option value="HRD">HRD</option>
+				<select id="gemCertificateSelect" name="gemCertificate" tabindex="12">
+					<c:forEach var="certificate" items="${ requestScope.arrayCertificate }" varStatus="loop">
+						<c:choose>
+							<c:when test="${ loop.index == gem.certificate }">
+								<option value="${ loop.index }" selected="selected">
+							</c:when>
+							<c:otherwise>
+								<option value="${ loop.index }">
+							</c:otherwise>
+						</c:choose>
+							${ certificate }
+						</option>
+					</c:forEach>
 				</select>
-				<span class="error">
-					${ requestScope.form.errors['gemCertificate'] }
-				</span>
+				<span class="error">${ requestScope.form.errors['gemCertificate'] }</span>
 			</td>
 		</tr>
 		<tr>
@@ -277,11 +275,9 @@
 			</td>
 			<td class="field_value">
 				<textarea id="gemComments" name="gemComments" rows="5" cols="40" tabindex="13"> 
-				<c:out value="${ requestScope.currentGem.comments }"/>
+				<c:out value="${ gem.comments }"/>
 				</textarea>
-				<span class="error">
-					${ requestScope.form.errors['gemComments'] }
-				</span>
+				<span class="error">${ requestScope.form.errors['gemComments'] }</span>
 			</td>
 		</tr>
 		<tr>
@@ -290,15 +286,22 @@
 			</td>
 			<td class="field_value">
 				<input type="text" id="gemPriceValue" name="gemPriceValue" placeholder="for 1 cts" 
-					value="<c:out value="${ requestScope.currentGem.priceValue }"/>" maxlength="10" tabindex="14">
-				<select id="gemPriceCurrency" name="gemPriceCurrency" value="${ requestScope.currentGem.priceCurrency }" tabindex="15">
-					<option value="">Currency</option>
-					<option value="EUR">EUR</option>
-					<option value="USD">USD</option>
+					value="<c:out value="${ gem.priceValue }"/>" maxlength="10" tabindex="14">
+				<select id="gemPriceCurrencySelect" name="gemPriceCurrency" tabindex="15">
+					<c:forEach var="currency" items="${ requestScope.arrayCurrency }" varStatus="loop">
+						<c:choose>
+							<c:when test="${ loop.index == gem.priceCurrency }">
+								<option value="${ loop.index }" selected="selected">
+							</c:when>
+							<c:otherwise>
+								<option value="${ loop.index }">
+							</c:otherwise>
+						</c:choose>
+							${ currency }
+						</option>
+					</c:forEach>
 				</select>	
-				<span class="error">
-					${ requestScope.form.errors['gemPrice'] }
-				</span>
+				<span class="error">${ requestScope.form.errors['gemPrice'] }</span>
 			</td>
 		</tr>
 		<tr>
@@ -306,7 +309,7 @@
 				Supplier ID	
 			</td>
 			<td class="field_value">
-				<select id="gemSupplierID" name="gemSupplierID" value="${ requestScope.currentGem.supplierID }" tabindex="16">
+				<select id="gemSupplierID" name="gemSupplierID" value="${ gem.supplierID }" tabindex="16">
 					<option value="1">1</option>
 				</select> 
 				<span class="error">
@@ -319,7 +322,7 @@
 				Photo
 			</td>
 			<td class="field_value">
-				<input type="text" id="gemPhotoLink" name="gemPhotoLink" disabled value="${ requestScope.currentGem.photoLink }" tabindex="17"> 
+				<input type="text" id="gemPhotoLink" name="gemPhotoLink" disabled value="${ gem.photoLink }" tabindex="17"> 
 				<span class="error">
 					${ requestScope.form.errors['gemPhotoLink'] }
 				</span>
@@ -330,11 +333,19 @@
 				Light
 			</td>
 			<td class="field_value">
-				<select id="gemLight" name="gemLight" value="${ requestScope.currentGem.light }" tabindex="18">
-					<option value="">Photo taken under:</option>
-					<option value="Daylight">Daylight</option>
-					<option value="Fluorescent light">Fluorescent light</option>
-					<option value="Incandescent light">Incandescent light</option>
+				<select id="gemLightSelect" name="gemLight" tabindex="18">
+					<c:forEach var="light" items="${ requestScope.arrayLight }" varStatus="loop">
+						<c:choose>
+							<c:when test="${ loop.index == gem.light }">
+								<option value="${ loop.index }" selected="selected">
+							</c:when>
+							<c:otherwise>
+								<option value="${ loop.index }">
+							</c:otherwise>
+						</c:choose>
+							${ light }
+						</option>
+					</c:forEach>
 				</select> 
 				<span class="error">
 					${ requestScope.form.errors['gemLight'] }

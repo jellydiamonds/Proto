@@ -67,42 +67,58 @@ public final class FormGem {
      */
     public Gem createGem( HttpServletRequest request ) {
         // String reference = getValeurChamp( request, PARAM_REFERENCE );
-        String species = getValeurChamp( request, PARAM_SPECIES );
+        String speciesStr = getValeurChamp( request, PARAM_SPECIES );
         String color = getValeurChamp( request, PARAM_COLOR );
-        String shape = getValeurChamp( request, PARAM_SHAPE );
-        String cut = getValeurChamp( request, PARAM_CUT );
-        String massString = getValeurChamp( request, PARAM_MASS );
-        String sizeXString = getValeurChamp( request, PARAM_SIZE_X );
-        String sizeYString = getValeurChamp( request, PARAM_SIZE_Y );
-        String sizeZString = getValeurChamp( request, PARAM_SIZE_Z );
-        String clarity = getValeurChamp( request, PARAM_CLARITY );
-        String enhancement = getValeurChamp( request, PARAM_ENHANCEMENT );
-        String origin = getValeurChamp( request, PARAM_ORIGIN );
-        String certificate = getValeurChamp( request, PARAM_CERTIFICATE );
+        String shapeStr = getValeurChamp( request, PARAM_SHAPE );
+        String cutStr = getValeurChamp( request, PARAM_CUT );
+        String massStr = getValeurChamp( request, PARAM_MASS );
+        String sizeXStr = getValeurChamp( request, PARAM_SIZE_X );
+        String sizeYStr = getValeurChamp( request, PARAM_SIZE_Y );
+        String sizeZStr = getValeurChamp( request, PARAM_SIZE_Z );
+        String clarityStr = getValeurChamp( request, PARAM_CLARITY );
+        String enhancementStr = getValeurChamp( request, PARAM_ENHANCEMENT );
+        String originStr = getValeurChamp( request, PARAM_ORIGIN );
+        String certificateStr = getValeurChamp( request, PARAM_CERTIFICATE );
         String comments = getValeurChamp( request, PARAM_COMMENTS );
-        String priceCurrency = getValeurChamp( request, PARAM_PRICE_CURRENCY );
-        String priceValueString = getValeurChamp( request, PARAM_PRICE_VALUE );
-        String supplierIDString = getValeurChamp( request, PARAM_SUPPLIER_ID );
+        String priceCurrencyStr = getValeurChamp( request, PARAM_PRICE_CURRENCY );
+        String priceValueStr = getValeurChamp( request, PARAM_PRICE_VALUE );
+        String supplierIDStr = getValeurChamp( request, PARAM_SUPPLIER_ID );
         // String photoLink = getValeurChamp( request, PARAM_PHOTO_LINK );
-        String light = getValeurChamp( request, PARAM_LIGHT );
+        String lightStr = getValeurChamp( request, PARAM_LIGHT );
 
         Gem gem = new Gem();
+
+        /*
+         * ========================= IMAGE VALIDATION =========================
+         * We start by validating an image to fill up the 'errors' parameter
+         * (empty for a moment) with the errors which come from the FormImage
+         * execution.
+         */
+        FormImage formImage = new FormImage();
+        try {
+            image = form.enregistrerImage( request, chemin );
+        } catch ( FormValidationException e ) {
+            setError( PARAM_IMAGE, e.getMessage() );
+        }
+        errors = form.getErreurs();
+
         // Processing and validation of parameters, entered by user.
-        processSpecies( species, gem );
+        processSpecies( speciesStr, gem );
         processColor( color, gem );
-        processShape( shape, gem );
-        processCut( cut, gem );
-        processMass( massString, gem );
-        processSize( sizeXString, sizeYString, sizeZString, gem );
-        processClarity( clarity, gem );
-        processEnhancement( enhancement, gem );
-        processOrigin( origin, gem );
-        processCertificate( certificate, gem );
+        processShape( shapeStr, gem );
+        processCut( cutStr, gem );
+        processMass( massStr, gem );
+        processSize( sizeXStr, sizeYStr, sizeZStr, gem );
+        processClarity( clarityStr, gem );
+        processEnhancement( enhancementStr, gem );
+        processOrigin( originStr, gem );
+        processCertificate( certificateStr, gem );
         processComments( comments, gem );
-        processPrice( priceCurrency, priceValueString, gem );
-        processSupplierID( supplierIDString, gem );
+        processPrice( priceValueStr, priceCurrencyStr, gem );
+        processSupplierID( supplierIDStr, gem );
+        processLight( lightStr, gem );
+
         // processPhoto ( ??? );
-        processLight( light, gem );
 
         System.out.println( "After processing all fields. errors.isEmpty() = " + errors.isEmpty() );
         printMap( errors );
@@ -110,7 +126,7 @@ public final class FormGem {
         if ( errors.isEmpty() ) {
             try {
                 // Automatically assigned fields
-                processDateAndReference( species, gem );
+                processDateAndReference( speciesStr, gem );
                 // Création d'une gemme avec son enregistrement dans la BDD
                 gemBeanLocal.addGem( gem );
             } catch ( GemBeanException e ) {
@@ -122,6 +138,58 @@ public final class FormGem {
             result = "Gem created successfully.";
         } else {
             result = "Error while creating a gem.";
+        }
+        System.out.println( result );
+        printMap( errors );
+
+        return gem;
+    }
+
+    /*
+     * Updates parameters of a given gem. As the gem is already made persistent,
+     * it will also update database values. Not creating a new gem.
+     */
+    public Gem editGem( HttpServletRequest request, Gem gem ) {
+        String speciesStr = getValeurChamp( request, PARAM_SPECIES );
+        String color = getValeurChamp( request, PARAM_COLOR );
+        String shapeStr = getValeurChamp( request, PARAM_SHAPE );
+        String cutStr = getValeurChamp( request, PARAM_CUT );
+        String massStr = getValeurChamp( request, PARAM_MASS );
+        String sizeXStr = getValeurChamp( request, PARAM_SIZE_X );
+        String sizeYStr = getValeurChamp( request, PARAM_SIZE_Y );
+        String sizeZStr = getValeurChamp( request, PARAM_SIZE_Z );
+        String clarityStr = getValeurChamp( request, PARAM_CLARITY );
+        String enhancementStr = getValeurChamp( request, PARAM_ENHANCEMENT );
+        String originStr = getValeurChamp( request, PARAM_ORIGIN );
+        String certificateStr = getValeurChamp( request, PARAM_CERTIFICATE );
+        String comments = getValeurChamp( request, PARAM_COMMENTS );
+        String priceCurrencyStr = getValeurChamp( request, PARAM_PRICE_CURRENCY );
+        String priceValueStr = getValeurChamp( request, PARAM_PRICE_VALUE );
+        String supplierIDStr = getValeurChamp( request, PARAM_SUPPLIER_ID );
+        // String photoLink = getValeurChamp( request, PARAM_PHOTO_LINK );
+        String lightStr = getValeurChamp( request, PARAM_LIGHT );
+
+        // Processing and validation of parameters, entered by user.
+        processSpecies( speciesStr, gem );
+        processColor( color, gem );
+        processShape( shapeStr, gem );
+        processCut( cutStr, gem );
+        processMass( massStr, gem );
+        processSize( sizeXStr, sizeYStr, sizeZStr, gem );
+        processClarity( clarityStr, gem );
+        processEnhancement( enhancementStr, gem );
+        processOrigin( originStr, gem );
+        processCertificate( certificateStr, gem );
+        processComments( comments, gem );
+        processPrice( priceValueStr, priceCurrencyStr, gem );
+        processSupplierID( supplierIDStr, gem );
+        processLight( lightStr, gem );
+
+        // Initialisation du résultat global de la validation.
+        if ( errors.isEmpty() ) {
+            result = "Gem edited successfully.";
+        } else {
+            result = "Error while editing a gem.";
         }
         System.out.println( result );
         printMap( errors );
@@ -143,7 +211,7 @@ public final class FormGem {
         if ( errors.isEmpty() ) {
             try {
                 /* Recherche de la gemme dans la BDD */
-                Long gemID = Long.parseLong( gemIDStr );
+                Long gemID = Long.valueOf( gemIDStr );
                 gem = gemBeanLocal.findGem( gemID );
             } catch ( GemBeanException e ) {
                 setError( PARAM_SQL, "CAUGHT a GemBeanException! Gem #" + gemIDStr + "not found." );
@@ -168,9 +236,10 @@ public final class FormGem {
      * 1) Validation des champs................................................
      * 2) Initialisation des propriétés correspondantes du bean .............
      */
-    private void processSpecies( String species, Gem gem ) {
+    private void processSpecies( String speciesStr, Gem gem ) {
+        Integer species = null;
         try {
-            validateSpecies( species );
+            species = validateSpecies( speciesStr );
         } catch ( FormValidationException e ) {
             setError( PARAM_SPECIES, e.getMessage() );
         }
@@ -186,18 +255,20 @@ public final class FormGem {
         gem.setColor( color );
     }
 
-    private void processShape( String shape, Gem gem ) {
+    private void processShape( String shapeStr, Gem gem ) {
+        Integer shape = null;
         try {
-            validateShape( shape );
+            shape = validateShape( shapeStr );
         } catch ( FormValidationException e ) {
             setError( PARAM_SHAPE, e.getMessage() );
         }
         gem.setShape( shape );
     }
 
-    private void processCut( String cut, Gem gem ) {
+    private void processCut( String cutStr, Gem gem ) {
+        Integer cut = null;
         try {
-            validateCut( cut );
+            cut = validateCut( cutStr );
         } catch ( FormValidationException e ) {
             setError( PARAM_CUT, e.getMessage() );
         }
@@ -238,36 +309,40 @@ public final class FormGem {
         gem.setSizeZ( sizeZ );
     }
 
-    private void processClarity( String clarity, Gem gem ) {
+    private void processClarity( String clarityStr, Gem gem ) {
+        Integer clarity = null;
         try {
-            validateClarity( clarity );
+            clarity = validateClarity( clarityStr );
         } catch ( FormValidationException e ) {
             setError( PARAM_CLARITY, e.getMessage() );
         }
         gem.setClarity( clarity );
     }
 
-    private void processEnhancement( String enhancement, Gem gem ) {
+    private void processEnhancement( String enhancementStr, Gem gem ) {
+        Integer enhancement = null;
         try {
-            validateEnhancement( enhancement );
+            enhancement = validateEnhancement( enhancementStr );
         } catch ( FormValidationException e ) {
             setError( PARAM_ENHANCEMENT, e.getMessage() );
         }
         gem.setEnhancement( enhancement );
     }
 
-    private void processOrigin( String origin, Gem gem ) {
+    private void processOrigin( String originStr, Gem gem ) {
+        Integer origin = null;
         try {
-            validateOrigin( origin );
+            origin = validateOrigin( originStr );
         } catch ( FormValidationException e ) {
             setError( PARAM_ORIGIN, e.getMessage() );
         }
         gem.setOrigin( origin );
     }
 
-    private void processCertificate( String certificate, Gem gem ) {
+    private void processCertificate( String certificateStr, Gem gem ) {
+        Integer certificate = null;
         try {
-            validateCertificate( certificate );
+            certificate = validateCertificate( certificateStr );
         } catch ( FormValidationException e ) {
             setError( PARAM_CERTIFICATE, e.getMessage() );
         }
@@ -283,15 +358,17 @@ public final class FormGem {
         gem.setComments( comments );
     }
 
-    private void processPrice( String priceCurrency, String priceValueString, Gem gem ) {
+    private void processPrice( String priceValueStr, String priceCurrencyStr, Gem gem ) {
         Double priceValue = null;
+        Integer priceCurrency = null;
         try {
-            priceValue = validatePrice( priceCurrency, priceValueString );
+            priceValue = validatePriceValue( priceValueStr );
+            priceCurrency = validatePriceCurrency( priceValue, priceCurrencyStr );
         } catch ( FormValidationException e ) {
             setError( PARAM_PRICE, e.getMessage() );
         }
-        gem.setPriceCurrency( priceCurrency );
         gem.setPriceValue( priceValue );
+        gem.setPriceCurrency( priceCurrency );
     }
 
     private void processSupplierID( String supplierIDString, Gem gem ) {
@@ -304,7 +381,25 @@ public final class FormGem {
         gem.setSupplierID( supplierID );
     }
 
-    private void processDateAndReference( String species, Gem gem ) {
+    private void processLight( String lightStr, Gem gem ) {
+        Integer light = null;
+        try {
+            light = validateLight( lightStr );
+        } catch ( FormValidationException e ) {
+            setError( PARAM_LIGHT, e.getMessage() );
+        }
+        gem.setLight( light );
+    }
+
+    private void processID( String gemIDStr ) {
+        try {
+            validateID( gemIDStr );
+        } catch ( FormValidationException e ) {
+            setError( PARAM_ID, e.getMessage() );
+        }
+    }
+
+    private void processDateAndReference( String speciesStr, Gem gem ) {
         // Setting the current date
         Date now = new Date();
         gem.setCreationDate( now );
@@ -317,7 +412,8 @@ public final class FormGem {
         String year = dateStr.substring( 24 );
         String month = dateStr.substring( 4, 7 );
         String day = dateStr.substring( 8, 10 );
-        String speciesCode = species.substring( 0, 3 ).toUpperCase();
+        String speciesCode = "GEM"; // TO DO: species.substring( 0, 3
+                                    // ).toUpperCase();
         int min = 1000;
         int max = 9999;
         int randomNum = min + (int) ( Math.random() * ( ( max - min ) + 1 ) );
@@ -334,26 +430,11 @@ public final class FormGem {
         gem.setReference( finalRef );
     }
 
-    private void processLight( String light, Gem gem ) {
-        try {
-            validateLight( light );
-        } catch ( FormValidationException e ) {
-            setError( PARAM_LIGHT, e.getMessage() );
-        }
-        gem.setLight( light );
-    }
-
-    private void processID( String gemIDStr ) {
-        try {
-            validateID( gemIDStr );
-        } catch ( FormValidationException e ) {
-            setError( PARAM_ID, e.getMessage() );
-        }
-    }
-
-    private void validateSpecies( String species ) throws FormValidationException {
-        if ( species == null ) {
+    private Integer validateSpecies( String speciesStr ) throws FormValidationException {
+        if ( speciesStr == null || speciesStr.equals( "0" ) ) {
             throw new FormValidationException( "Please select a gem species." );
+        } else {
+            return Integer.valueOf( speciesStr );
         }
     }
 
@@ -363,30 +444,34 @@ public final class FormGem {
         }
     }
 
-    private void validateShape( String shape ) throws FormValidationException {
-        if ( shape == null ) {
+    private Integer validateShape( String shapeStr ) throws FormValidationException {
+        if ( shapeStr == null || shapeStr.equals( "0" ) ) {
             throw new FormValidationException( "Please select a gem shape." );
+        } else {
+            return Integer.valueOf( shapeStr );
         }
     }
 
-    private void validateCut( String cut ) throws FormValidationException {
-        if ( cut == null ) {
+    private Integer validateCut( String cutStr ) throws FormValidationException {
+        if ( cutStr == null || cutStr.equals( "0" ) ) {
             throw new FormValidationException( "Please select a gem cut." );
+        } else {
+            return Integer.valueOf( cutStr );
         }
     }
 
-    private Double validateMass( String massString ) throws FormValidationException {
-        Double temp = null;
-        if ( massString != null ) {
-            if ( massString.matches( REGEX_MASS ) ) {
-                temp = Double.parseDouble( massString );
+    private Double validateMass( String massStr ) throws FormValidationException {
+        Double mass = null;
+        if ( massStr != null ) {
+            if ( massStr.matches( REGEX_MASS ) ) {
+                mass = Double.valueOf( massStr );
             } else {
                 throw new FormValidationException( "Mass must be positive decimal" );
             }
-        } // else {
-          // throw new FormValidationException( "Please enter a mass");
-          // }
-        return temp;
+        } else {
+            throw new FormValidationException( "Please enter a mass" );
+        }
+        return mass;
     }
 
     private Float validateSize( String sizeString, char dimensionLetter )
@@ -410,7 +495,7 @@ public final class FormGem {
 
         if ( sizeString != null ) {
             if ( sizeString.matches( REGEX_SIZE ) ) {
-                size = Float.parseFloat( sizeString );
+                size = Float.valueOf( sizeString );
             } else {
                 throw new FormValidationException( dimensionWord + " must be a positive decimal. " );
             }
@@ -423,56 +508,73 @@ public final class FormGem {
         return size;
     }
 
-    private void validateClarity( String clarity ) throws FormValidationException {
-        if ( clarity == null ) {
+    private Integer validateClarity( String clarityStr ) throws FormValidationException {
+        if ( clarityStr == null || clarityStr.equals( "0" ) ) {
             throw new FormValidationException( "Please select a gem clarity." );
+        } else {
+            return Integer.valueOf( clarityStr );
         }
     }
 
-    private void validateEnhancement( String enhancement ) throws FormValidationException {
-        // Nothing for the moment.
+    private Integer validateEnhancement( String enhancementStr ) throws FormValidationException {
+        if ( enhancementStr == null || enhancementStr.equals( "0" ) ) {
+            return null;
+        } else {
+            return Integer.valueOf( enhancementStr );
+        }
     }
 
-    private void validateOrigin( String origin ) throws FormValidationException {
-        // Nothing for the moment.
+    private Integer validateOrigin( String originStr ) throws FormValidationException {
+        if ( originStr == null || originStr.equals( "0" ) ) {
+            return null;
+        } else {
+            return Integer.valueOf( originStr );
+        }
     }
 
-    private void validateCertificate( String certificate ) throws FormValidationException {
-        // Nothing for the moment.
+    private Integer validateCertificate( String certificateStr ) throws FormValidationException {
+        if ( certificateStr == null || certificateStr.equals( "0" ) ) {
+            return null;
+        } else {
+            return Integer.valueOf( certificateStr );
+        }
     }
 
     private void validateComments( String comments ) throws FormValidationException {
         // Nothing for the moment.
     }
 
-    private Double validatePrice( String priceCurrency, String priceValueString ) throws FormValidationException {
+    private Double validatePriceValue( String priceValueStr ) throws FormValidationException {
         Double priceValue = null;
-        // If the price value field is empty, we don't check the currency field.
-        if ( priceValueString != null ) {
-            // If the value is entered, the currency must be selected.
-            if ( priceCurrency != null ) {
-                if ( !priceCurrency.matches( REGEX_PRICECURRENCY ) ) {
-                    throw new FormValidationException( "Currency must contain a 3 letter-code." );
-                }
+        if ( priceValueStr != null ) {
+            // Validating the price value field
+            if ( priceValueStr.matches( REGEX_PRICEVALUE ) ) {
+                priceValue = Double.valueOf( priceValueStr );
             } else {
-                throw new FormValidationException( "Please select a currency." );
-            }
-            // Now validating the price value field
-            if ( priceValueString.matches( REGEX_PRICEVALUE ) ) {
-                priceValue = Double.parseDouble( priceValueString );
-            }
-            if ( priceValue < 0 ) {
                 throw new FormValidationException( "Price must be a positive decimal" );
             }
         }
         return priceValue;
     }
 
+    private Integer validatePriceCurrency( Double priceValue, String priceCurrencyStr ) throws FormValidationException {
+        Integer priceCurrency = null;
+        // If the value is entered, the currency must be selected.
+        if ( priceValue != null ) {
+            if ( priceCurrencyStr == null ) {
+                throw new FormValidationException( "Please select a currency." );
+            } else {
+                Integer.valueOf( priceCurrencyStr );
+            }
+        }
+        return priceCurrency;
+    }
+
     private Long validateSupplierID( String supplierIDString ) throws FormValidationException {
         Long supplierID = -1L;
         if ( supplierIDString != null ) {
             if ( supplierIDString.matches( "[0-9]*" ) ) {
-                supplierID = Long.parseLong( supplierIDString );
+                supplierID = Long.valueOf( supplierIDString );
             } else {
                 throw new FormValidationException( "Supplier ID must contain only digits." );
             }
@@ -482,8 +584,12 @@ public final class FormGem {
         return supplierID;
     }
 
-    private void validateLight( String light ) throws FormValidationException {
-        // Nothing for the moment.
+    private Integer validateLight( String lightStr ) throws FormValidationException {
+        if ( lightStr == null || lightStr.equals( "0" ) ) {
+            return null;
+        } else {
+            return Integer.valueOf( lightStr );
+        }
     }
 
     private void validateID( String id ) throws FormValidationException {

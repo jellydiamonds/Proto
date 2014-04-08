@@ -11,51 +11,51 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table( name = "GEM" )
+@Table( name = "Gem_ID" )
 public class Gem implements Serializable {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
-    private Long   id;
+    private Long    id;
     @Column( name = "creation_date" )
-    private Date   creationDate;
+    private Date    creationDate;
     @Column
-    private String reference;
+    private String  reference;
     @Column
-    private String species;
+    private Integer species;
     @Column
-    private String color;
+    private String  color;
     @Column
-    private String shape;
+    private Integer shape;
     @Column
-    private String cut;
+    private Integer cut;
     @Column
-    private Double mass;
+    private Double  mass;
     @Column( name = "size_x" )
-    private Float  sizeX;
+    private Float   sizeX;
     @Column( name = "size_y" )
-    private Float  sizeY;
+    private Float   sizeY;
     @Column( name = "size_z" )
-    private Float  sizeZ;
+    private Float   sizeZ;
     @Column
-    private String clarity;
+    private Integer clarity;
     @Column
-    private String enhancement;
+    private Integer enhancement;
     @Column
-    private String origin;
+    private Integer origin;
     @Column
-    private String certificate;
+    private Integer certificate;
     @Column
-    private String comments;
+    private String  comments;
     @Column( name = "price_currency" )
-    private String priceCurrency;
+    private Integer priceCurrency;
     @Column( name = "price_value" )
-    private Double priceValue;
+    private Double  priceValue;
     @Column( name = "supplier_id" )
-    private Long   supplierID;
+    private Long    supplierID;
     @Column( name = "photo_link" )
-    private String photoLink;
+    private String  photoLink;
     @Column
-    private String light;
+    private Integer light;
 
     public Long getId() {
         return id;
@@ -81,11 +81,11 @@ public class Gem implements Serializable {
         this.reference = reference;
     }
 
-    public String getSpecies() {
+    public Integer getSpecies() {
         return species;
     }
 
-    public void setSpecies( String species ) {
+    public void setSpecies( Integer species ) {
         this.species = species;
     }
 
@@ -97,19 +97,19 @@ public class Gem implements Serializable {
         this.color = color;
     }
 
-    public String getShape() {
+    public Integer getShape() {
         return shape;
     }
 
-    public void setShape( String shape ) {
+    public void setShape( Integer shape ) {
         this.shape = shape;
     }
 
-    public String getCut() {
+    public Integer getCut() {
         return cut;
     }
 
-    public void setCut( String cut ) {
+    public void setCut( Integer cut ) {
         this.cut = cut;
     }
 
@@ -145,35 +145,35 @@ public class Gem implements Serializable {
         this.sizeZ = sizeZ;
     }
 
-    public String getClarity() {
+    public Integer getClarity() {
         return clarity;
     }
 
-    public void setClarity( String clarity ) {
+    public void setClarity( Integer clarity ) {
         this.clarity = clarity;
     }
 
-    public String getEnhancement() {
+    public Integer getEnhancement() {
         return enhancement;
     }
 
-    public void setEnhancement( String enhancement ) {
+    public void setEnhancement( Integer enhancement ) {
         this.enhancement = enhancement;
     }
 
-    public String getOrigin() {
+    public Integer getOrigin() {
         return origin;
     }
 
-    public void setOrigin( String origin ) {
+    public void setOrigin( Integer origin ) {
         this.origin = origin;
     }
 
-    public String getCertificate() {
+    public Integer getCertificate() {
         return certificate;
     }
 
-    public void setCertificate( String certificate ) {
+    public void setCertificate( Integer certificate ) {
         this.certificate = certificate;
     }
 
@@ -185,11 +185,11 @@ public class Gem implements Serializable {
         this.comments = comments;
     }
 
-    public String getPriceCurrency() {
+    public Integer getPriceCurrency() {
         return priceCurrency;
     }
 
-    public void setPriceCurrency( String priceCurrency ) {
+    public void setPriceCurrency( Integer priceCurrency ) {
         this.priceCurrency = priceCurrency;
     }
 
@@ -217,11 +217,11 @@ public class Gem implements Serializable {
         this.photoLink = photoLink;
     }
 
-    public String getLight() {
+    public Integer getLight() {
         return light;
     }
 
-    public void setLight( String light ) {
+    public void setLight( Integer light ) {
         this.light = light;
     }
 

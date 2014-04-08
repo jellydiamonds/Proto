@@ -63,6 +63,10 @@ public class GemBeanImpl implements IGemLocal, IGemRemote {
         }
     }
 
+    /* Returns 3 first letters of gem species */
+
+    // TO DO
+
     /* Returns the total number of DB entries. */
     /*
      * public int getNumberGems() throws GemBeanException { try { Query query =

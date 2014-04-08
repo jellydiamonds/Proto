@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,23 +18,27 @@ import com.jelly.jellyDiamonds.ejb.beans.entity.Gem;
 import com.jelly.jellyDiamonds.ejb.beans.session.IGemLocal;
 import com.jelly.jellyDiamonds.ejb.forms.FormGem;
 
-@WebServlet( name = "createGemServlet", urlPatterns = "/createGem" )
+@WebServlet( urlPatterns = "/createGem", initParams = @WebInitParam( name = "path", value = "C:/javaEEtutoriel/TPFilRouge/images/" ) )
+@MultipartConfig( location = "C:/javaEEtutoriel/TPFilRouge/images/", maxFileSize = 10 * 1024 * 1024, maxRequestSize = 20 * 1024 * 1024, fileSizeThreshold = 1024 * 1024 )
 public class CreateGem extends HttpServlet {
     public static final String ATT_GEM      = "currentGem";
     public static final String ATT_GEMS     = "sessionGemsList";
     public static final String ATT_FORM     = "form";
+    public static final String ATT_ACTION   = "action";
 
-    public static final String VIEW_FORM    = "/WEB-INF/create_gem.jsp";
-    public static final String VIEW_SUCCESS = "/WEB-INF/gem_created.jsp";
+    public static final String VIEW_FORM    = "/WEB-INF/create_edit_gem.jsp";
+    public static final String VIEW_SUCCESS = "/WEB-INF/gemID.jsp";
 
-    /* Injection de l'objet métier */
+    // Injection de l'objet métier
+
     @EJB
     private IGemLocal          gemBeanLocal;
 
     @Override
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        /* Affichage de la page de la création d'une gemme. */
+        request.setAttribute( ATT_ACTION, "/createGem" );
+        // Displaying the form
         getServletContext().getRequestDispatcher( VIEW_FORM ).forward( request, response );
     }
 
@@ -51,6 +57,7 @@ public class CreateGem extends HttpServlet {
         /* Ajout des attributs en requête */
         request.setAttribute( ATT_GEM, currentGem );
         request.setAttribute( ATT_FORM, form );
+        request.setAttribute( ATT_ACTION, "/createGem" );
 
         if ( form.getErrors().isEmpty() ) {
             /* Récupération d'une Liste des gemmes */
