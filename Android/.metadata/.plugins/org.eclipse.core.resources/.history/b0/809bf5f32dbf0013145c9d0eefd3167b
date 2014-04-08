@@ -1,0 +1,13 @@
+package com.jellydiamonds.android.metier;
+
+public class GemStatusTradeInProgress extends GemStatus{
+
+		/**
+		 *  Gem-ID is in TradeInProgress status when a transaction have been started.
+		 */
+	
+		public GemStatusTradeInProgress()
+		{
+			this.mCurrentStatus = "TradeInProgress";
+		}
+}

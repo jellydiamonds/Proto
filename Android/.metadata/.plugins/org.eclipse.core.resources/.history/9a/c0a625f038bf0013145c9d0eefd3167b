@@ -1,0 +1,140 @@
+package com.jellydiamonds.android.metier;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class JellyUser implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3998293232567716497L;
+	
+	private String mUserID = null;
+	private String mDisplayName = null;
+	private String mFirstName = null;
+	private String mLastName = null;
+	private String mEmail = null;
+	private String mPhone = null;
+	private String mAddress = null;
+	private String mCity = null;
+	private String mCountry = null;
+	
+	private Date   			mSignupDate = null;
+	private JellyLicence 	mLicence = null;
+	private JellyCollection mCollection = null;
+
+	
+	public JellyUser()
+	{
+		// User creation date
+		this.mSignupDate = new Date( System.currentTimeMillis() );
+		this.mCollection = new JellyCollection( this.mUserID );
+	}
+	
+	public JellyLicence getLicence() {
+		return mLicence;
+	}
+
+	public void setLicence(JellyLicence mLicence) {
+		this.mLicence = mLicence;
+	}
+
+	public String getUserID() {
+		return mUserID;
+	}
+
+	public void setUserID(String mUserID) {
+		this.mUserID = mUserID;
+	}
+
+
+	public String getDisplayName() {
+		return mDisplayName;
+	}
+
+
+	public void setDisplayName(String mDisplayName) {
+		this.mDisplayName = mDisplayName;
+	}
+
+
+	public String getFirstName() {
+		return mFirstName;
+	}
+
+
+	public void setFirstName(String mFirstName) {
+		this.mFirstName = mFirstName;
+	}
+
+
+	public String getLastName() {
+		return mLastName;
+	}
+
+
+	public void setLastName(String mLastName) {
+		this.mLastName = mLastName;
+	}
+
+
+	public String getEmail() {
+		return mEmail;
+	}
+
+
+	public void setEmail(String mEmail) {
+		this.mEmail = mEmail;
+	}
+
+
+	public String getPhone() {
+		return mPhone;
+	}
+
+
+	public void setPhone(String mPhone) {
+		this.mPhone = mPhone;
+	}
+
+
+	public String getAddress() {
+		return mAddress;
+	}
+
+
+	public void setAddress(String mAddress) {
+		this.mAddress = mAddress;
+	}
+
+
+	public String getCity() {
+		return mCity;
+	}
+
+
+	public void setCity(String mCity) {
+		this.mCity = mCity;
+	}
+
+
+	public String getCountry() {
+		return mCountry;
+	}
+
+
+	public void setCountry(String mCountry) {
+		this.mCountry = mCountry;
+	}
+
+
+	public Date getSignupDate() {
+		return mSignupDate;
+	}
+
+
+	public void setSignupDate(Date mSignupDate) {
+		this.mSignupDate = mSignupDate;
+	}
+}

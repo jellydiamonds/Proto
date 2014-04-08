@@ -1,0 +1,19 @@
+package com.jellydiamonds.android.metier;
+
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 GemCut test = GemCut.Concave;
+		 GemCut test2 = GemCut.Concave;
+		 
+		 System.out.println("name : " + test.toString());
+		 System.out.println("value : " + test.getValue());
+		 
+		 System.out.prinln(test.equals(test2));
+	}
+
+}

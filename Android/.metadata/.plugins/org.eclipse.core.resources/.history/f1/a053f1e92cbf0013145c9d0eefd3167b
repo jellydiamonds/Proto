@@ -1,0 +1,45 @@
+package com.jellydiamonds.android.metier;
+
+import java.util.Date;
+
+public class JellyLicence {
+	
+	private String mUserReference = null;
+	private Date   mPeremptionDate = null;
+	
+	public JellyLicence()
+	{
+		
+	}
+	
+	public JellyLicence( String userReference, Date peremptionDate )
+	{
+		this.mUserReference = userReference;
+		this.mPeremptionDate = peremptionDate;
+	}
+
+	public String getUserReference() {
+		return mUserReference;
+	}
+
+	public void setUserReference(String mUserReference) {
+		this.mUserReference = mUserReference;
+	}
+
+	public Date getPeremptionDate() {
+		return mPeremptionDate;
+	}
+
+	public void setPeremptionDate(Date mPeremptionDate) {
+		this.mPeremptionDate = mPeremptionDate;
+	}
+	
+	public boolean isValid()
+	{
+		Date l_now = new Date( System.currentTimeMillis() );
+		
+		return( l_now.compareTo(this.mPeremptionDate) < 0  );
+	}
+	
+	
+}

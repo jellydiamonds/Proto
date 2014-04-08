@@ -1,0 +1,29 @@
+package com.jellydiamonds.android.metier;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class GemID implements Serializable {
+	
+    private Date    creationDate = null;
+    private String  reference = null;
+    private Integer species = null;
+    private String  color = null;
+    private Integer shape = null;
+    private Integer cut = null;
+    private Double  mass = null;
+    private Float   sizeX = null;
+    private Float   sizeY = null;
+    private Float   sizeZ = null;
+    private Integer clarity = null;
+    private Integer enhancement = null;
+    private Integer origin = null;
+    private Integer certificate = null;
+    private String  comments = null;
+    private Integer priceCurrency = null;
+    private Double  priceValue = null;
+    private Long    supplierID = null;
+    private String  photoLink = null;
+    private Integer light = null;
+
+}

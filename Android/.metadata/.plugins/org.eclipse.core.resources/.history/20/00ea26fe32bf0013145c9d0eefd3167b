@@ -1,0 +1,7 @@
+package com.jellydiamonds.android.metier;
+
+public class JellyCollection {
+	
+	private ArrayList<GemID> mofflineCollection = null;
+
+}

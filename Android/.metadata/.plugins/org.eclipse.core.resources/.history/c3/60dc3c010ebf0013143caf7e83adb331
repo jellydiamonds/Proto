@@ -1,0 +1,13 @@
+package com.jellydiamonds.android.metier;
+
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Species test = Species.AGATE;
+	}
+
+}

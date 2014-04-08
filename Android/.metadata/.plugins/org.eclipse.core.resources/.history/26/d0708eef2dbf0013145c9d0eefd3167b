@@ -1,0 +1,13 @@
+package com.jellydiamonds.android.metier;
+
+public class GemStatusDeleted extends GemStatus {
+	
+	/**
+	 * Gem-ID is in Deleted status when it has been published an d then removed from JellyDiamonds.
+	 */
+	public GemStatusDeleted()
+	{
+		this.mCurrentStatus = "Deleted";
+	}
+
+}

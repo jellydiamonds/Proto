@@ -1,0 +1,24 @@
+package com.jellydiamonds.android.metier;
+
+import java.util.Date;
+
+public class JellyUser {
+
+	private String mUserID = null;
+	private String mDisplayName = null;
+	private String mFirstName = null;
+	private String mLastName = null;
+	private String mEmail = null;
+	private String mPhone = null;
+	private String mAddress = null;
+	private String mCity = null;
+	private String mCountry = null;
+	private Date   mSignupDate = null;
+	
+	
+	public JellyUser()
+	{
+		// User creation date
+		this.mSignupDate = new Date( System.currentTimeMillis() )
+	}
+}

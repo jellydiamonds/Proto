@@ -1,0 +1,26 @@
+package com.jellydiamonds.android.metier;
+
+public class GemID {
+	
+    private Date    creationDate;
+    private String  reference;
+    private Integer species;
+    private String  color;
+    private Integer shape;
+    private Integer cut;
+    private Double  mass;
+    private Float   sizeX;
+    private Float   sizeY;
+    private Float   sizeZ;
+    private Integer clarity;
+    private Integer enhancement;
+    private Integer origin;
+    private Integer certificate;
+    private String  comments;
+    private Integer priceCurrency;
+    private Double  priceValue;
+    private Long    supplierID;
+    private String  photoLink;
+    private Integer light;
+
+}

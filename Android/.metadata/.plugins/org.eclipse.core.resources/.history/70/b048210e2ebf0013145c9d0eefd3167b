@@ -1,0 +1,13 @@
+package com.jellydiamonds.android.metier;
+
+public class GemStatusLocal extends GemStatus{
+	
+	/**
+	 * Gem-ID is not synchronized with JellyDiamonds (not published...)
+	 */
+	public GemStatusLocal()
+	{
+		this.mCurrentStatus = "Local";
+	}
+
+}

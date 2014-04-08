@@ -1,9 +1,0 @@
-package com.jellydiamonds.android.camera;
-
-import android.hardware.Camera;
-
-public class CameraConfigurator {
-	
-	private static Camera.Parameters smParameter = null;
-
-}

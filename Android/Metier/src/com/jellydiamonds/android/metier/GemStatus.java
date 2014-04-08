@@ -1,0 +1,25 @@
+package com.jellydiamonds.android.metier;
+
+import java.io.Serializable;
+
+public abstract class GemStatus implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5815555278193921805L;
+	protected String mCurrentStatus;
+	
+	
+	public GemStatus()
+	{
+		mCurrentStatus = "NoStatus";
+	}
+	
+	@Override
+	public String toString()
+	{
+		return this.mCurrentStatus;
+	}
+
+}

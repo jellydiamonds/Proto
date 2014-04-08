@@ -1,0 +1,20 @@
+package com.jellydiamonds.android.metier;
+
+public class JellyUser {
+
+	private String mUserID;
+	private String mFirstName;
+	private String mLastName;
+	private String mEmail;
+	private String mPhone;
+	private String mAddress;
+	private String mCity;
+	private String mCountry;
+	private Date   mSignupDate;
+	
+	
+	public JellyUser()
+	{
+		
+	}
+}

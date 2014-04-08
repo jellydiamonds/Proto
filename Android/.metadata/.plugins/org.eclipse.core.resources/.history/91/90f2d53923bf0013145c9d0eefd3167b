@@ -1,0 +1,19 @@
+package com.jellydiamonds.android.metier;
+
+public class GemStatus {
+	
+	
+	protected String mCurrentStatus;
+	
+	
+	public GemStatus()
+	{
+		mCurrentStatus = "NoStatus";
+	}
+	
+	public String toString()
+	{
+		return this.mCurrentStatus;
+	}
+
+}

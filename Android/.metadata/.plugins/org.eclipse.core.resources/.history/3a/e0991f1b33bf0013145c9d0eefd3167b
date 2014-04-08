@@ -1,0 +1,11 @@
+package com.jellydiamonds.android.metier;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class JellyCollection {
+	
+	private ArrayList<GemID> mofflineCollection = null;
+	private HashMap<String,GemID> mSyncedCollection = null;
+
+}
