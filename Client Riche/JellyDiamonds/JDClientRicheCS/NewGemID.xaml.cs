@@ -1,4 +1,4 @@
-﻿using JellyDiamondsCRicheC.Models;
+﻿using Microsoft.Samples.CustomControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +12,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Xceed.Wpf.Toolkit;
-using System.Windows.Forms;
-using WPFColorPickerLib;
 
 namespace JellyDiamondsCRicheCS
 {
@@ -26,7 +23,31 @@ namespace JellyDiamondsCRicheCS
         public NewGemID()
         {
             InitializeComponent();
+        }
 
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            //System.Windows.Forms.ColorDialog clrdial = new System.Windows.Forms.ColorDialog();
+            //WPFColorPickerLib.ColorDialog clrdial2 = new WPFColorPickerLib.ColorDialog();
+            //clrdial.AnyColor = true;
+            //clrdial.ShowDialog();
+            //clrdial2.Show();
+            // Doesn't work :(   ColorPicker clrpick = new ColorPicker();
+            ColorPicker cpicker = new ColorPicker();
+            Display_main_color.Fill =  new SolidColorBrush(cpicker.SelectedColor);
+
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            ColorPicker cpicker = new ColorPicker();
+            Display_2nd_color_1.Fill = new SolidColorBrush(cpicker.SelectedColor);
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            ColorPicker cpicker = new ColorPicker();
+            Display_2nd_color_2.Fill = new SolidColorBrush(cpicker.SelectedColor);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -37,7 +58,7 @@ namespace JellyDiamondsCRicheCS
             openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             openFileDialog.FilterIndex = 2;
             openFileDialog.RestoreDirectory = true;
-            
+
 
             if (openFileDialog.ShowDialog() == true)
             {
@@ -50,16 +71,17 @@ namespace JellyDiamondsCRicheCS
                         String chemin = openFileDialog.FileName;
                         BitmapImage bm = new BitmapImage(new Uri(chemin, UriKind.RelativeOrAbsolute));
                         imagepierre.Source = bm;
-                        
+
 
                         using (myStream)
                         {
-                          
+
 
                             // Insert code to read the stream here.
                         }
                     }
                 }
+
                 catch (Exception ex)
                 {
                     Xceed.Wpf.Toolkit.MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
@@ -67,14 +89,8 @@ namespace JellyDiamondsCRicheCS
             }
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
         {
-            System.Windows.Forms.ColorDialog clrdial = new System.Windows.Forms.ColorDialog();
-            WPFColorPickerLib.ColorDialog clrdial2 = new WPFColorPickerLib.ColorDialog();
-            clrdial.AnyColor = true;
-            clrdial.ShowDialog();
-            clrdial2.Show();
-            // Doesn't work :(   ColorPicker clrpick = new ColorPicker();
 
         }
     }

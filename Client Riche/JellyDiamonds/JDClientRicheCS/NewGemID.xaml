@@ -21,7 +21,7 @@
         <Ellipse x:Name="Display_2nd_color_1" Fill="#FFFFFFFF" HorizontalAlignment="Left" Height="31" Margin="209,85,0,0" Stroke="Black" VerticalAlignment="Top" Width="87"/>
         <Ellipse x:Name="Display_2nd_color_2" Fill="#FFFFFFFF" HorizontalAlignment="Left" Height="31" Margin="209,121,0,0" Stroke="Black" VerticalAlignment="Top" Width="87"/>
         <Button x:Name="Btn_2nd_color_1" Content="Set Color" HorizontalAlignment="Left" Margin="301,85,0,0" VerticalAlignment="Top" Width="124" Click="Button_Click_3" Height="31"/>
-        <Button x:Name="Btn_2nd_color_2" Content="Set Color" HorizontalAlignment="Left" Margin="296,121,0,0" VerticalAlignment="Top" Width="124" Click="Button_Click_4" Height="31"/>
+        <Button x:Name="Btn_2nd_color_2" Content="Set Color" HorizontalAlignment="Left" Margin="301,121,0,0" VerticalAlignment="Top" Width="124" Click="Button_Click_4" Height="31"/>
         <Label x:Name="lbl_main_color" Content="Main color" HorizontalAlignment="Left" Margin="209,10,0,0" VerticalAlignment="Top" Width="87"/>
         <Label x:Name="lbl_main_color_Copy" Content="Other Colors" HorizontalAlignment="Left" Margin="209,63,0,0" VerticalAlignment="Top" Width="87"/>
     </Grid>

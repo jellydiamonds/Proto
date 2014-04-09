@@ -1,0 +1,12 @@
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerCustomControl\ColorPickerSampleApplication\bin\Debug\ColorPickerSampleApplication.exe
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerCustomControl\ColorPickerSampleApplication\bin\Debug\ColorPickerSampleApplication.pdb
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerCustomControl\ColorPickerSampleApplication\bin\Debug\ColorPicker.dll
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerCustomControl\ColorPickerSampleApplication\obj\Debug\ColorPickerSampleApplication.csprojResolveAssemblyReference.cache
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerCustomControl\ColorPickerSampleApplication\obj\Debug\SampleViewer.baml
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerCustomControl\ColorPickerSampleApplication\obj\Debug\app.baml
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerCustomControl\ColorPickerSampleApplication\obj\Debug\SampleViewer.g.cs
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerCustomControl\ColorPickerSampleApplication\obj\Debug\app.g.cs
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerCustomControl\ColorPickerSampleApplication\obj\Debug\ColorPickerSampleApplication_MarkupCompile.cache
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerCustomControl\ColorPickerSampleApplication\obj\Debug\ColorPickerSampleApplication.g.resources
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerCustomControl\ColorPickerSampleApplication\obj\Debug\ColorPickerSampleApplication.exe
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerCustomControl\ColorPickerSampleApplication\obj\Debug\ColorPickerSampleApplication.pdb
