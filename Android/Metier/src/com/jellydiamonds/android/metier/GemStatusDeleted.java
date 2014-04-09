@@ -8,7 +8,7 @@ public class GemStatusDeleted extends GemStatus {
 	private static final long serialVersionUID = 1641134954149481822L;
 
 	/**
-	 * Gem-ID is in Deleted status when it has been published an d then removed from JellyDiamonds.
+	 * Gem-ID is in Deleted status when it has been published and then removed from JellyDiamonds.
 	 */
 	public GemStatusDeleted()
 	{

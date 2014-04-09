@@ -9,10 +9,10 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		for(String l_tmp : Locale.getISOCountries())
-		{
-			System.out.println(l_tmp);
-		}
+		GemSpecies test = GemSpecies.AMAZONITE;
+		
+		System.out.println(test.toString());
+		System.out.println(test.getValue());
 	}
 
 }

@@ -1,0 +1,19 @@
+package com.jellydiamonds.android.comm;
+
+import java.util.Collection;
+
+import org.json.JSONArray;
+import com.jellydiamonds.android.metier.GemID;
+import com.jellydiamonds.android.metier.JellyCollection;
+
+public class JellySerialize {
+
+	JSONArray SerializeJellyCollection( Collection<GemID> collection )
+	{
+		JSONArray l_serializedCollection = new JSONArray();
+		
+		
+		
+		return l_serializedCollection;
+	}
+}

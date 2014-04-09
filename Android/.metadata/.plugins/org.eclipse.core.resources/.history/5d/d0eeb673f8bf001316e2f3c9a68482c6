@@ -1,0 +1,12 @@
+package com.jellydiamonds.android.comm;
+
+import org.json.JSONArray;
+import com.jellydiamonds.android.metier.JellyCollection;
+
+public class JellySerialize {
+
+	JSONArray SerializeJellyCollection( JellyCollection collection )
+	{
+		
+	}
+}
