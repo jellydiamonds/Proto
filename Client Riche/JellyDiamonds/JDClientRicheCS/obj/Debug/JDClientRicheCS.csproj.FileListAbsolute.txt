@@ -5,8 +5,6 @@ D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JDClientRich
 D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JDClientRicheCS\obj\Debug\JellyDiamondsCRicheCS.g.resources
 D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JDClientRicheCS\obj\Debug\JellyDiamondsCRicheCS.Properties.Resources.resources
 D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JDClientRicheCS\obj\Debug\JDClientRicheCS.csproj.GenerateResource.Cache
-D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JDClientRicheCS\obj\Debug\NewGemID.baml
-D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JDClientRicheCS\obj\Debug\NewGemID.g.cs
 D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JDClientRicheCS\bin\Debug\JellyDiamondsCRicheCS.exe
 D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JDClientRicheCS\bin\Debug\JellyDiamondsCRicheCS.pdb
 D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JDClientRicheCS\obj\Debug\JellyDiamondsCRicheCS.exe
@@ -33,4 +31,5 @@ D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JDClientRich
 D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JDClientRicheCS\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
 D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JDClientRicheCS\bin\Debug\WPFColorPickerLib.dll
 D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JDClientRicheCS\bin\Debug\WPFColorPickerLib.pdb
-D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JDClientRicheCS\bin\Debug\ColorPicker.dll
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JDClientRicheCS\obj\Debug\NewGemID.g.cs
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JDClientRicheCS\obj\Debug\NewGemID.baml

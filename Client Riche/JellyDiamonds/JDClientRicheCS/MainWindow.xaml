@@ -8,7 +8,7 @@
     <TabControl HorizontalAlignment="Left" Height="{Binding ActualHeight, ElementName=window, Mode=OneWay}" Margin="0,0,0,0" VerticalAlignment="Top" Width="{Binding ActualWidth, ElementName=window, Mode=OneWay}">
         <TabItem Header="Collection" Margin="0">
             <Grid x:Name="MainGrid" Background="AntiqueWhite" Margin="0,0,0,0"  Width="{Binding ActualHeight, ElementName=TabControl, Mode=OneWay}" Height="{Binding ActualWidth, ElementName=TabControl, Mode=OneWay}"  Grid.RowSpan="2" Grid.ColumnSpan="2">
-                <Button x:Name="New_GemID" Content="+ New GemID" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="98" Height="49" Click="New_GemID_Click"/>
+                <Button x:Name="New_GemID" Content="+ New GemID" HorizontalAlignment="Right" Margin="0,0,1322,747" VerticalAlignment="Bottom" Width="98" Height="49" Click="New_GemID_Click"/>
                 <Button x:Name="Delete_GemID" Content="Delete selected GemID" Margin="0,0,10,33" Height="47" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="178"/>
                 <ScrollViewer Margin="10,83,0,0" HorizontalAlignment="Left" Width="1410" Height="638" VerticalAlignment="Top">
                     <StackPanel Height="330" Width="688"/>
