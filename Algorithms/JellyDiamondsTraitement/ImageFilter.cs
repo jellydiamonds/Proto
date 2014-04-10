@@ -85,10 +85,10 @@ namespace JellyDiamondsTraitement
             for (int i = 0; i < filteredImageRgbValues.Length; i++)
             {
                 // Reduction avec 1% de securite (pour les filtres suivants)
-                if (i % imageData.Stride > imageData.Stride * (reductionX - 1) / 100 &&
-                    i % imageData.Stride < (100 - reductionX + 1) * imageData.Stride / 100 &&
-                    i / imageData.Stride > imageData.Height * (reductionY -1) / 100 &&
-                    i / imageData.Stride < (100 - reductionY + 1) * imageData.Height / 100
+                if (i % imageData.Stride > imageData.Stride * (reductionX) / 100 &&
+                    i % imageData.Stride < (100 - reductionX) * imageData.Stride / 100 &&
+                    i / imageData.Stride > imageData.Height * (reductionY) / 100 &&
+                    i / imageData.Stride < (100 - reductionY) * imageData.Height / 100
                     )
                 {
                     filteredImageRgbValues[i] = applyFilter(imageRgbValues, i, imageData.Stride);

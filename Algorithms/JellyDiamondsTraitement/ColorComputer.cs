@@ -108,7 +108,6 @@ namespace JellyDiamondsTraitement
             // Fusion des images
             for (int j = reductionY * height / 100; j < (100 - reductionY) * height / 100; j++)
             {
-                leftBorder = rightBorder = false;
                 for (int i = reductionX * width / 100; i < (100 - reductionX) * width / 100; i += 4)
                 {
                     if ((updownff00ff[strideCoeff * (j * width + i)] == 255 &&
@@ -138,8 +137,7 @@ namespace JellyDiamondsTraitement
             uint counter = 0;
             for (int j = reductionY * height / 100; j < (100 - reductionY) * height / 100; j++)
             {
-                leftBorder = rightBorder = false;
-                for (int i = reductionX * width / 100; i < (100 - reductionY) * width / 100; i++)
+                for (int i = reductionX * width / 100; i < (100 - reductionX) * width / 100; i++)
                 {
                     if (!(imageRgbValues[strideCoeff * (j * width + i)] == 255 &&
                             imageRgbValues[strideCoeff * (j * width + i) + 1] == 0 &&
