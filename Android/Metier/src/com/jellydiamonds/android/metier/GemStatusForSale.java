@@ -9,6 +9,6 @@ public class GemStatusForSale extends GemStatus{
 
 		public GemStatusForSale()
 		{
-			this.mCurrentStatus = "ForSale";
+			this.mCurrentStatus = "forsale";
 		}
 }

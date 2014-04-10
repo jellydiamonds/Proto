@@ -2,6 +2,7 @@ package com.jellydiamonds.android.metier;
 
 public enum GemCut {
 	
+	EMPTY(0),
 	Asscher(1),
 	Baguette(2),
 	Briolette(3),

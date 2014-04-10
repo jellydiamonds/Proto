@@ -1,11 +1,19 @@
 package com.example.commjelly;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Bundle;
+import android.os.Environment;
 
 import android.app.Activity;
+import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
 
@@ -28,12 +36,15 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		// File l_photo = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/test.jpg");
+		// Log.d("[COMMJELLY]","File : " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/test.jpg" );
+		
 		ArrayList<GemID> gemCollection = new ArrayList<GemID>();
-		GemID gem1 = new GemID();
+		/*GemID gem1 = new GemID();
 		
 		gem1.setReference("20140409EMER001");
 		gem1.setColor("#123456");
-		gem1.setMass(2.05);
+		gem1.setMass(2.05f);
 		gem1.setSizeX(11.05f);
 		gem1.setSizeY(7.01f);
 		gem1.setSizeZ(4.37f);
@@ -41,8 +52,7 @@ public class MainActivity extends Activity {
 		gem1.setPriceCurrency(0);
 		gem1.setPriceValue(300.5);
 		gem1.setSupplierID(6666L);
-		//gem1.setCreationDate(new Date());
-		//gem1.setPhotoLink(null);
+		gem1.setPhotoLink(l_photo);
 		gem1.setSpecies(GemSpecies.EMERALD);
 		gem1.setShape(GemShape.Rectangle);
 		gem1.setCut(GemCut.Diamond);
@@ -52,9 +62,22 @@ public class MainActivity extends Activity {
 		gem1.setCertificate(GemCertificate.GIA);
 		gem1.setOrigin(GemOrigin.Mozambique);
 		gemCollection.add(gem1); 
+		*/
 		
-		String jsonString = JellySerialize.SerializeJellyCollection( gemCollection ).toString();
+		gemCollection.add(new GemID());
+		gemCollection.add(new GemID());
+		gemCollection.add(new GemID());
+		gemCollection.add(new GemID());
+		
+		String jsonString = "";
+		try {
+			jsonString = JellySerialize.SerializeJellyCollection("dude", gemCollection ).toString(2);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		TextView view = (TextView) findViewById(R.id.viewjson);
+		view.setMovementMethod(new ScrollingMovementMethod());
 		view.setText(jsonString);
 	}
 

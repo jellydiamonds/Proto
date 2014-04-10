@@ -2,6 +2,7 @@ package com.jellydiamonds.android.metier;
 
 public enum GemClarity {
 	
+	EMPTY(0),
 	Loupe_Clean(1),
 	Eye_Clean(2),
 	Eyes_Clean_to_Slightly_Included(3),

@@ -2,6 +2,7 @@ package com.jellydiamonds.android.metier;
 
 public enum GemSpecies {
 	
+	EMPTY(0),
 	AGATE(1),
 	ALEXANDRITE(2),
 	ALMANDINE(3),

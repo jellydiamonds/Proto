@@ -2,6 +2,7 @@ package com.jellydiamonds.android.metier;
 
 public enum GemLight {
 	
+	EMPTY(0),
 	Daylight(1),
 	Fluorescent_light(2),
 	Incandescent_light(3);

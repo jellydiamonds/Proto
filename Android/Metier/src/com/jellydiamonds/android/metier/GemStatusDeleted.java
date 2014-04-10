@@ -12,7 +12,7 @@ public class GemStatusDeleted extends GemStatus {
 	 */
 	public GemStatusDeleted()
 	{
-		this.mCurrentStatus = "Deleted";
+		this.mCurrentStatus = "deleted";
 	}
 
 }

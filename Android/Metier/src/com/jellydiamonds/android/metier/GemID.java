@@ -2,7 +2,6 @@ package com.jellydiamonds.android.metier;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.Date;
 
 public class GemID implements Serializable {
 	
@@ -13,16 +12,16 @@ public class GemID implements Serializable {
 
     private String  reference = null;
     private String  color = null;
-    private Double  mass = null;
+    private Float  mass = null;
     private Float   sizeX = null;
     private Float   sizeY = null;
     private Float   sizeZ = null;
     private String  comments = null;
     private Integer priceCurrency = null;
-    private Double  priceValue = null;
+    private Float  priceValue = null;
     private Long    supplierID = null;
     
-	private Date    creationDate = null;
+	private Long    creationDate = null;
     private File    photoLink = null;
     
     private GemSpecies species = null;
@@ -41,7 +40,25 @@ public class GemID implements Serializable {
     	// Initial status is Local
     	this.currentStatus = new GemStatusLocal();
     	// Set creation date
-    	this.creationDate = new Date( System.currentTimeMillis() );
+    	this.creationDate = System.currentTimeMillis();
+    	
+    	this.origin = GemOrigin.Unknown;
+    	this.shape = GemShape.EMPTY;
+    	this.cut = GemCut.EMPTY;
+    	this.clarity = GemClarity.EMPTY;
+    	this.light = GemLight.EMPTY;
+    	this.enhancement = GemEnhancement.EMPTY;
+    	this.certificate = GemCertificate.EMPTY;
+    	this.supplierID = 0L;
+    	this.priceValue = 0.0f;
+    	this.priceCurrency = 0;
+    	this.comments = "";
+    	this.sizeX = 0.0f;
+    	this.sizeY = 0.0f;
+    	this.sizeY = 0.0f;
+    	this.mass = 0.0f;
+    	this.color = "";
+    	this.reference = "";
     }
     
     public GemStatus getCurrentStatus() {
@@ -50,10 +67,10 @@ public class GemID implements Serializable {
 	public void setCurrentStatus(GemStatus currentStatus) {
 		this.currentStatus = currentStatus;
 	}
-	public Date getCreationDate() {
+	public Long getCreationDate() {
 		return creationDate;
 	}
-	public void setCreationDate(Date creationDate) {
+	public void setCreationDate(Long creationDate) {
 		this.creationDate = creationDate;
 	}
 	public String getReference() {
@@ -86,10 +103,10 @@ public class GemID implements Serializable {
 	public void setCut(GemCut cut) {
 		this.cut = cut;
 	}
-	public Double getMass() {
+	public Float getMass() {
 		return mass;
 	}
-	public void setMass(Double mass) {
+	public void setMass(Float mass) {
 		this.mass = mass;
 	}
 	public Float getSizeX() {
@@ -146,10 +163,10 @@ public class GemID implements Serializable {
 	public void setPriceCurrency(Integer priceCurrency) {
 		this.priceCurrency = priceCurrency;
 	}
-	public Double getPriceValue() {
+	public Float getPriceValue() {
 		return priceValue;
 	}
-	public void setPriceValue(Double priceValue) {
+	public void setPriceValue(Float priceValue) {
 		this.priceValue = priceValue;
 	}
 	public Long getSupplierID() {

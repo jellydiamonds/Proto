@@ -1,7 +1,8 @@
 package com.jellydiamonds.android.metier;
 
 public enum GemEnhancement {
-
+	
+	EMPTY(0),
 	High_Pressure(1),
 	High_Temperature(2),
 	Unknown(3);

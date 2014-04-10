@@ -1,0 +1,5 @@
+package com.jellydiamonds.android.comm;
+
+public interface JellyUnserializeEvent {
+
+}

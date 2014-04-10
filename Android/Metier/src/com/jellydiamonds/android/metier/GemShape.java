@@ -2,6 +2,7 @@ package com.jellydiamonds.android.metier;
 
 public enum GemShape {
 	
+	EMPTY(0),
 	Camer(1),
 	Cushion(2),
 	Fancy(3),

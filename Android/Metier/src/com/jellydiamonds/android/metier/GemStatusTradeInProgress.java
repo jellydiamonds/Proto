@@ -13,6 +13,6 @@ public class GemStatusTradeInProgress extends GemStatus{
 	
 		public GemStatusTradeInProgress()
 		{
-			this.mCurrentStatus = "TradeInProgress";
+			this.mCurrentStatus = "tradeinprogress";
 		}
 }

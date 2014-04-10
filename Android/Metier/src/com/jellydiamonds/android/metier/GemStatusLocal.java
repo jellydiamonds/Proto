@@ -12,7 +12,7 @@ public class GemStatusLocal extends GemStatus{
 	 */
 	public GemStatusLocal()
 	{
-		this.mCurrentStatus = "Local";
+		this.mCurrentStatus = "local";
 	}
 
 }

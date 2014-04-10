@@ -1,0 +1,8 @@
+package com.jellydiamonds.android.comm;
+
+import com.jellydiamonds.android.metier.GemID;
+
+public interface JellyGemIdDecodeFromJSONEvent {
+
+	public void onDecode( GemID gem );
+}

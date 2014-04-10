@@ -2,6 +2,7 @@ package com.jellydiamonds.android.metier;
 
 public enum GemCertificate {
 	
+	EMPTY(0),
 	GIA(1),
 	Gublin(2),
 	AIGS(3),
