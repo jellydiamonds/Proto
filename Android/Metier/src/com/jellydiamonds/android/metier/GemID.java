@@ -42,23 +42,25 @@ public class GemID implements Serializable {
     	// Set creation date
     	this.creationDate = System.currentTimeMillis();
     	
-    	this.origin = GemOrigin.Unknown;
+    	this.origin = GemOrigin.EMPTY;
     	this.shape = GemShape.EMPTY;
     	this.cut = GemCut.EMPTY;
     	this.clarity = GemClarity.EMPTY;
     	this.light = GemLight.EMPTY;
     	this.enhancement = GemEnhancement.EMPTY;
     	this.certificate = GemCertificate.EMPTY;
+    	this.species = GemSpecies.EMPTY;
     	this.supplierID = 0L;
     	this.priceValue = 0.0f;
     	this.priceCurrency = 0;
     	this.comments = "";
     	this.sizeX = 0.0f;
     	this.sizeY = 0.0f;
-    	this.sizeY = 0.0f;
+    	this.sizeZ = 0.0f;
     	this.mass = 0.0f;
     	this.color = "";
     	this.reference = "";
+    	
     }
     
     public GemStatus getCurrentStatus() {

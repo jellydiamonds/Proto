@@ -1,0 +1,45 @@
+package com.jellydiamonds.android.metier;
+
+public enum GemOrigin {
+	
+	Unknown(0),
+	Afghanistan(1),
+	Australia(2),
+	Birmania(3),
+	Brazil(4),
+	Colombia(5),
+	India(6),
+	Kenya(7),
+	Madagascar(8),
+	Mozambique(9),
+	Namibia(10),
+	Nigeria(11),
+	Pakistan(12),
+	Russia(13),
+	Sri_lanka(14),
+	Tanzania(15),
+	Thailand(16),
+	USA(17),
+	Zambia(18);
+	
+	protected int origin;
+	
+	GemOrigin( int origin )
+	{
+		this.origin = origin;
+	}
+	
+	public int getValue() 
+	{
+		return this.origin;
+	}
+	
+	public void setValue( Integer value )
+	{
+		if( 	(value <= 0 ) || 
+				( value >= values().length ) )
+			this.origin = 0;
+		else
+			this.origin = value;
+	}
+}

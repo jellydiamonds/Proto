@@ -3,9 +3,9 @@ package com.jellydiamonds.android.metier;
 public enum GemEnhancement {
 	
 	EMPTY(0),
-	High_Pressure(1),
-	High_Temperature(2),
-	Unknown(3);
+	HIGH_PRESSURE(1),
+	HIGH_TEMPERATURE(2);
+	//Unknown(3);
 	
 	protected int enhancement;
 	
@@ -19,4 +19,12 @@ public enum GemEnhancement {
 		return this.enhancement;
 	}
 	
+	public static GemEnhancement fromValue( int value )
+	{
+		if( 	(value <= 0 ) || 
+				( value >= values().length ) )
+			return values()[0];
+		else
+			return values()[value];
+	}
 }

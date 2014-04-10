@@ -75,6 +75,15 @@ public enum GemSpecies {
 		return this.specie;
 	}
 	
+	public static GemSpecies fromValue( int value )
+	{
+		if( 	(value <= 0 ) || 
+				( value >= values().length ) )
+			return values()[0];
+		else
+			return values()[value];
+	}
+	
 	/*
 	(1,'Agate'),
 	(2,'Alexandrite'),
