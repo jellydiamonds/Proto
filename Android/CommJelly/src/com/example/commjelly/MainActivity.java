@@ -1,12 +1,16 @@
 package com.example.commjelly;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,6 +21,10 @@ import android.app.Activity;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,10 +45,15 @@ import com.jellydiamonds.android.metier.GemSpecies;
 public class MainActivity extends Activity {
 
 	private static final String TAG = "[JellyCommTest]";
+	public static final File DOCUMENT_DIR = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+	public static final File PICTURE_DIR = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 	
 	private TextView infobox = null;
-	private ArrayList<GemID> gemCollection = null;
-	private ArrayList<GemID> gemCollectionResult = null;
+	private Button	 decodeButton = null;
+	private EditText fileGetter = null;
+	
+	//private ArrayList<GemID> gemCollection = null;
+	//private ArrayList<GemID> gemCollectionResult = null;
 	private String ownerCollection = "JohnFox";
 	
 	@Override
@@ -48,20 +61,55 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		fileGetter = (EditText)findViewById(R.id.fileGetter);
+		decodeButton = (Button) findViewById(R.id.decodeButton);
 		infobox = (TextView) findViewById(R.id.viewjson);
 		infobox.setMovementMethod(new ScrollingMovementMethod());
 		
-		File l_photo = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/test.jpg");
+		decodeButton.setOnClickListener( new OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				String l_filename = fileGetter.getText().toString();
+				File l_tmp = new File( DOCUMENT_DIR + "/" + l_filename);
+				infobox.setText("");
+				if( l_tmp.exists() && l_tmp.canRead() )
+				{
+					try {
+						String jsonString = fileToString(l_tmp);
+						if(jsonString != null)
+							JellySerialize.UnserializeJellyCollection(new JSONObject(jsonString));
+						else
+							infobox.setText("jsonstring is empty...");
+						
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				else
+				{
+					infobox.setText("File " + l_tmp + " cannot be opened...");
+				}
+			}
+			
+		});
+		
+		JellySerialize.setJellyGemIdDecodeFromJSONEvent(eventDecode);
+		//gemCollectionResult = new ArrayList<GemID>();
+		
+		/*File l_photo = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/test.jpg");
 		Log.d(TAG,"File : " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/test.jpg" );
 		
 		if( l_photo.exists() && l_photo.canRead())
 			Log.d(TAG,l_photo.getName() + " Will be encoded !");
 		else
-			Log.d(TAG,l_photo.getName() + " Will not be encoded...");
+			Log.d(TAG,l_photo.getName() + " Will not be encoded...");*/
 		
-		gemCollection = new ArrayList<GemID>();
-		gemCollectionResult = new ArrayList<GemID>();
-		GemID gem1 = new GemID();
+		//gemCollection = new ArrayList<GemID>();
+		
+		/*GemID gem1 = new GemID();
 		
 		gem1.setReference("20140409EMER001");
 		gem1.setColor("#123456");
@@ -73,7 +121,7 @@ public class MainActivity extends Activity {
 		gem1.setPriceCurrency(0);
 		gem1.setPriceValue(300.5f);
 		gem1.setSupplierID(6666L);
-		gem1.setPhotoLink(l_photo);
+		//gem1.setPhotoLink(l_photo);
 		gem1.setSpecies(GemSpecies.EMERALD);
 		gem1.setShape(GemShape.RECTANGLE);
 		gem1.setCut(GemCut.DIAMOND);
@@ -99,12 +147,12 @@ public class MainActivity extends Activity {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		stringToFile( jsonString, Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/JSONFormatGemID.txt" );
-		Toast.makeText(getApplicationContext(), 
-				"JSON text file is saved at ' " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/JSONFormatGemID.txt '", 
-				Toast.LENGTH_LONG).show();
-		//infobox.setText(jsonString);
+		infobox.setText(jsonString);*/
+		//stringToFile( jsonString, Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/JSONFormatGemID.txt" );
+		//Toast.makeText(getApplicationContext(), 
+		//		"JSON text file is saved at ' " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/JSONFormatGemID.txt '", 
+		//		Toast.LENGTH_LONG).show();
+		/*
 		try {
 			JellySerialize.UnserializeJellyCollection(new JSONObject(jsonString));
 			
@@ -123,7 +171,7 @@ public class MainActivity extends Activity {
 		for( GemID l_tmp : gemCollectionResult)
 		{
 			Log.d(TAG,l_tmp.toString());
-		}
+		}*/
 		
 		
 	}
@@ -164,6 +212,37 @@ public class MainActivity extends Activity {
 		}
 	}
 	
+	private String fileToString( File file )
+	{
+		FileInputStream l_file = null;
+		ByteArrayOutputStream l_data_byte = new ByteArrayOutputStream();
+		byte [] l_buffer = new byte[ 1024 ];
+		int l_read = 0;
+		
+		try {
+			l_file = new FileInputStream(file);
+			
+			while( ( l_read = l_file.read(l_buffer) ) > 0 )
+			{
+				l_data_byte.write(l_buffer, 0, l_read);
+			}
+			l_data_byte.flush();
+			
+			l_file.close();
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if( l_data_byte == null )
+			return null;
+		
+		return l_data_byte.toString();
+	}
+	
 	private JellyGemIdDecodeFromJSONEvent eventDecode = new JellyGemIdDecodeFromJSONEvent() {
 		
 		@Override
@@ -171,15 +250,15 @@ public class MainActivity extends Activity {
 			// TODO Auto-generated method stub
 			Log.d(TAG,"Owner of current collection being decoded is " + owner);
 			Log.d(TAG,"Owner of previous collection encoded is " + ownerCollection);
-			if( !owner.equals( ownerCollection ) )
-				return false;
+			
+			infobox.append( "Owner is : ' " + owner + " '.\n");
 			return true;
 		}
 		
 		@Override
 		public boolean onDataDecode(GemID gem) {
 			// TODO Auto-generated method stub
-			gemCollectionResult.add(gem);
+			infobox.append( gem.toString() + "\n");
 			return true;
 		}
 

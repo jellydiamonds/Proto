@@ -60,7 +60,7 @@ public class JellySerialize {
 		
 		String l_collectionOwner = null;
 		JSONArray l_collectionData = null;
-		JSONObject l_currentGem = null;
+		//JSONObject l_currentGem = null;
 		
 		if ( 	( !collectionSerialized.has("jellyUser") ) || 
 				( !collectionSerialized.has("jellyCollection") ) )
@@ -80,8 +80,13 @@ public class JellySerialize {
 		
 		for(int l_index = 0; l_index < l_collectionData.length(); l_index++)
 		{
-			if( UnserializeJellyGemID(l_currentGem) == false )
-				return false;
+			try {
+				if( UnserializeJellyGemID(l_collectionData.getJSONObject(l_index)) == false )
+					return false;
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return true;
@@ -230,6 +235,8 @@ public class JellySerialize {
 	{
 		GemID l_extractedGemID = new GemID();
 		
+		if( gemSerialized == null )
+			return false;
 
 		if( gemSerialized.has("reference") )
 		{
