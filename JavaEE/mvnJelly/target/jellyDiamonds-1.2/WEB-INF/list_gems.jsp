@@ -18,58 +18,70 @@
 		<td class="mainTable">
 			<div id="gemsList">
 			<c:choose>
-				<%-- Si aucune gemme n'existe en session, affichage d'un message par défaut --%>
-				<c:when test="${ empty sessionScope.sessionGemsList }">	
+				<%-- If the MAP of gems is empty, display a default message. --%>
+				<c:when test="${ empty sessionScope.sessionGemsMap }">	
 					<p class="error">No gems in the list.</p>
 				</c:when>
-				<%-- Sinon, affichage du tableau --%>
+				<%-- Otherwise, display a table. --%>
 				<c:otherwise>
 					<h1>.:GEMS:.</h1>
-					<table>
+					<table id="gemsListTable">
 						<tr>
-							<th>Gem-ID #</th>
-							<th>Creation date</th>
+							<th>Photo</th>
+							<!-- <th>Light</th>
+							<th>Gem-ID #</th>-->
+							<!-- <th>Creation date</th> -->
 							<th>Gem reference</th>
 							<th>Species</th>
-							<th>Color</th>
+							<!-- <th>Color</th>
 							<th>Shape</th>
-							<th>Cut</th>
+							<th>Cut</th> -->
 							<th>Mass (cts)</th>
 							<th>Dimensions (mm)</th>
-							<th>Clarity</th>
+							<!-- <th>Clarity</th>
 							<th>Enhancement</th>
 							<th>Origin</th>
 							<th>Certificate</th>
-							<th>Comments</th>
+							<th>Comments</th> -->
 							<th>Price (per 1 cts)</th>
 							<th>Supplier ID</th>
-							<th>Photo</th>
 							<th class="delete">Delete</th>
 						</tr>
-						<c:forEach var="gem" items="${ sessionScope.sessionGemsList }" varStatus="loop">
-						<tr class=${ loop.index % 2 == 0 ? 'whiteLine' : 'grayLine' }
+						<c:forEach var="gemEntry" items="${ sessionScope.sessionGemsMap }" varStatus="loop">
+						<c:set var="gem" scope="request" value="${ gemEntry.value }" />
+						<tr class=${ loop.index % 2 == 0 ? 'blackLine' : 'darkGrayLine' }
 							onclick="document.location = '<c:url value="/gems"><c:param name="gemID" value="${ gem.id }"/></c:url>';">
+							
+							<td class="gemPhoto">
+				<%-- If gem's photo exists, we display a thumbnail of a photo which is a link to original image.--%>
+								<c:if test="${ !empty gem.photoLink }">
+									<img src="<c:url value="/images/${ gem.photoLink }"/>" alt="Gem # ${ gem.id }" width="100"/>
+								</c:if>
+							</td>
+							<!-- <td class="gemLight">
+								<c:out value="${ applicationScope.arrayLight[gem.light] }"/>
+							</td>
 							<td class="gemID">
 								<c:out value="${ gem.id }"/>
-							</td>
-							<td class="gemDate">
+							</td>-->
+							<!-- <td class="gemDate">
 								<c:out value="${ gem.creationDate }"/>
-							</td>
+							</td> -->
 							<td class="gemReference">
 								<c:out value="${ gem.reference }"/>
 							</td>
 							<td class="gemSpecies">
-								<c:out value="${ gem.species }"/>
+								<c:out value="${ applicationScope.arraySpecies[gem.species] }"/>
 							</td>
-							<td class="gemColor">
+							<!-- <td class="gemColor">
 								<c:out value="${ gem.color }"/>
 							</td>
 							<td class="gemShape">
-								<c:out value="${ gem.shape }"/>
+								<c:out value="${ applicationScope.arrayShape[gem.shape] }"/>
 							</td>
 							<td class="gemCut">
-								<c:out value="${ gem.cut }"/>
-							</td>
+								<c:out value="${ applicationScope.arrayCut[gem.cut] }"/>
+							</td>-->
 							<td class="gemMass">
 								<c:out value="${ gem.mass }"/>
 							</td>
@@ -79,32 +91,29 @@
 									<c:out value=" x ${ gem.sizeZ }"/>
 								</c:if>
 							</td>
-							<td class="gemClarity">
-								<c:out value="${ gem.clarity }"/>
+							<!-- <td class="gemClarity">
+								<c:out value="${ applicationScope.arrayClarity[gem.clarity] }"/>
 							</td>
 							<td class="gemEnhancement">
-								<c:out value="${ gem.enhancement }"/>
+								<c:out value="${ applicationScope.arrayEnhancement[gem.enhancement] }"/>
 							</td>
 							<td class="gemOrigin">
-								<c:out value="${ gem.origin }"/>
+								<c:out value="${ applicationScope.arrayOrigin[gem.origin] }"/>
 							</td>
 							<td class="gemCertificate">
-								<c:out value="${ gem.certificate }"/>
+								<c:out value="${ applicationScope.arrayCertificate[gem.certificate] }"/>
 							</td>
 							<td class="gemComments">
 								<c:out value="${ gem.comments }"/>
-							</td>
+							</td> -->
 							<td class="gemPrice">
-								<c:out value="${ gem.priceValue } ${ gem.priceCurrency }"/>
+								<c:out value="${ gem.priceValue } ${ applicationScope.arrayCurrency[gem.priceCurrency] }"/>
 							</td>
 							<td class="gemSupplierID">
 								<c:out value="${ gem.supplierID }"/>
 							</td>
-							<td class="gemPhotoLink">
-								<c:out value="${ gem.photoLink }"/>
-							</td>
 							<td>
-								<a href="<c:url value="/deleteGem"><c:param name="idGem" 
+								<a href="<c:url value="/deleteGem"><c:param name="gemID" 
 								value="${ gem.id }"/></c:url>">
 									<img src="<c:url value="/inc/cross.png"/>" alt="delete gem" width="15" height="15"/>
 								</a>

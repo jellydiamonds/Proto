@@ -1,7 +1,7 @@
 package com.jelly.jellyDiamonds.web.servlets;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -14,24 +14,29 @@ import javax.servlet.http.HttpSession;
 import com.jelly.jellyDiamonds.ejb.beans.entity.Gem;
 import com.jelly.jellyDiamonds.ejb.beans.session.IGemLocal;
 
-@WebServlet( name = "listGemsServlet", urlPatterns = { "/start", "/listGems" } )
+@WebServlet( urlPatterns = { "/start", "/listGems" } )
 public class ListGems extends HttpServlet {
-    public static final String VIEW_GEMS = "/WEB-INF/list_gems.jsp";
-    public static final String ATT_GEMS  = "sessionGemsList";
+    public static final String VIEW_GEMS    = "/WEB-INF/list_gems.jsp";
+
+    // public static final String ATT_GEMS_LIST = "sessionGemsList";
+    public static final String ATT_GEMS_MAP = "sessionGemsMap";
 
     @EJB
-    IGemLocal                  gemLocalBean;
+    IGemLocal                  gemBeanLocal;
 
     @Override
     protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException,
             IOException {
-        /* !!! A MODIFIER!!! Ne pas efficace */
-        /* Récupération d'une Liste des gemmes de la BASE DE DONNEES */
-        List<Gem> sessionGemsList = gemLocalBean.getAllGems();
-
-        /* Enregistrer la Liste, afficher la liste */
+        // Reloading gems Map, as there can be new entries in the database
         HttpSession session = request.getSession();
-        session.setAttribute( ATT_GEMS, sessionGemsList );
+        Map<Long, Gem> gemsMap = gemBeanLocal.getGemsMap();
+        session.setAttribute( ATT_GEMS_MAP, gemsMap );
+
+        /*
+         * !!! A MODIFIER!!! Ne pas efficace (afficher par 10,20..., mais pas
+         * TOUTES les gemmes)
+         */
+
         request.getRequestDispatcher( VIEW_GEMS ).forward( request, response );
     }
 }

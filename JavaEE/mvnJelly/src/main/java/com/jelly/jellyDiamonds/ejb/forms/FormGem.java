@@ -36,19 +36,19 @@ public final class FormGem {
     private static final String PARAM_SIZE           = "gemSize";
     private static final String PARAM_PRICE          = "gemPrice";
     private static final String PARAM_SQL            = "sql";
+    public static final String  PARAM_PATH           = "path";
     // Regular expressions
     private static final String REGEX_MASS           = "[0-9]*(\\.[0-9]*)*";
     private static final String REGEX_SIZE           = "[0-9]*(\\.[0-9]*)*";
     private static final String REGEX_PRICECURRENCY  = "[A-Z][A-Z][A-Z]";
     private static final String REGEX_PRICEVALUE     = "[0-9]*(\\.[0-9]*)*";
 
-    /* Un objet métier qui gère la communication avec la base de données */
+    // EJB which connects to the database.
     private IGemLocal           gemBeanLocal;
 
     private String              result;
     private Map<String, String> errors               = new HashMap<String, String>();
 
-    /* Constructeur avec un objet métier en paramètre */
     public FormGem( IGemLocal gemLocal ) {
         this.gemBeanLocal = gemLocal;
     }
@@ -62,11 +62,13 @@ public final class FormGem {
     }
 
     /*
-     * Création d'une gemme en utilisant la méthode 'addGem' de l'objet
-     * gemBeanLocal.
+     * Creates a Gem object from the parameters of HTTP REQUEST object. Stores
+     * gem's photo on disk. The 'errors' map is EMPTY for a moment, as each
+     * servlet instanciate its own FormGem, and in each operation - AddGem,
+     * EditGem - the method createGem() is called before saving to the database.
      */
-    public Gem createGem( HttpServletRequest request ) {
-        // String reference = getValeurChamp( request, PARAM_REFERENCE );
+    public Gem createGem( HttpServletRequest request, String path ) {
+        // Getting form fields.
         String speciesStr = getValeurChamp( request, PARAM_SPECIES );
         String color = getValeurChamp( request, PARAM_COLOR );
         String shapeStr = getValeurChamp( request, PARAM_SHAPE );
@@ -83,26 +85,12 @@ public final class FormGem {
         String priceCurrencyStr = getValeurChamp( request, PARAM_PRICE_CURRENCY );
         String priceValueStr = getValeurChamp( request, PARAM_PRICE_VALUE );
         String supplierIDStr = getValeurChamp( request, PARAM_SUPPLIER_ID );
-        // String photoLink = getValeurChamp( request, PARAM_PHOTO_LINK );
         String lightStr = getValeurChamp( request, PARAM_LIGHT );
+        // String photoLink = null;
 
         Gem gem = new Gem();
 
-        /*
-         * ========================= IMAGE VALIDATION =========================
-         * We start by validating an image to fill up the 'errors' parameter
-         * (empty for a moment) with the errors which come from the FormImage
-         * execution.
-         */
-        FormImage formImage = new FormImage();
-        try {
-            image = form.enregistrerImage( request, chemin );
-        } catch ( FormValidationException e ) {
-            setError( PARAM_IMAGE, e.getMessage() );
-        }
-        errors = form.getErreurs();
-
-        // Processing and validation of parameters, entered by user.
+        // Processing and validating the parameters, entered by user.
         processSpecies( speciesStr, gem );
         processColor( color, gem );
         processShape( shapeStr, gem );
@@ -117,112 +105,77 @@ public final class FormGem {
         processPrice( priceValueStr, priceCurrencyStr, gem );
         processSupplierID( supplierIDStr, gem );
         processLight( lightStr, gem );
-
-        // processPhoto ( ??? );
+        // Image processing and validation, using a FormImage object.
+        processImage( request, path, gem );
 
         System.out.println( "After processing all fields. errors.isEmpty() = " + errors.isEmpty() );
         printMap( errors );
-        // Si tous les champs sont correctements remplis
-        if ( errors.isEmpty() ) {
+        return gem;
+    }
+
+    /*
+     * Creates a new gem in the database, if the 'errors' map is empty. Before
+     * saving, adds automatically assigned fields (reference and creation date).
+     */
+    public void addNewGem( Gem gem ) {
+        if ( this.errors.isEmpty() ) {
             try {
-                // Automatically assigned fields
-                processDateAndReference( speciesStr, gem );
-                // Création d'une gemme avec son enregistrement dans la BDD
+                processDateAndReference( gem );
                 gemBeanLocal.addGem( gem );
             } catch ( GemBeanException e ) {
                 setError( PARAM_SQL, e.getMessage() );
             }
         }
-        // Initialisation du résultat global de la validation.
+        // Global result
         if ( errors.isEmpty() ) {
             result = "Gem created successfully.";
         } else {
             result = "Error while creating a gem.";
         }
-        System.out.println( result );
-        printMap( errors );
-
-        return gem;
+        System.out.println( "Result: " + result );
+        printMap( this.errors );
     }
 
-    /*
-     * Updates parameters of a given gem. As the gem is already made persistent,
-     * it will also update database values. Not creating a new gem.
-     */
-    public Gem editGem( HttpServletRequest request, Gem gem ) {
-        String speciesStr = getValeurChamp( request, PARAM_SPECIES );
-        String color = getValeurChamp( request, PARAM_COLOR );
-        String shapeStr = getValeurChamp( request, PARAM_SHAPE );
-        String cutStr = getValeurChamp( request, PARAM_CUT );
-        String massStr = getValeurChamp( request, PARAM_MASS );
-        String sizeXStr = getValeurChamp( request, PARAM_SIZE_X );
-        String sizeYStr = getValeurChamp( request, PARAM_SIZE_Y );
-        String sizeZStr = getValeurChamp( request, PARAM_SIZE_Z );
-        String clarityStr = getValeurChamp( request, PARAM_CLARITY );
-        String enhancementStr = getValeurChamp( request, PARAM_ENHANCEMENT );
-        String originStr = getValeurChamp( request, PARAM_ORIGIN );
-        String certificateStr = getValeurChamp( request, PARAM_CERTIFICATE );
-        String comments = getValeurChamp( request, PARAM_COMMENTS );
-        String priceCurrencyStr = getValeurChamp( request, PARAM_PRICE_CURRENCY );
-        String priceValueStr = getValeurChamp( request, PARAM_PRICE_VALUE );
-        String supplierIDStr = getValeurChamp( request, PARAM_SUPPLIER_ID );
-        // String photoLink = getValeurChamp( request, PARAM_PHOTO_LINK );
-        String lightStr = getValeurChamp( request, PARAM_LIGHT );
-
-        // Processing and validation of parameters, entered by user.
-        processSpecies( speciesStr, gem );
-        processColor( color, gem );
-        processShape( shapeStr, gem );
-        processCut( cutStr, gem );
-        processMass( massStr, gem );
-        processSize( sizeXStr, sizeYStr, sizeZStr, gem );
-        processClarity( clarityStr, gem );
-        processEnhancement( enhancementStr, gem );
-        processOrigin( originStr, gem );
-        processCertificate( certificateStr, gem );
-        processComments( comments, gem );
-        processPrice( priceValueStr, priceCurrencyStr, gem );
-        processSupplierID( supplierIDStr, gem );
-        processLight( lightStr, gem );
-
-        // Initialisation du résultat global de la validation.
+    /* Updates gem in the database, doesn't create a new one. */
+    public void updateGem( Gem gem ) {
+        if ( this.errors.isEmpty() ) {
+            try {
+                gemBeanLocal.updateGem( gem );
+            } catch ( GemBeanException e ) {
+                setError( PARAM_SQL, e.getMessage() );
+            }
+        }
+        // Global result
         if ( errors.isEmpty() ) {
             result = "Gem edited successfully.";
         } else {
             result = "Error while editing a gem.";
         }
-        System.out.println( result );
-        printMap( errors );
-
-        return gem;
+        System.out.println( "Result: " + result );
+        printMap( this.errors );
     }
 
-    /*
-     * Recherche d'une gemme en utilisant la méthode 'findGem' de l'objet
-     * gemBeanLocal.
-     */
+    /* Searches for a gem with given id in the database. */
     public Gem findGem( HttpServletRequest request ) {
-        String gemIDStr = getValeurChamp( request, PARAM_ID );
         Gem gem = new Gem();
-        /* Validation des champs */
+        // Validating an ID field
+        String gemIDStr = getValeurChamp( request, PARAM_ID );
         processID( gemIDStr );
 
-        /* Si tous les champs sont correctements remplis */
+        // If the search form has no errors, looking for a gem in the database.
         if ( errors.isEmpty() ) {
             try {
-                /* Recherche de la gemme dans la BDD */
                 Long gemID = Long.valueOf( gemIDStr );
                 gem = gemBeanLocal.findGem( gemID );
             } catch ( GemBeanException e ) {
-                setError( PARAM_SQL, "CAUGHT a GemBeanException! Gem #" + gemIDStr + "not found." );
+                setError( PARAM_SQL, "Caught a GemBeanException! Gem #" + gemIDStr + "not found." );
             }
         }
 
         if ( gem == null ) {
             setError( PARAM_SQL, "ouch! Gem #" + gemIDStr + " not found." );
         }
-
-        /* Initialisation du résultat global de la validation. */
+        // Global resurt of a search
         if ( errors.isEmpty() ) {
             result = "Gem found";
         } else {
@@ -237,6 +190,7 @@ public final class FormGem {
      * 2) Initialisation des propriétés correspondantes du bean .............
      */
     private void processSpecies( String speciesStr, Gem gem ) {
+        System.out.println( "EditGem.processSpecies: speciesStr = " + speciesStr );
         Integer species = null;
         try {
             species = validateSpecies( speciesStr );
@@ -399,7 +353,24 @@ public final class FormGem {
         }
     }
 
-    private void processDateAndReference( String speciesStr, Gem gem ) {
+    /*
+     * ========== IMAGE PROCESSING AND VALIDATION =========================
+     * Extracting an image file from the request, saving it to the given
+     * directory on the disk.
+     */
+    private void processImage( HttpServletRequest request, String path, Gem gem ) {
+        String photoLink = null;
+        FormImage formImage = new FormImage();
+        try {
+            photoLink = formImage.saveImage( request, path );
+        } catch ( FormValidationException e ) {
+            setError( PARAM_PHOTO_LINK, e.getMessage() );
+        }
+        // 'gemPhotoLink' field has already been validated by FormImage
+        gem.setPhotoLink( photoLink );
+    }
+
+    private void processDateAndReference( Gem gem ) {
         // Setting the current date
         Date now = new Date();
         gem.setCreationDate( now );
@@ -564,7 +535,7 @@ public final class FormGem {
             if ( priceCurrencyStr == null ) {
                 throw new FormValidationException( "Please select a currency." );
             } else {
-                Integer.valueOf( priceCurrencyStr );
+                priceCurrency = Integer.valueOf( priceCurrencyStr );
             }
         }
         return priceCurrency;
@@ -603,15 +574,7 @@ public final class FormGem {
     }
 
     /* METHODES UTILITAIRES */
-    /* Ajoute un message correspondant au champ spécifié à la map des erreurs. */
-    private void setError( String paramName, String message ) {
-        errors.put( paramName, message );
-    }
-
-    /*
-     * Méthode utilitaire qui rétourne null si un champ est vide, et son continu
-     * sinon.
-     */
+    /* If the field is not empty, returns its content, otherwise null. */
     private static String getValeurChamp( HttpServletRequest request, String paramName ) {
         String value = request.getParameter( paramName );
         if ( value == null || value.trim().length() == 0 ) {
@@ -619,6 +582,16 @@ public final class FormGem {
         } else {
             return value;
         }
+    }
+
+    /* Adds a corresponding message to the 'errors' map. */
+    private void setError( String paramName, String message ) {
+        errors.put( paramName, message );
+    }
+
+    /* Copies all the entries of the first map to the second one. */
+    private void copyErrors( Map source, Map destination ) {
+        destination.putAll( source );
     }
 
     /* Prints the error map line by line. */

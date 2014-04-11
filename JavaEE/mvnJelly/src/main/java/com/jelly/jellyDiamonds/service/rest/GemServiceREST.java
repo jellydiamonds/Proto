@@ -1,11 +1,8 @@
 package com.jelly.jellyDiamonds.service.rest;
 
-import java.util.List;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -30,17 +27,19 @@ public class GemServiceREST {
 
     // La couche 'service' fait appel au couche 'metier'
 
-    @GET
-    @POST
-    @Path( "/addGem/{species}/{color}" )
-    public void ws_addGem(
-            @PathParam( value = "species" ) String species,
-            @PathParam( value = "color" ) String color ) {
-        Gem gem = new Gem();
-        gem.setSpecies( species );
-        gem.setColor( color );
-        gemBeanLocal.addGem( gem );
-    }
+    /*
+     * @GET
+     * 
+     * @POST
+     * 
+     * @Path( "/addGem" ) public void ws_readGemString(Http {
+     * 
+     * JsonObject gemJson = JellyJSON.parseToJson( gemString );
+     * JellyJSON.printJsonObject( gemJson ); /* Gem gem = new Gem();
+     * em.setSpecies( species ); gem.setColor( color ); gemBeanLocal.addGem( gem
+     * );
+     */
+    // }
 
     @GET
     @Path( "/findGem/{id}" )
@@ -49,10 +48,10 @@ public class GemServiceREST {
             @PathParam( value = "id" ) Long id ) {
         return gemBeanLocal.findGem( id );
     }
-
-    @GET
-    @Path( "/getAllGems" )
-    public List<Gem> ws_getAllGems() {
-        return gemBeanLocal.getAllGems();
-    }
+    /*
+     * @GET
+     * 
+     * @Path( "/getAllGems" ) public List<Gem> ws_getAllGems() { return
+     * gemBeanLocal.getAllGems(); }
+     */
 }

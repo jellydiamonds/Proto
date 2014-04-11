@@ -20,7 +20,7 @@ public class FindGem extends HttpServlet {
     public static final String VIEW_FORM    = "/WEB-INF/find_gem.jsp";
     public static final String VIEW_SUCCESS = "/WEB-INF/gemID.jsp";
 
-    /* Injection de l'objet métier */
+    // EJB injection
     @EJB
     private IGemLocal          gemBeanLocal;
 

@@ -7,27 +7,20 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
-import com.sun.mail.util.MimeUtil;
+import eu.medsea.mimeutil.MimeUtil;
 
 public final class FormImage {
-    private static final String PARAM_IMAGE = "imageGem";
+    private static final String PARAM_IMAGE = "gemPhotoLink";
     private static final int    BUFFER_SIZE = 10 * 1024;
 
-    private Map<String, String> errors      = new HashMap<String, String>();
-
-    public Map<String, String> getErrors() {
-        return errors;
-    }
-
+    /* Saves an image on disk, returns its link (relative to the provided path). */
     public String saveImage( HttpServletRequest request, String path ) throws FormValidationException {
-        /* Getting the content of file form field using getPart() method. */
+        // Getting the content of file form field using getPart() method.
         String imageFilename = null;
         InputStream imageContent = null;
         try {
@@ -60,7 +53,7 @@ public final class FormImage {
                 /* If it is an image, the MIME header will start by "image". */
                 if ( mimeTypes.toString().startsWith( "image" ) ) {
                     /* Writing the image on the disk */
-                    ecrireFichier( imageContent, imageFilename, path );
+                    writeFile( imageContent, imageFilename, path );
                 } else {
                     throw new FormValidationException( "Selected file must be of an image type." );
                 }
@@ -93,11 +86,6 @@ public final class FormImage {
         }
 
         return imageFilename;
-    }
-
-    // Adds a message to a corresponding field of errors map. */
-    private void setError( String param, String message ) {
-        errors.put( param, message );
     }
 
     /*

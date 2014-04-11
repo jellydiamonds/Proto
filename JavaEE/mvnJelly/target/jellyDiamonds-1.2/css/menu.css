@@ -12,7 +12,7 @@ div#menu {
 	margin-left: 10px;
 	margin-right: 10px;
 	border: 2px #000 solid;
-	background-color: #0568CD;
+	background-color: #000; #0568CD;
 	-moz-border-radius: 5px; 
 	-webkit-border-radius: 5px; 
 	border-radius: 5px;

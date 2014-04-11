@@ -15,19 +15,32 @@
 					</a>
 				</div>
 				<div class="button" tabindex="2"/>
-					<a href="<c:url value="/listGems"/>">
-						List
+					<a href="<c:url value="/deleteGem?gemID=${ gem.id }"/>">
+						Delete
 					</a>
 				</div>
 			</div>
 		</td>
 	</tr>
 	<tr>
-		<td class="field_title">Gem #</td>
-		<td class="field_value"><c:out value="${ requestScope.currentGem.id }" /></td>
+		<td class="gemPhoto" colspan="2">
+			<%-- If gem's photo exists, we display a thumbnail of a photo which is a link to original image.--%>
+			<c:if test="${ !empty gem.photoLink }">
+				<a href="<c:url value="/images/${ gem.photoLink }"/>">
+					<img src="<c:url value="/images/${ gem.photoLink }"/>" alt="Gem # ${ gem.id }" width="400"/>
+				</a>
+			</c:if>
+		</td>
 	</tr>
 	<tr>
-		<td class="field_title">Date</td>
+		<td class="field_title">Photo taken under:</td>
+		<td class="field_value"><c:out value="${ applicationScope.arrayLight[gem.light] }"/></td>
+	<tr>
+		<td class="field_title">GemID #</td>
+		<td class="field_value"><c:out value="${ gem.id }" /></td>
+	</tr>
+	<tr>
+		<td class="field_title">GemID creation date</td>
 		<td class="field_value"><c:out value="${ gem.creationDate }" /></td>
 	</tr>
 	<tr>
@@ -36,7 +49,7 @@
 	</tr>
 	<tr>
 		<td class="field_title">Species</td>
-		<td class="field_value"><c:out value="${ gem.species }" /></td>
+		<td class="field_value"><c:out value="${ applicationScope.arraySpecies[gem.species] }" /></td>
 	</tr>
 	<tr>
 		<td class="field_title">Color</td>
@@ -44,11 +57,11 @@
 	</tr>
 	<tr>
 		<td class="field_title">Shape</td>
-		<td class="field_value"><c:out value="${ gem.shape }" /></td>
+		<td class="field_value"><c:out value="${ applicationScope.arrayShape[gem.shape] }" /></td>
 	</tr>
 	<tr>
 		<td class="field_title">Cut</td>
-		<td class="field_value"><c:out value="${ gem.cut }" /></td>
+		<td class="field_value"><c:out value="${ applicationScope.arrayCut[gem.cut] }" /></td>
 	</tr>
 	<tr>
 		<td class="field_title">Mass</td>
@@ -76,19 +89,19 @@
 	</tr>
 	<tr>
 		<td class="field_title">Clarity</td>
-		<td class="field_value"><c:out value="${ gem.clarity }" /></td>
+		<td class="field_value"><c:out value="${ applicationScope.arrayClarity[gem.clarity] }" /></td>
 	</tr>
 	<tr>
 		<td class="field_title">Enhancement</td>
-		<td class="field_value"><c:out value="${ gem.enhancement }" /></td>
+		<td class="field_value"><c:out value="${ applicationScope.arrayEnhancement[gem.enhancement] }" /></td>
 	</tr>
 	<tr>
 		<td class="field_title">Origin</td>
-		<td class="field_value"><c:out value="${ gem.origin }" /></td>
+		<td class="field_value"><c:out value="${ applicationScope.arrayOrigin[gem.origin] }" /></td>
 	</tr>
 	<tr>
 		<td class="field_title">Certificate</td>
-		<td class="field_value"><c:out value="${ gem.certificate }" /></td>
+		<td class="field_value"><c:out value="${ applicationScope.arrayCertificate[gem.certificate] }" /></td>
 	</tr>
 	<tr>
 		<td class="field_title">Comments</td>
@@ -98,21 +111,13 @@
 		<td class="field_title">Price</td>
 		<td class="field_value">
 			<c:if test="${ !empty gem.priceValue }">
-				<c:out value="${ gem.priceValue } ${ gem.priceCurrency }" /> / cts
+				<c:out value="${ gem.priceValue } ${ applicationScope.arrayCurrency[gem.priceCurrency] }" /> / cts
 			</c:if>
 		</td>
 	</tr>
 	<tr>
 		<td class="field_title">Supplier ID</td>
 		<td class="field_value"><c:out value="${ gem.supplierID }" /></td>
-	</tr>
-	<tr>
-		<td class="field_title">Photo link</td>
-		<td class="field_value"><c:out value="${ gem.photoLink }" /></td>
-	</tr>
-	<tr>
-		<td class="field_title">Photo taken under</td>
-		<td class="field_value"><c:out value="${ gem.light }" /></td>
 	</tr>
 </table>
 

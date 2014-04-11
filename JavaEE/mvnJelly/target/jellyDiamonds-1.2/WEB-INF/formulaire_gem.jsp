@@ -1,51 +1,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <c:set var="gem" scope="request" value="${ requestScope.currentGem }" />
-<c:set var="formGem" scope="request" value="${ requestScope.form }" />
-
-<c:set var="arraySpecies" scope="request" value='${ 
-					["---","Agate","Alexandrite","Almandine","Amazonite","Amber","Amethyst","Ametrine","Andalusite",
-                    "Apatite","Aquamarine","Beryl","Bixbite","Chalcedony","Chrome tourmaline","Chrysoberyl",
-                    "Citrine","Color change garnet","Color change sapphire","Cubic zirconia","Demantoid",
-                    "Diamond","Diopside","Emerald","Fluorite","Goshenite","Hessonite","Iolite","Kunzite",
-                    "Kyanite","Lapis lazuli","Malaia garnet","Moonstone","Morganite","Opal","Peridot",
-                    "Pezzottaite","Prehnite","Pyrope","Rhodochrosite","Rhodolite","Rhodonite","Rose quartz",
-                    "Rubelite","Ruby","Sapphire","Scapolite","Smoky quartz","Spessartite","Sphene","Spinel",
-                    "Star ruby","Star sapphire","Tanzanite","Topaz","Tourmaline","Tsavorite","Turquoise","Zircon"] }'/>
-                    
-<c:set var="arrayShape" scope="request" value='${ 
-					["---","Camer","Cushion","Fancy","Heart","Marquise","Octagon","Oval","Pear",
-	               "Rectangle","Round","Ruff","Square","Trillion"] }' />
-
-<c:set var="arrayCut" scope="request" value='${ 
-					["---","Asscher","Baguette","Briolette","Cabashian","Checker-board","Concave","Diamond",
-                	"Fancy","Millenium","Mixte","Portugueese","Princess","Radiant","Ruff","Step-cut"] }' />
-
-<c:set var="arrayClarity" scope="request" value='${
-					["---","Loupe Clean","Eye Clean","Eyes Clean to Slightly Included","Slightly Included",
-                    "Moderately Included","Heavily Included","Translucent","Opaque"] }' />
-
-<c:set var="arrayEnhancement" scope="request" value='${
-					["---","High Pressure","High Temperature","Unknown"] }' />
-
-<c:set var="arrayOrigin" scope="request" value='${
-					["---","Madagascar","some country (will add a list)"] }' />
-
-<c:set var="arrayCertificate" scope="request" value='${
-					["---", "GIA (Gemological Institut of America)","Güblin Gem Lab",
-                    "AIGS (Asian Institute Of Gemological Sciences)","HRD Antwerp"] }' />
-
-<c:set var="arrayCurrency" scope="request" value='${
-					["---","EUR","USD","CAD","RUR","UAH"] }' />
-
-<c:set var="arrayLight" scope="request" value='${
-					["---","Daylight","Fluorescent light","Incandescent light"] }' />
-       
+<c:set var="formGem" scope="request" value="${ requestScope.form }" />       
 <c:set var="actionServlet" value="${ requestScope.action }" />       
-<form method="post" action="<c:url value="${ actionServlet }"/>" accept-charset="UTF-8" name="GemForm" id="GemForm">
+
+<form method="post" action="<c:url value="${ actionServlet }"/>" accept-charset="UTF-8" name="GemForm" id="GemForm"  enctype="multipart/form-data">
 	<h1 class = "maintitle">
 	<c:choose>
-		<c:when test="${ requestScope.action == '/createGem' }">
+		<c:when test="${ requestScope.action == '/addGem' }">
 			Create a new Gem-ID
 		</c:when>
 		<c:otherwise>
@@ -61,7 +23,7 @@
 			</td>
 			<td class="field_value">
 				<select id="gemSpeciesSelect" name="gemSpecies" tabindex="1">
-					<c:forEach var="species" items="${ requestScope.arraySpecies }" varStatus="loop">
+					<c:forEach var="species" items="${ applicationScope.arraySpecies }" varStatus="loop">
 						<option value="${ loop.index }" <c:if test="${ loop.index == gem.species }">selected</c:if>>
 						<!--<c:choose>
 							<c:when test="${ loop.index == gem.species }">
@@ -94,7 +56,7 @@
 			</td>
 			<td class="field_value">
 				<select id="gemShapeSelect" name="gemShape" tabindex="3">
-					<c:forEach var="shape" items="${ requestScope.arrayShape }" varStatus="loop">
+					<c:forEach var="shape" items="${ applicationScope.arrayShape }" varStatus="loop">
 						<c:choose>
 							<c:when test="${ loop.index == gem.shape }">
 								<option value="${ loop.index }" selected="selected">
@@ -116,7 +78,7 @@
 			</td>
 			<td class="field_value">
 				<select id="gemCutSelect" name="gemCut" tabindex="4">
-					<c:forEach var="cut" items="${ requestScope.arrayCut }" varStatus="loop">
+					<c:forEach var="cut" items="${ applicationScope.arrayCut }" varStatus="loop">
 						<c:choose>
 							<c:when test="${ loop.index == gem.cut }">
 								<option value="${ loop.index }" selected="selected">
@@ -187,7 +149,7 @@
 			</td>
 			<td class="field_value">
 				<select id="gemClaritySelect" name="gemClarity" tabindex="9">
-					<c:forEach var="clarity" items="${ requestScope.arrayClarity }" varStatus="loop">
+					<c:forEach var="clarity" items="${ applicationScope.arrayClarity }" varStatus="loop">
 						<c:choose>
 							<c:when test="${ loop.index == gem.clarity }">
 								<option value="${ loop.index }" selected="selected">
@@ -209,7 +171,7 @@
 			</td>
 			<td class="field_value">
 				<select id="gemEnhancementSelect" name="gemEnhancement" multiple  tabindex="10">
-					<c:forEach var="enhancement" items="${ requestScope.arrayEnhancement }" varStatus="loop">
+					<c:forEach var="enhancement" items="${ applicationScope.arrayEnhancement }" varStatus="loop">
 						<c:choose>
 							<c:when test="${ loop.index == gem.enhancement }">
 								<option value="${ loop.index }" selected="selected">
@@ -231,7 +193,7 @@
 			</td>
 			<td class="field_value">
 				<select id="gemOriginSelect" name="gemOrigin" tabindex="11">
-					<c:forEach var="origin" items="${ requestScope.arrayOrigin }" varStatus="loop">
+					<c:forEach var="origin" items="${ applicationScope.arrayOrigin }" varStatus="loop">
 						<c:choose>
 							<c:when test="${ loop.index == gem.origin }">
 								<option value="${ loop.index }" selected="selected">
@@ -253,7 +215,7 @@
 			</td>
 			<td class="field_value">
 				<select id="gemCertificateSelect" name="gemCertificate" tabindex="12">
-					<c:forEach var="certificate" items="${ requestScope.arrayCertificate }" varStatus="loop">
+					<c:forEach var="certificate" items="${ applicationScope.arrayCertificate }" varStatus="loop">
 						<c:choose>
 							<c:when test="${ loop.index == gem.certificate }">
 								<option value="${ loop.index }" selected="selected">
@@ -275,7 +237,7 @@
 			</td>
 			<td class="field_value">
 				<textarea id="gemComments" name="gemComments" rows="5" cols="40" tabindex="13"> 
-				<c:out value="${ gem.comments }"/>
+					<c:out value="${ gem.comments }"/>
 				</textarea>
 				<span class="error">${ requestScope.form.errors['gemComments'] }</span>
 			</td>
@@ -288,7 +250,7 @@
 				<input type="text" id="gemPriceValue" name="gemPriceValue" placeholder="for 1 cts" 
 					value="<c:out value="${ gem.priceValue }"/>" maxlength="10" tabindex="14">
 				<select id="gemPriceCurrencySelect" name="gemPriceCurrency" tabindex="15">
-					<c:forEach var="currency" items="${ requestScope.arrayCurrency }" varStatus="loop">
+					<c:forEach var="currency" items="${ applicationScope.arrayCurrency }" varStatus="loop">
 						<c:choose>
 							<c:when test="${ loop.index == gem.priceCurrency }">
 								<option value="${ loop.index }" selected="selected">
@@ -322,7 +284,7 @@
 				Photo
 			</td>
 			<td class="field_value">
-				<input type="text" id="gemPhotoLink" name="gemPhotoLink" disabled value="${ gem.photoLink }" tabindex="17"> 
+				<input type="file" id="gemPhotoLink" name="gemPhotoLink" value="${ gem.photoLink }" tabindex="17"/>
 				<span class="error">
 					${ requestScope.form.errors['gemPhotoLink'] }
 				</span>
@@ -334,7 +296,7 @@
 			</td>
 			<td class="field_value">
 				<select id="gemLightSelect" name="gemLight" tabindex="18">
-					<c:forEach var="light" items="${ requestScope.arrayLight }" varStatus="loop">
+					<c:forEach var="light" items="${ applicationScope.arrayLight }" varStatus="loop">
 						<c:choose>
 							<c:when test="${ loop.index == gem.light }">
 								<option value="${ loop.index }" selected="selected">

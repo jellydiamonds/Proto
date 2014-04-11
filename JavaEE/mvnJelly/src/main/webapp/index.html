@@ -27,17 +27,19 @@
         	<li>
         		<span class="api" id="gemAPI">Gem API:</span>
         		<ul>
-        			<li><span class="url">/gems/addGem/{type}/{color}</span> - adds a gem to the database. <br/>
-        			Replace {type} and {color} by strings OR use the following form:</li>
+        			<li><span class="url">api/gems/addGem/{gemString}</span> - adds a gem to the database. <br/>
+        			Replace {gemString} by a GemID strings in JSON format.<br>
+        			...OR use the following form:</li>
+        			
         		</ul>
         	</li>
         </ul> 
         <div class="urlBlock" id="addGemURL">
-        	http://jelly.diamonds/jellyDiamonds-1.0/api<br/>
-        	/gems/addGem/<input type="text" id="inlineGemSpecies" size="20"></input>/<input type="text" id="inlineGemColor" size="10"></input>
-        	<input type="button" id="saveAddGemURL" value="save URL" />		
+        	<form name="jsonTestForm" action="api/gems/addGem" method="post">
+				<textarea rows="7" cols="50" name="jsonTextarea" ></textarea><br>
+				<input type="submit" value="TRY REST WEB SERVICE!"/>	
+			</form>		
        	</div>
-       	<p><a id="addGemLink"></a></p>
     
     </div>
     </body>

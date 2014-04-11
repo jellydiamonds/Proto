@@ -1,7 +1,5 @@
 package com.jelly.jellyDiamonds.service;
 
-import java.util.List;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jws.WebMethod;
@@ -14,8 +12,8 @@ import com.jelly.jellyDiamonds.ejb.beans.session.IGemLocal;
 @Stateless
 /*
  * WebService de type Jax-WS. Il sera publié dans une adresse
- * "address=http://localhost:8080/GemMarket_EJB/GemWS". Pour voir son WSDL, il
- * faut ajouter "?WSDL" à la fin de cette adresse dans un navigateur.
+ * "http://localhost:8080/GemMarket_EJB/GemWS". Pour voir son WSDL, il faut
+ * ajouter "?WSDL" à la fin de cette adresse dans un navigateur.
  */
 @WebService
 public class GemServiceSOAP {
@@ -47,8 +45,8 @@ public class GemServiceSOAP {
         return gemBeanLocal.findGem( id );
     }
 
-    @WebMethod
-    public List<Gem> ws_getAllGems() {
-        return gemBeanLocal.getAllGems();
-    }
+    /*
+     * @WebMethod public List<Gem> ws_getAllGems() { return
+     * gemBeanLocal.getAllGems(); }
+     */
 }

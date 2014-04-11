@@ -18,7 +18,7 @@
 	font-family: Verdana, Helvetica;
 	font-size: 12pt; 
 	text-align: right;
-    width: 130px;
+    width: 250px;
     padding-right: 1em;
 }	
 #recapTable .field_value {
@@ -30,6 +30,9 @@
 	color: #2af;
 	margin-left: 10px;
 	margin-right: 10px;	
+}
+.gemPhoto {
+	text-align: center;
 }
 .buttonsContainer .button { 
 	background: #4b8df9; 

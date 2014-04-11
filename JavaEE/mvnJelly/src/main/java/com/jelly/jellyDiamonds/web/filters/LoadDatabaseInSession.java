@@ -1,7 +1,7 @@
 package com.jelly.jellyDiamonds.web.filters;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.servlet.Filter;
@@ -12,7 +12,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.jelly.jellyDiamonds.ejb.beans.entity.Gem;
@@ -26,12 +25,10 @@ import com.jelly.jellyDiamonds.ejb.beans.session.IGemLocal;
  */
 @WebFilter( urlPatterns = "/*" )
 public class LoadDatabaseInSession implements Filter {
-    public static final String ATT_GEMS = "sessionGemsList";
+    public static final String ATT_GEMS_LIST = "sessionGemsList";
+    public static final String ATT_GEMS_MAP  = "sessionGemsMap";
 
-    /*
-     * Controleur a besoin de la couche METIER. On utilise un interface LOCAL,
-     * comme on est sur le meme serveur que l'EJB.
-     */
+    // EJB injection
     @EJB
     private IGemLocal          gemBeanLocal;
 
@@ -48,23 +45,23 @@ public class LoadDatabaseInSession implements Filter {
             ServletException {
         /* Cast des objets request et response */
         HttpServletRequest request = (HttpServletRequest) req;
-        HttpServletResponse response = (HttpServletResponse) resp;
 
         /* Récupération de la session depuis la requête */
         HttpSession session = request.getSession();
 
         /*
-         * Si la LISTE des gemmes dans session est vide, on lui peuple avec les
-         * données contenues dans la BDD.
+         * If the MAP of gems in session is empty, we populate it with the
+         * database entries.
          */
-        if ( session.getAttribute( ATT_GEMS ) == null ) {
-            /*
-             * Récupération de la LISTE des gemmes existantes, enregistrement en
-             * session
-             */
-            List<Gem> listGems = gemBeanLocal.getAllGems();
-            session.setAttribute( ATT_GEMS, listGems );
+        if ( session.getAttribute( ATT_GEMS_MAP ) == null ) {
+            Map<Long, Gem> gemsMap = gemBeanLocal.getGemsMap();
+            session.setAttribute( ATT_GEMS_MAP, gemsMap );
         }
+        /*
+         * Old version: if ( session.getAttribute( ATT_GEMS_LIST ) == null ) {
+         * List<Gem> listGems = gemBeanLocal.getAllGems(); session.setAttribute(
+         * ATT_GEMS_LIST, listGems ); }
+         */
 
         /* Pour terminer, poursuite de la requête en cours */
         chain.doFilter( req, resp );

@@ -1,6 +1,9 @@
 package com.jelly.jellyDiamonds.ejb.beans.session;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -19,11 +22,21 @@ public class GemBeanImpl implements IGemLocal, IGemRemote {
 
     /* =============== METHODS IMPLEMENTATIONS ============== */
 
-    /* Adds a gem to the database, returns its code. */
+    /* Adds a gem to the database. */
     @Override
     public void addGem( Gem gem ) throws GemBeanException {
         try {
             entityManager.persist( gem );
+        } catch ( Exception e ) {
+            throw new GemBeanException( e );
+        }
+    }
+
+    /* Updates an existing gem after editing. */
+    @Override
+    public void updateGem( Gem gem ) throws GemBeanException {
+        try {
+            entityManager.merge( gem );
         } catch ( Exception e ) {
             throw new GemBeanException( e );
         }
@@ -52,9 +65,9 @@ public class GemBeanImpl implements IGemLocal, IGemRemote {
         return gem;
     }
 
-    /* Returns the list of all the gems stored in the database. */
+    /* Returns the LIST of all the gems stored in the database. */
     @Override
-    public List<Gem> getAllGems() throws GemBeanException {
+    public List<Gem> getGemsList() throws GemBeanException {
         try {
             Query query = entityManager.createQuery( JPQL_getAllGems );
             return query.getResultList();
@@ -63,8 +76,28 @@ public class GemBeanImpl implements IGemLocal, IGemRemote {
         }
     }
 
-    /* Returns 3 first letters of gem species */
+    /* Returns the MAP of all the gems stored in the database (id as the key). */
+    @Override
+    public Map<Long, Gem> getGemsMap() throws GemBeanException {
+        List<Gem> gemsList;
+        Map<Long, Gem> gemsMap = new HashMap<Long, Gem>();
+        // Getting all gems from the database as a list.
+        try {
+            Query query = entityManager.createQuery( JPQL_getAllGems );
+            gemsList = query.getResultList();
+        } catch ( Exception e ) {
+            throw new GemBeanException( e );
+        }
+        // Looping through all elements in the list, populating the map.
+        Iterator<Gem> it = gemsList.iterator();
+        while ( it.hasNext() ) {
+            Gem gem = (Gem) it.next();
+            gemsMap.put( gem.getId(), gem );
+        }
+        return gemsMap;
+    }
 
+    /* Returns 3 first letters of gem species */
     // TO DO
 
     /* Returns the total number of DB entries. */
