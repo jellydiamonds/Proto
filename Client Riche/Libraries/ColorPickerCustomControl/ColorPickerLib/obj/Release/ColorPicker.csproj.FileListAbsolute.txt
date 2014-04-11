@@ -8,3 +8,13 @@ D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCusto
 D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerCustomControl\ColorPickerLib\obj\Release\Themes\generic.baml
 D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerCustomControl\ColorPickerLib\obj\Release\ColorPicker.g.resources
 D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerCustomControl\ColorPickerLib\obj\Release\ColorPicker.dll
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerLib\bin\Release\ColorPicker.dll
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerLib\obj\Release\ColorPicker.csprojResolveAssemblyReference.cache
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerLib\obj\Release\ColorPickerDialog.g.cs
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerLib\obj\Release\GeneratedInternalTypeHelper.g.cs
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerLib\obj\Release\ColorPicker_MarkupCompile.cache
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerLib\obj\Release\ColorPicker_MarkupCompile.lref
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerLib\obj\Release\ColorPickerDialog.baml
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerLib\obj\Release\Themes\generic.baml
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerLib\obj\Release\ColorPicker.g.resources
+D:\Users\andupont\Documents\GitHub\Proto\Client Riche\Libraries\ColorPickerCustomControl\ColorPickerLib\obj\Release\ColorPicker.dll

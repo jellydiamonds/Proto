@@ -1,2 +1,0 @@
-D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JellyDiamondsCRicheC\bin\Debug\JellyDiamondsCRicheC.exe.config
-D:\Users\andupont\Documents\GitHub\Proto\Client Riche\JellyDiamonds\JellyDiamondsCRicheC\bin\Debug\JellyDiamondsCRicheCS.exe.config
