@@ -1,5 +1,6 @@
 package com.example.commjelly;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -13,16 +14,23 @@ import android.os.Bundle;
 import android.os.Environment;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jellydiamonds.android.comm.JellyGemIdDecodeFromJSONEvent;
 import com.jellydiamonds.android.comm.JellySerialize;
+import com.jellydiamonds.android.metier.GemCertificate;
+import com.jellydiamonds.android.metier.GemClarity;
+import com.jellydiamonds.android.metier.GemCut;
+import com.jellydiamonds.android.metier.GemEnhancement;
 import com.jellydiamonds.android.metier.GemID;
+import com.jellydiamonds.android.metier.GemLight;
+import com.jellydiamonds.android.metier.GemOrigin;
+import com.jellydiamonds.android.metier.GemShape;
+import com.jellydiamonds.android.metier.GemSpecies;
 
 
 
@@ -53,7 +61,7 @@ public class MainActivity extends Activity {
 		
 		gemCollection = new ArrayList<GemID>();
 		gemCollectionResult = new ArrayList<GemID>();
-		/*GemID gem1 = new GemID();
+		GemID gem1 = new GemID();
 		
 		gem1.setReference("20140409EMER001");
 		gem1.setColor("#123456");
@@ -63,26 +71,25 @@ public class MainActivity extends Activity {
 		gem1.setSizeZ(4.37f);
 		gem1.setComments("This gem is perfect it's my best one");
 		gem1.setPriceCurrency(0);
-		gem1.setPriceValue(300.5);
+		gem1.setPriceValue(300.5f);
 		gem1.setSupplierID(6666L);
 		gem1.setPhotoLink(l_photo);
 		gem1.setSpecies(GemSpecies.EMERALD);
-		gem1.setShape(GemShape.Rectangle);
-		gem1.setCut(GemCut.Diamond);
-		gem1.setClarity(GemClarity.Eyes_Clean_to_Slightly_Included);
-		gem1.setLight(GemLight.Fluorescent_light);
-		gem1.setEnhancement(GemEnhancement.High_Pressure);
+		gem1.setShape(GemShape.RECTANGLE);
+		gem1.setCut(GemCut.DIAMOND);
+		gem1.setClarity(GemClarity.EYES_CLEAN_TO_SLIGHTLY_INCLUDED);
+		gem1.setLight(GemLight.FLUORESCENT_LIGHT);
+		gem1.setEnhancement(GemEnhancement.HIGH_PRESSURE);
 		gem1.setCertificate(GemCertificate.GIA);
-		gem1.setOrigin(GemOrigin.Mozambique);
+		gem1.setOrigin(GemOrigin.MOZAMBIQUE);
 		gemCollection.add(gem1); 
-		*/
+		
 		
 		gemCollection.add(new GemID());
 		gemCollection.add(new GemID());
 		gemCollection.add(new GemID());
 		gemCollection.add(new GemID());
 		
-		gemCollection.get(0).setPhotoLink(l_photo);
 		
 		JellySerialize.setJellyGemIdDecodeFromJSONEvent(eventDecode);
 		String jsonString = "";
@@ -92,6 +99,11 @@ public class MainActivity extends Activity {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		stringToFile( jsonString, Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/JSONFormatGemID.txt" );
+		Toast.makeText(getApplicationContext(), 
+				"JSON text file is saved at ' " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/JSONFormatGemID.txt '", 
+				Toast.LENGTH_LONG).show();
 		//infobox.setText(jsonString);
 		try {
 			JellySerialize.UnserializeJellyCollection(new JSONObject(jsonString));
@@ -121,6 +133,35 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	private void stringToFile( String data, String path ) 
+	{
+		
+		FileOutputStream l_file = null;
+		ByteArrayInputStream l_data_byte = new ByteArrayInputStream ( data.getBytes() );
+		byte [] l_buffer = new byte[ 1024 ];
+		int l_read = 0;
+		
+		try {
+			l_file = new FileOutputStream( path );
+			
+			while( ( l_read = l_data_byte.read( l_buffer ) ) > 0 )
+			{
+				l_file.write( l_buffer, 0 , l_read );
+			}
+			
+			l_data_byte.close();
+			l_file.flush();
+			l_file.close();
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private JellyGemIdDecodeFromJSONEvent eventDecode = new JellyGemIdDecodeFromJSONEvent() {

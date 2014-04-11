@@ -22,6 +22,7 @@ import com.jellydiamonds.android.metier.GemEnhancement;
 import com.jellydiamonds.android.metier.GemID;
 import com.jellydiamonds.android.metier.GemLight;
 import com.jellydiamonds.android.metier.GemOrigin;
+import com.jellydiamonds.android.metier.GemShape;
 import com.jellydiamonds.android.metier.GemSpecies;
 import com.jellydiamonds.android.metier.GemStatusFactory;
 
@@ -79,16 +80,8 @@ public class JellySerialize {
 		
 		for(int l_index = 0; l_index < l_collectionData.length(); l_index++)
 		{
-			try {
-				l_currentGem = l_collectionData.getJSONObject( l_index );
-				// An error lead to the end of the process ( it can be due to a user intention or due to json format error...)
-				if( UnserializeJellyGemID(l_currentGem) == false )
-					return false;
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if( UnserializeJellyGemID(l_currentGem) == false )
 				return false;
-			}
 		}
 		
 		return true;
@@ -233,69 +226,211 @@ public class JellySerialize {
 		return l_json_gemid;
 	}
 	
-	public static boolean UnserializeJellyGemID( JSONObject gemSerialized ) throws JSONException
+	public static boolean UnserializeJellyGemID( JSONObject gemSerialized )
 	{
 		GemID l_extractedGemID = new GemID();
 		
+
 		if( gemSerialized.has("reference") )
-			l_extractedGemID.setReference( gemSerialized.getString("reference") );
+		{
+			try {
+				l_extractedGemID.setReference( gemSerialized.getString("reference") );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
+
 		if( gemSerialized.has("color") )
-			l_extractedGemID.setColor( gemSerialized.getString("color") );
+		{
+			try {
+				l_extractedGemID.setColor( gemSerialized.getString("color") );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		if( gemSerialized.has("mass") )
-			l_extractedGemID.setMass( Float.parseFloat( gemSerialized.getString("mass") ) );
+		{
+			try {
+				l_extractedGemID.setMass( (float) gemSerialized.getDouble("mass") );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		if( gemSerialized.has("sizeX") )
-			l_extractedGemID.setSizeX( Float.parseFloat( gemSerialized.getString("sizeX") ) );
-		
+		{
+			try {
+				l_extractedGemID.setSizeX( (float) gemSerialized.getDouble("sizeX") );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+			
 		if( gemSerialized.has("sizeY") )
-			l_extractedGemID.setSizeY( Float.parseFloat( gemSerialized.getString("sizeY") ) );
+		{
+			try {
+				l_extractedGemID.setSizeY( (float) gemSerialized.getDouble("sizeY") );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		if( gemSerialized.has("sizeZ") )
-			l_extractedGemID.setSizeZ( Float.parseFloat( gemSerialized.getString("sizeZ") ) );
+		{
+			try {
+				l_extractedGemID.setSizeZ( (float) gemSerialized.getDouble("sizeZ") );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		if( gemSerialized.has("comments") )
-			l_extractedGemID.setComments( gemSerialized.getString("comments") );
+		{
+			try {
+				l_extractedGemID.setComments( gemSerialized.getString("comments") );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		if( gemSerialized.has("priceCurrency") )
-			l_extractedGemID.setPriceCurrency( Integer.parseInt( gemSerialized.getString("priceCurrency") ) );
+		{
+			try {
+				l_extractedGemID.setPriceCurrency( gemSerialized.getInt("priceCurrency") );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		if( gemSerialized.has("priceValue") )
-			l_extractedGemID.setPriceValue( Float.parseFloat( gemSerialized.getString("priceValue") ) );
+		{
+			try {
+				l_extractedGemID.setPriceValue( (float) gemSerialized.getDouble("priceValue") );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		if( gemSerialized.has("supplierId") )
-			l_extractedGemID.setSupplierID( Long.parseLong( gemSerialized.getString("supplierId") ) );
+		{
+			try {
+				l_extractedGemID.setSupplierID( gemSerialized.getLong("supplierId") );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		if( gemSerialized.has("creationDate") )
-			l_extractedGemID.setCreationDate( Long.parseLong( gemSerialized.getString("creationDate") ) );
+		{
+			try {
+				l_extractedGemID.setCreationDate( gemSerialized.getLong("creationDate") );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		if( gemSerialized.has("species") )
-			l_extractedGemID.setSpecies( GemSpecies.fromValue( Integer.parseInt( gemSerialized.getString("species") ) ) ) ;
+		{
+			try {
+				l_extractedGemID.setSpecies( GemSpecies.fromValue( gemSerialized.getInt("species") ) ) ;
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		if( gemSerialized.has("shape") )
-			gemSerialized.getString("shape");
+		{
+			try {
+				l_extractedGemID.setShape( GemShape.fromValue( gemSerialized.getInt("shape") ) );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		if( gemSerialized.has("cut") )
-			l_extractedGemID.setCut( GemCut.fromValue( Integer.parseInt( gemSerialized.getString("cut") ) ) );
+		{
+			try {
+				l_extractedGemID.setCut( GemCut.fromValue( gemSerialized.getInt("cut") ) );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		if( gemSerialized.has("clarity") )
-			l_extractedGemID.setClarity( GemClarity.fromValue( Integer.parseInt(gemSerialized.getString("clarity") ) ) );
+		{
+			try {
+				l_extractedGemID.setClarity( GemClarity.fromValue( gemSerialized.getInt("clarity") ) );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		if( gemSerialized.has("light") )
-			l_extractedGemID.setLight( GemLight.fromValue( Integer.parseInt( gemSerialized.getString("light") ) ) );
+		{
+			try {
+				l_extractedGemID.setLight( GemLight.fromValue( gemSerialized.getInt("light") ) );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		if( gemSerialized.has("enhancement") )
-			l_extractedGemID.setEnhancement( GemEnhancement.fromValue( Integer.parseInt( gemSerialized.getString("enhancement") ) ) );
+		{
+			try {
+				l_extractedGemID.setEnhancement( GemEnhancement.fromValue( gemSerialized.getInt("enhancement") ) );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		if( gemSerialized.has("certificate") )
-			l_extractedGemID.setCertificate( GemCertificate.fromValue( Integer.parseInt( gemSerialized.getString("certificate") ) ) );
+		{
+			try {
+				l_extractedGemID.setCertificate( GemCertificate.fromValue( gemSerialized.getInt("certificate") ) );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		if( gemSerialized.has("origin") )
-			l_extractedGemID.setOrigin( GemOrigin.fromValue( Integer.parseInt( gemSerialized.getString("origin") ) ) );
+		{
+			try {
+				l_extractedGemID.setOrigin( GemOrigin.fromValue( gemSerialized.getInt("origin") ) );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		if( gemSerialized.has("currentStatus") )
-			l_extractedGemID.setCurrentStatus( GemStatusFactory.create( gemSerialized.getString("currentStatus") ) );
+		{
+			try {
+				l_extractedGemID.setCurrentStatus( GemStatusFactory.create( gemSerialized.getString("currentStatus") ) );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		// Photolink is already null
 		
@@ -312,9 +447,14 @@ public class JellySerialize {
 		 */
 		if( gemSerialized.has("photoBinary") )
 		{
-			JellySerialize.evGem.onPictureDecode(
-					streamFromBase64( 
-							gemSerialized.getString("photoBinary") ) );
+			try {
+				JellySerialize.evGem.onPictureDecode(
+						streamFromBase64( 
+								gemSerialized.getString("photoBinary") ) );
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return true;
@@ -332,7 +472,7 @@ public class JellySerialize {
 		 * Reducing image size
 		 */
 		BitmapFactory.Options l_opt = new BitmapFactory.Options();
-		l_opt.inSampleSize = 8;
+		l_opt.inSampleSize = 2;
 		
 		Bitmap l_image = BitmapFactory.decodeFile( source.getPath(), l_opt );
 		
