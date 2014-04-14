@@ -98,7 +98,7 @@ namespace JellyDiamondsTraitement
 
                 return 0;
             }
-            catch (SystemException e)
+            catch (Exception e)
             {
                 Console.WriteLine(@"ERREUR : " + e.Message);
                 return -1;
