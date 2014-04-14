@@ -1,0 +1,7 @@
+package com.jellydiamonds.android.app;
+
+import android.app.Fragment;
+
+public class FragmentHomeView extends Fragment {
+
+}

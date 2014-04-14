@@ -1,0 +1,20 @@
+package com.jellydiamonds.android.app;
+
+import java.util.List;
+
+import android.app.ListFragment;
+
+
+
+public class FragmentHomeView extends ListFragment {
+	
+	private List<Object> mItems = null;
+	
+	
+	public FragmentHomeView()
+	{
+		
+	}
+	
+	
+}

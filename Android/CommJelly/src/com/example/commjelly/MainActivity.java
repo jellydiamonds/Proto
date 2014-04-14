@@ -8,8 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collection;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,19 +24,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jellydiamonds.android.comm.JellyGemIdDecodeFromJSONEvent;
 import com.jellydiamonds.android.comm.JellySerialize;
-import com.jellydiamonds.android.metier.GemCertificate;
-import com.jellydiamonds.android.metier.GemClarity;
-import com.jellydiamonds.android.metier.GemCut;
-import com.jellydiamonds.android.metier.GemEnhancement;
 import com.jellydiamonds.android.metier.GemID;
-import com.jellydiamonds.android.metier.GemLight;
-import com.jellydiamonds.android.metier.GemOrigin;
-import com.jellydiamonds.android.metier.GemShape;
-import com.jellydiamonds.android.metier.GemSpecies;
 
 
 

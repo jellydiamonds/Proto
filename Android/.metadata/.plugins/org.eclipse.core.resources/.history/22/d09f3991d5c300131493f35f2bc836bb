@@ -1,0 +1,32 @@
+package com.jellydiamonds.android.app;
+
+import android.app.Fragment;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+
+public class FragmentHomeView extends Fragment {
+	
+	private Context mParentContext = null;
+	private View mGemListView = null;
+	private ArrayAdapter<String> mItemsGem = null;
+	
+	
+	public FragmentHomeView()
+	{
+		mItemsGem = new ArrayAdapter<String>()
+	}
+	
+	@Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) 
+	{
+
+		mGemListView = inflater.inflate(R.layout.fragment_central_drawer,container,false);
+		return container;
+		
+	}
+
+}

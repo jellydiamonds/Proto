@@ -6,5 +6,13 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_websearch">Web search</string>
+    <string name="no_gems">No Gems</string>
 
+    <string-array name="leftDrawer_actions">
+            <item name="local_actions_title">My GEMS</item>
+            <item name="local_latest_gems">Latest gems created</item>
+
+            <item name="distant_actions_title">JellyDiamonds</item>
+            <item name="distant_search">Search a gem</item>
+    </string-array>
 </resources>

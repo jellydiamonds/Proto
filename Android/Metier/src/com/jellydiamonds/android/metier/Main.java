@@ -1,6 +1,5 @@
 package com.jellydiamonds.android.metier;
 
-import java.util.Locale;
 
 public class Main {
 
