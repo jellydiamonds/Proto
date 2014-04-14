@@ -22,7 +22,7 @@ Database: DB_JELLY
 	- supplier_id		INT UNSIGNED	NOT NULL (FOREIGN KEY to be associated later with a USER_PRO table)
 	- photo_link		VARCHAR(100)			
 	- light				TINYINT						FOREIGN KEY ==> Enum_Light(light)
-
+	- current_status		TINYINT	NOT NULL			FOREIGN KEY  ==> Enum_Status(status)
 2. TABLE USER_PRO:
 	- user_id			: BIGINT(20) UNSIGNED		NOT NULL	AUTO_INCREMENT PRIMARY KEY
 	- signup_date		: DATETIME			NOT NULL
@@ -91,3 +91,7 @@ Database: DB_JELLY
 1.9. Table Enum_Light
 	- code		TINYINT		NOT NULL	PRIMARY KEY
 	- light		VARCHAR(20)	NOT NULL
+
+1.10. Table Enum_Status
+	- code		TINYINT		NOT NULL	PRIMARY KEY
+	- status	VARCHAR(20)	NOT NULL

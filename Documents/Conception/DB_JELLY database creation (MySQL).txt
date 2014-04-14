@@ -51,6 +51,12 @@ CREATE TABLE Enum_Light (
 	light	VARCHAR(20)	NOT NULL,
 	PRIMARY KEY (code)
 ) ENGINE=INNODB;
+
+CREATE TABLE Enum_Status (
+	code	TINYINT		NOT NULL,
+	status	VARCHAR(30)	NOT NULL,
+	PRIMARY KEY (code)
+) ENGINE=INNODB;
  
 CREATE TABLE Gem_ID (	
 	id				BIGINT UNSIGNED	NOT NULL	AUTO_INCREMENT,
@@ -74,6 +80,7 @@ CREATE TABLE Gem_ID (
 	supplier_id		INT UNSIGNED	NOT NULL,
 	photo_link		VARCHAR(100),
 	light			TINYINT,
+	current_status		TINYINT		NOT NULL,
 	PRIMARY KEY (id)
 ) ENGINE = INNODB;
 
@@ -86,7 +93,8 @@ ALTER TABLE Gem_ID
 	ADD CONSTRAINT fk_origin FOREIGN KEY (origin) REFERENCES Enum_Country(code),
 	ADD CONSTRAINT fk_certificate FOREIGN KEY (certificate) REFERENCES Enum_Certificate(code),
 	ADD CONSTRAINT fk_currency FOREIGN KEY (price_currency) REFERENCES Enum_Currency(code),
-	ADD CONSTRAINT fk_light FOREIGN KEY (light) REFERENCES Enum_Light(code);
+	ADD CONSTRAINT fk_light FOREIGN KEY (light) REFERENCES Enum_Light(code),
+	ADD CONSTRAINT fk_status FOREIGN KEY (current_status) REFERENCES Enum_Status(code);
 
 INSERT INTO Enum_Species (code, species) VALUES
 (1,'Agate'),
@@ -205,3 +213,9 @@ INSERT INTO Enum_Light (code, light) VALUES
 (1, 'Daylight'),
 (2, 'Fluorescent light'),
 (3, 'Incandescent light');
+
+INSERT INTO Enum_Status (code, status) VALUES
+(1, 'Default'),
+(2, 'Local'),
+(3, 'For sale'),
+(4, 'Transaction in progress');
