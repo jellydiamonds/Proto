@@ -8,11 +8,15 @@
     <string name="action_websearch">Web search</string>
     <string name="no_gems">No Gems</string>
 
-    <string-array name="leftDrawer_actions">
-            <item name="local_actions_title">My GEMS</item>
-            <item name="local_latest_gems">Latest gems created</item>
-
-            <item name="distant_actions_title">JellyDiamonds</item>
-            <item name="distant_search">Search a gem</item>
+    <!-- DRAWER STRINGS -->
+    <string name="local_actions_title">My GEMS</string>
+    <string-array name="local_actions">
+        <item name="mygems" >Latest gems created</item>
     </string-array>
+
+    <string name="distant_actions_title">JellyDiamonds</string>
+    <string-array name="distant_actions">
+        <item name="search" >Search a gem</item>
+    </string-array>
+            
 </resources>

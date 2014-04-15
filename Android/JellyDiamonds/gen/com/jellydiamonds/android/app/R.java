@@ -9,7 +9,8 @@ package com.jellydiamonds.android.app;
 
 public final class R {
     public static final class array {
-        public static final int leftDrawer_actions=0x7f060000;
+        public static final int distant_actions=0x7f060001;
+        public static final int local_actions=0x7f060000;
     }
     public static final class attr {
     }
@@ -29,10 +30,14 @@ public final class R {
         public static final int ic_launcher=0x7f020002;
     }
     public static final class id {
-        public static final int action_settings=0x7f090005;
+        public static final int action_settings=0x7f090009;
         public static final int content_frame=0x7f090003;
+        public static final int distant_options_list=0x7f090008;
+        public static final int distant_title=0x7f090007;
+        public static final int drawer_Linearlayout=0x7f090004;
         public static final int frag_gem_listview=0x7f090001;
-        public static final int left_drawer=0x7f090004;
+        public static final int local_options_list=0x7f090006;
+        public static final int local_title=0x7f090005;
         public static final int root_drawer_layout=0x7f090002;
         public static final int text1=0x7f090000;
     }
@@ -50,8 +55,12 @@ public final class R {
         public static final int action_settings=0x7f050001;
         public static final int action_websearch=0x7f050004;
         public static final int app_name=0x7f050000;
+        public static final int distant_actions_title=0x7f050007;
         public static final int drawer_close=0x7f050003;
         public static final int drawer_open=0x7f050002;
+        /**  DRAWER STRINGS 
+         */
+        public static final int local_actions_title=0x7f050006;
         public static final int no_gems=0x7f050005;
     }
     public static final class style {

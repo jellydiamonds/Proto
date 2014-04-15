@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">JellyDiamonds</string>
+    <string name="action_settings">Settings</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_websearch">Web search</string>
+    <string name="no_gems">No Gems</string>
+
+    <string name="local_actions_title">My GEMS</string>
+    <string-array name="local_actions">
+        
+    </string-array>
+    <string name="local_action_mygems">Latest gems created</string>
+
+    <string name="distant_actions_title">JellyDiamonds</string>
+    <string name="distant_action_search">Search a gem</string>
+            
+</resources>
