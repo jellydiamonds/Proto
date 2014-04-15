@@ -4,8 +4,8 @@ public enum GemEnhancement {
 	
 	EMPTY(0),
 	HIGH_PRESSURE(1),
-	HIGH_TEMPERATURE(2);
-	//Unknown(3);
+	HIGH_TEMPERATURE(2),
+	UNKNOWN(3);
 	
 	protected int enhancement;
 	

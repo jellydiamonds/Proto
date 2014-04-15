@@ -13,6 +13,7 @@ public class GemStatusDeleted extends GemStatus {
 	public GemStatusDeleted()
 	{
 		this.mCurrentStatus = "deleted";
+		this.mCurrentStatusNumber = 5;
 	}
 
 }

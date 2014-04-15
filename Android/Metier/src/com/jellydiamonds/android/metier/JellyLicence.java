@@ -46,5 +46,39 @@ public class JellyLicence implements Serializable {
 		
 		return( l_now.compareTo(this.mPeremptionDate) < 0  );
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((mPeremptionDate == null) ? 0 : mPeremptionDate.hashCode());
+		result = prime * result
+				+ ((mUserReference == null) ? 0 : mUserReference.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		JellyLicence other = (JellyLicence) obj;
+		if (mPeremptionDate == null) {
+			if (other.mPeremptionDate != null)
+				return false;
+		} else if (!mPeremptionDate.equals(other.mPeremptionDate))
+			return false;
+		if (mUserReference == null) {
+			if (other.mUserReference != null)
+				return false;
+		} else if (!mUserReference.equals(other.mUserReference))
+			return false;
+		return true;
+	}
+	
 	
 }

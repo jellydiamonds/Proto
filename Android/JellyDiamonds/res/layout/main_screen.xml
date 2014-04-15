@@ -47,7 +47,7 @@
 	        android:layout_height="wrap_content"
 	        android:choiceMode="singleChoice"
 	        android:divider="@android:color/darker_gray"
-	        android:dividerHeight="1dp"
+	        android:dividerHeight="1px"
 	        />
 	    
 	    <!-- DISTANT ACTIONS -->
@@ -74,11 +74,9 @@
 	        android:layout_height="wrap_content"
 	        android:choiceMode="singleChoice"
 	        android:divider="@android:color/darker_gray"
-	        android:dividerHeight="1dp"
+	        android:dividerHeight="1px"
 	        />
 	    
     </LinearLayout>
     
 </android.support.v4.widget.DrawerLayout>
-
-<!-- android:layout_gravity="start"-->

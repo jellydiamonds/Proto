@@ -9,6 +9,49 @@ import java.util.Map;
 
 public class JellyCollection implements Serializable {
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime
+				* result
+				+ ((mLocalCollection == null) ? 0 : mLocalCollection.hashCode());
+		result = prime * result
+				+ ((mOwnerID == null) ? 0 : mOwnerID.hashCode());
+		result = prime
+				* result
+				+ ((mSyncedCollection == null) ? 0 : mSyncedCollection
+						.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		JellyCollection other = (JellyCollection) obj;
+		if (mLocalCollection == null) {
+			if (other.mLocalCollection != null)
+				return false;
+		} else if (!mLocalCollection.equals(other.mLocalCollection))
+			return false;
+		if (mOwnerID == null) {
+			if (other.mOwnerID != null)
+				return false;
+		} else if (!mOwnerID.equals(other.mOwnerID))
+			return false;
+		if (mSyncedCollection == null) {
+			if (other.mSyncedCollection != null)
+				return false;
+		} else if (!mSyncedCollection.equals(other.mSyncedCollection))
+			return false;
+		return true;
+	}
+
 	/**
 	 * 
 	 */
@@ -82,5 +125,33 @@ public class JellyCollection implements Serializable {
 	public Map<String,GemID> getSyncedCollection()
 	{
 		return this.mSyncedCollection;
+	}
+	
+	public Collection<GemID> getForSaleCollection()
+	{
+		Collection<GemID> l_gemsForSale = new ArrayList<GemID>();
+		
+		for( GemID l_tmp : this.mSyncedCollection.values() )
+		{
+			if( l_tmp.getCurrentStatus().toValue() == 3 ) // Status 3 is ForSale
+			{
+				l_gemsForSale.add( l_tmp );
+			}
+		}
+		return l_gemsForSale;
+	}
+	
+	public Collection<GemID> getDeletedCollection()
+	{
+		Collection<GemID> l_gemsDeleted = new ArrayList<GemID>();
+		
+		for( GemID l_tmp : this.mSyncedCollection.values() )
+		{
+			if( l_tmp.getCurrentStatus().toValue() == 5 ) // Status 5  is Deleted
+			{
+				l_gemsDeleted.add( l_tmp );
+			}
+		}
+		return l_gemsDeleted;
 	}
 }

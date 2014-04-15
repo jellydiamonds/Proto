@@ -1,0 +1,5 @@
+package com.jellydiamonds.android.metier;
+
+public enum GemCurrency {
+
+}

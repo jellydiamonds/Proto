@@ -1,0 +1,20 @@
+package com.jellydiamonds.android.metier;
+
+
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		JellyUser test1 = new JellyUser();
+		JellyUser test2 = null;
+		
+		JellyUser.saveJellyUserContext("save", "/Users/MoZ/Desktop", test1);
+		test2 = JellyUser.recoverJellyUserContext("save.jelly", "/Users/MoZ/Desktop");
+	}
+	
+
+}

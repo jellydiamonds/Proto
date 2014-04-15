@@ -18,4 +18,22 @@ public class GemStatusFactory {
 			return new GemStatusLocal();
 	}
 
+	public static GemStatus create( int status )
+	{
+		switch( status )
+		{
+		case 1:
+			return new GemStatusDefault();
+		case 2:
+			return new GemStatusLocal();
+		case 3:
+			return new GemStatusForSale();
+		case 4:
+			return new GemStatusTradeInProgress();
+		case 5:
+			return new GemStatusDeleted();
+		default:
+			return new GemStatusLocal();
+		}
+	}
 }

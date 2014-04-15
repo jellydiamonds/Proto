@@ -1,9 +1,0 @@
-package com.jellydiamonds.android.metier;
-
-public class GemStatusDefault extends GemStatus {
-
-		public GemStatusDefault()
-		{
-			this.mCurrentStatus = "Default";
-		}
-}

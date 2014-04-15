@@ -17,6 +17,7 @@ import android.util.Base64InputStream;
 
 import com.jellydiamonds.android.metier.GemCertificate;
 import com.jellydiamonds.android.metier.GemClarity;
+import com.jellydiamonds.android.metier.GemCurrency;
 import com.jellydiamonds.android.metier.GemCut;
 import com.jellydiamonds.android.metier.GemEnhancement;
 import com.jellydiamonds.android.metier.GemID;
@@ -145,7 +146,7 @@ public class JellySerialize {
 			/**
 			 * PriceCurrency
 			 */
-			if ( gem.getPriceCurrency() != null ) l_json_gemid.put("priceCurrency", gem.getPriceCurrency() );						
+			if ( gem.getPriceCurrency() != null ) l_json_gemid.put("priceCurrency", gem.getPriceCurrency().getValue().toString() );						
 			else l_json_gemid.put("priceCurrency", "" );
 			
 			/**
@@ -217,7 +218,7 @@ public class JellySerialize {
 			/**
 			 * CurrentStatus
 			 */
-			if ( gem.getCurrentStatus() != null ) l_json_gemid.put("currentStatus", gem.getCurrentStatus().toString());			
+			if ( gem.getCurrentStatus() != null ) l_json_gemid.put("currentStatus", gem.getCurrentStatus().toValue().toString());			
 			else l_json_gemid.put("currentStatus", "" );
 			
 			l_json_gemid.put("photoBinary", jpgToBase64( gem.getPhotoLink() ) );	
@@ -312,7 +313,7 @@ public class JellySerialize {
 		if( gemSerialized.has("priceCurrency") )
 		{
 			try {
-				l_extractedGemID.setPriceCurrency( gemSerialized.getInt("priceCurrency") );
+				l_extractedGemID.setPriceCurrency( GemCurrency.fromValue( gemSerialized.getInt("priceCurrency") ) );
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -432,7 +433,7 @@ public class JellySerialize {
 		if( gemSerialized.has("currentStatus") )
 		{
 			try {
-				l_extractedGemID.setCurrentStatus( GemStatusFactory.create( gemSerialized.getString("currentStatus") ) );
+				l_extractedGemID.setCurrentStatus( GemStatusFactory.create( gemSerialized.getInt("currentStatus") ) );
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

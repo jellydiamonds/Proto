@@ -1,0 +1,31 @@
+package com.jellydiamonds.android.metier;
+
+public enum GemCurrency {
+	
+	EMPTY(0),
+	GIA(1),
+	GUBLIN(2),
+	AIGS(3),
+	HRD(4);
+	
+	protected int currency;
+	
+	GemCurrency( int currency )
+	{
+		this.currency = currency;
+	}
+	
+	public Integer getValue()
+	{
+		return this.currency;
+	}
+	
+	public static GemCurrency fromValue( int value )
+	{
+		if( 	(value <= 0 ) || 
+				( value >= values().length ) )
+			return values()[0];
+		else
+			return values()[value];
+	}
+}

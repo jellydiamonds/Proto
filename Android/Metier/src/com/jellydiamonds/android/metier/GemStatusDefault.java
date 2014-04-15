@@ -13,5 +13,6 @@ public class GemStatusDefault extends GemStatus {
 		public GemStatusDefault()
 		{
 			this.mCurrentStatus = "default";
+			this.mCurrentStatusNumber = 1;
 		}
 }

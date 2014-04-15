@@ -17,7 +17,6 @@ public class GemID implements Serializable {
     private Float   sizeY = null;
     private Float   sizeZ = null;
     private String  comments = null;
-    private Integer priceCurrency = null;
     private Float  priceValue = null;
     private Long    supplierID = null;
     
@@ -32,6 +31,7 @@ public class GemID implements Serializable {
     private GemEnhancement enhancement = null;
     private GemCertificate certificate = null;
     private GemOrigin origin = null;
+    private GemCurrency priceCurrency = null;
     
     private GemStatus currentStatus = null;
     
@@ -52,7 +52,7 @@ public class GemID implements Serializable {
     	this.species = GemSpecies.EMPTY;
     	this.supplierID = 0L;
     	this.priceValue = 0.0f;
-    	this.priceCurrency = 0;
+    	this.priceCurrency = GemCurrency.EMPTY;
     	this.comments = "";
     	this.sizeX = 0.0f;
     	this.sizeY = 0.0f;
@@ -63,24 +63,38 @@ public class GemID implements Serializable {
     	
     }
     
+    public  String getTitleDisplay()
+    {
+    	if( this.reference.equals("") )
+    		return "No Reference";
+    	
+    	return new String("Ref : " + this.reference );
+    }
+    
     public GemStatus getCurrentStatus() {
 		return currentStatus;
 	}
+    
 	public void setCurrentStatus(GemStatus currentStatus) {
 		this.currentStatus = currentStatus;
 	}
+	
 	public Long getCreationDate() {
 		return creationDate;
 	}
+	
 	public void setCreationDate(Long creationDate) {
 		this.creationDate = creationDate;
 	}
+	
 	public String getReference() {
 		return reference;
 	}
+	
 	public void setReference(String reference) {
 		this.reference = reference;
 	}
+	
 	public GemSpecies getSpecies() {
 		return species;
 	}
@@ -159,10 +173,10 @@ public class GemID implements Serializable {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	public Integer getPriceCurrency() {
+	public GemCurrency getPriceCurrency() {
 		return priceCurrency;
 	}
-	public void setPriceCurrency(Integer priceCurrency) {
+	public void setPriceCurrency(GemCurrency priceCurrency) {
 		this.priceCurrency = priceCurrency;
 	}
 	public Float getPriceValue() {
@@ -236,15 +250,14 @@ public class GemID implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "GemID [creationDate=" + creationDate + ", reference="
-				+ reference + ", species=" + species + ", color=" + color
-				+ ", shape=" + shape + ", cut=" + cut + ", mass=" + mass
-				+ ", sizeX=" + sizeX + ", sizeY=" + sizeY + ", sizeZ=" + sizeZ
-				+ ", clarity=" + clarity + ", enhancement=" + enhancement
-				+ ", origin=" + origin + ", certificate=" + certificate
-				+ ", comments=" + comments + ", priceCurrency=" + priceCurrency
-				+ ", priceValue=" + priceValue + ", supplierID=" + supplierID
-				+ ", photoLink=" + photoLink + ", light=" + light + "]";
+		return    "  shape :" + shape + ", cut :" + cut + ", mass : " + mass
+				+ ", specie :" + species + ", color :" + color
+				+ ", sizeX : " + sizeX + ", sizeY: " + sizeY + ", sizeZ : " + sizeZ
+				+ ", clarity : " + clarity + ", enhancement : " + enhancement
+				+ ", origin : " + origin + ", certificate : " + certificate
+				+ ", comments :" + comments + ", priceCurrency :" + priceCurrency
+				+ ", priceValue :" + priceValue + ", supplierID :" + supplierID
+				+ ", photoLink :" + photoLink + ", light :" + light + "";
 	}
 	
 	@Override

@@ -10,5 +10,6 @@ public class GemStatusForSale extends GemStatus{
 		public GemStatusForSale()
 		{
 			this.mCurrentStatus = "forsale";
+			this.mCurrentStatusNumber = 3;
 		}
 }

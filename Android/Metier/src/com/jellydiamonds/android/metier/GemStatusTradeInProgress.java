@@ -14,5 +14,6 @@ public class GemStatusTradeInProgress extends GemStatus{
 		public GemStatusTradeInProgress()
 		{
 			this.mCurrentStatus = "tradeinprogress";
+			this.mCurrentStatusNumber = 4;
 		}
 }
