@@ -18,8 +18,5 @@
     <string-array name="distant_actions">
         <item name="search" >Search a gem</item>
     </string-array>
-    
-    <!-- ROW PREVIEW STRING -->
-    <string name="image_content_description">Gem picture</string>
             
 </resources>

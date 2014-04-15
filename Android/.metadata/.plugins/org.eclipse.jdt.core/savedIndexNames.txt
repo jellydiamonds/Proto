@@ -19,4 +19,3 @@ INDEX VERSION 1.126+/Users/MoZ/Documents/Code/repositories/SNU/Proto/Android/.me
 976991869.index
 3402792739.index
 526130696.index
-1210050955.index
