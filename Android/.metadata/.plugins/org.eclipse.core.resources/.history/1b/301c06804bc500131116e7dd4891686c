@@ -1,0 +1,16 @@
+package com.jellydiamonds.android.app;
+
+import android.app.Fragment;
+
+public class PendingFragment extends Fragment {
+
+	public PendingFragment()
+	{
+		
+	}
+	
+	public static PendingFragment newInstance() {
+		PendingFragment fragment = new PendingFragment();
+		return fragment;
+	}
+}

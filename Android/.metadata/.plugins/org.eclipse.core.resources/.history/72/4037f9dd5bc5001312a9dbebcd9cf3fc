@@ -1,0 +1,16 @@
+package com.jellydiamonds.android.app;
+
+import android.app.Fragment;
+
+public class GemDetailedFragment extends Fragment {
+	
+	public GemDetailedFragment()
+	{
+		
+	}
+
+	public static newInstance()
+	{
+		return new GemDetailedFragment();
+	}
+}

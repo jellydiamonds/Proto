@@ -18,6 +18,7 @@ public class JellyCollectionAdapter implements ListAdapter{
 
 	private Context mContext = null;
 	private ArrayList<GemID> mData = null;
+
 	private int	mLayout = -1;
 	
 	private LayoutInflater mLayoutInflater = null;
@@ -28,6 +29,14 @@ public class JellyCollectionAdapter implements ListAdapter{
 		this.mData = new ArrayList<GemID>(data);
 		this.mLayout = R.layout.fragment_item_row;
 		this.mLayoutInflater = ( LayoutInflater )mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	}
+	
+	public ArrayList<GemID> getData() {
+		return mData;
+	}
+
+	public void setData(ArrayList<GemID> mData) {
+		this.mData = mData;
 	}
 	
 	@Override

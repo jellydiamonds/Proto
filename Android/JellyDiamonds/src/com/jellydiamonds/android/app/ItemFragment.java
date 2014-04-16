@@ -31,8 +31,9 @@ public class ItemFragment extends Fragment implements OnItemClickListener {
 
 	// TODO: Rename and change types of parameters
 
-	private OnFragmentInteractionListener mListener;
-
+	//private OnFragmentInteractionListener mListener;
+	private static ItemFragment mInstance = null;
+	
 	/**
 	 * The fragment's ListView/GridView.
 	 */
@@ -46,8 +47,11 @@ public class ItemFragment extends Fragment implements OnItemClickListener {
 
 	// TODO: Rename and change types of parameters
 	public static ItemFragment newInstance() {
-		ItemFragment fragment = new ItemFragment();
-		return fragment;
+		
+		if( ItemFragment.mInstance == null )
+			ItemFragment.mInstance = new ItemFragment();
+		
+		return ItemFragment.mInstance;
 	}
 
 	/**
@@ -88,28 +92,35 @@ public class ItemFragment extends Fragment implements OnItemClickListener {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		try {
+		/*try {
 			mListener = (OnFragmentInteractionListener) activity;
 		} catch (ClassCastException e) {
 			throw new ClassCastException(activity.toString()
 					+ " must implement OnFragmentInteractionListener");
-		}
+		}*/
 	}
 
 	@Override
 	public void onDetach() {
 		super.onDetach();
-		mListener = null;
+		//mListener = null;
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		if (null != mListener) {
-			// Notify the active callbacks interface (the activity, if the
-			// fragment is attached to one) that an item has been selected.
-			Log.d("ITEMFRAGMENT", " item number " + position + " was clicked (id=" + id +")");
-		}
+		// Display detailedView
+		android.app.FragmentManager l_fragment_manager = null;
+		GemDetailedFragment l_gemDetailedFragment = null;
+		
+		// Notify the active callbacks interface (the activity, if the
+		// fragment is attached to one) that an item has been selected.
+		
+		Log.d("ITEMFRAGMENT", " item number " + position + " was clicked (id=" + id +")");
+		l_fragment_manager = getFragmentManager();
+		l_gemDetailedFragment = GemDetailedFragment.newInstance();
+		
+		l_fragment_manager.beginTransaction().replace(R.id.content_frame,l_gemDetailedFragment).commit();
 		
 	}
 
@@ -135,9 +146,9 @@ public class ItemFragment extends Fragment implements OnItemClickListener {
 	 * "http://developer.android.com/training/basics/fragments/communicating.html"
 	 * >Communicating with Other Fragments</a> for more information.
 	 */
-	public interface OnFragmentInteractionListener {
+	/*public interface OnFragmentInteractionListener {
 		// TODO: Update argument type and name
 		public void onFragmentInteraction(String id);
-	}
+	}*/
 
 }

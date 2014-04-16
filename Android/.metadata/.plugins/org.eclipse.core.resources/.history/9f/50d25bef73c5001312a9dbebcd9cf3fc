@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="url_separator">/</string>
+    <string name="url_hostname">jelly.diamonds</string>
+    <string name="url_webservice_adress">api/rest/users</string>
+    <string name="url_gems_list">gems/refs</string>
+    <string name="url_gems_get">gems</string>
+    <string name="url_gems_post">gems</string>
+</resources>

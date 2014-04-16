@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">JellyDiamonds</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    
+    <string name="no_gems">No Gems</string>
+    
+    <!-- MENU STRING -->
+	<string name="action_websearch">Web search</string>
+	<string name="action_remove_jellyuser">Delete JellyUser</string>
+	<string name="action_settings">Settings</string>
+	<string name="action_edit">Edit Gem</string>
+	<string name="action_sync">Sync Gems Collection</string>
+	
+    <!-- DRAWER STRINGS -->
+    <string name="local_actions_title">My GEMS</string>
+    <string-array name="local_actions">
+        <item name="mygems" >All Gems</item>
+        <item name="localgems" >Local Gems</item>
+        <item name="syncgems">Synchronized Gems</item>
+        <item name="forsalegems" >For Sale</item>
+        <item name="deletedgems" >Deleted Gems</item>
+    </string-array>
+
+    <string name="distant_actions_title">JellyDiamonds</string>
+    <string-array name="distant_actions">
+        <item name="search" >Search a Gem</item>
+    </string-array>
+    
+    <!-- ROW PREVIEW STRING -->
+    <string name="image_content_description">Gem picture</string>
+            
+</resources>

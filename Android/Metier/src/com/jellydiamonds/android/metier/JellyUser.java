@@ -17,7 +17,7 @@ public class JellyUser implements Serializable {
 	 */
 	private static final long serialVersionUID = 3998293232567716497L;
 	
-	private String mUserID = null;
+	private Long mUserID = null;
 	private String mDisplayName = null;
 	private String mFirstName = null;
 	private String mLastName = null;
@@ -58,11 +58,11 @@ public class JellyUser implements Serializable {
 		this.mLicence = mLicence;
 	}
 
-	public String getUserID() {
+	public Long getUserID() {
 		return mUserID;
 	}
 
-	public void setUserID(String mUserID) {
+	public void setUserID(Long mUserID) {
 		this.mUserID = mUserID;
 	}
 

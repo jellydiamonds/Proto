@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,7 +28,18 @@ import android.widget.TextView;
 
 import com.jellydiamonds.android.comm.JellyGemIdDecodeFromJSONEvent;
 import com.jellydiamonds.android.comm.JellySerialize;
+import com.jellydiamonds.android.comm.JellySynchronize;
+import com.jellydiamonds.android.metier.GemCertificate;
+import com.jellydiamonds.android.metier.GemClarity;
+import com.jellydiamonds.android.metier.GemCurrency;
+import com.jellydiamonds.android.metier.GemCut;
+import com.jellydiamonds.android.metier.GemEnhancement;
 import com.jellydiamonds.android.metier.GemID;
+import com.jellydiamonds.android.metier.GemLight;
+import com.jellydiamonds.android.metier.GemOrigin;
+import com.jellydiamonds.android.metier.GemShape;
+import com.jellydiamonds.android.metier.GemSpecies;
+import com.jellydiamonds.android.metier.JellyUser;
 
 
 
@@ -161,6 +173,42 @@ public class MainActivity extends Activity {
 		{
 			Log.d(TAG,l_tmp.toString());
 		}*/
+		
+		JellyUser test = new JellyUser();
+		test.setUserID(10L);
+		GemID gem1 = new GemID();
+		gem1.setSupplierID(10L);
+		gem1.setColor("#123456");
+		gem1.setMass(2.05f);
+		gem1.setSizeX(11.05f);
+		gem1.setSizeY(7.01f);
+		gem1.setSizeZ(4.37f);
+		gem1.setComments("This gem is perfect it's my best one");
+		gem1.setPriceCurrency(GemCurrency.USD);
+		gem1.setPriceValue(300.5f);
+		//gem1.setPhotoLink(l_photo);
+		gem1.setSpecies(GemSpecies.EMERALD);
+		gem1.setShape(GemShape.RECTANGLE);
+		gem1.setCut(GemCut.DIAMOND);
+		gem1.setClarity(GemClarity.EYES_CLEAN_TO_SLIGHTLY_INCLUDED);
+		gem1.setLight(GemLight.FLUORESCENT_LIGHT);
+		gem1.setEnhancement(GemEnhancement.HIGH_PRESSURE);
+		gem1.setCertificate(GemCertificate.GIA);
+		gem1.setOrigin(GemOrigin.MOZAMBIQUE);
+		test.getCollection().getLocalCollection().add(gem1);
+		
+		JellySynchronize sync;
+
+		sync = new JellySynchronize( 	getResources().getString(R.string.url_hostname), // hostname
+										getResources().getString(R.string.url_webservice_adress), // serviceAddr
+										getResources().getString(R.string.url_gems_list), // listGem
+										getResources().getString(R.string.url_gems_get), // getGem
+										getResources().getString(R.string.url_gems_post), // postGem
+										test);
+		
+		//Log.d(TAG,sync.getGETGemsRefsURI().toString());
+		sync.execute((Void) null);
+
 		
 		
 	}

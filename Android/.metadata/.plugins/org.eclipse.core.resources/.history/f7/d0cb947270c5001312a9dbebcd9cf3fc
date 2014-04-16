@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="url_hostname">http://jelly.diamonds</string>
+    <string name="url_webservice_adress">api/rest</string>
+    <string name="url_separator">/</string>
+</resources>

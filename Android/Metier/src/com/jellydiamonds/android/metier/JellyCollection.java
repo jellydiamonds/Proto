@@ -57,14 +57,14 @@ public class JellyCollection implements Serializable {
 	 */
 	private static final long serialVersionUID = -3082987100213107689L;
 	
-	private String 				mOwnerID = null;
+	private Long 				mOwnerID = null;
 	private List<GemID> 		mLocalCollection = null;
 	
 	// Key is GemID reference, GemID must be synced
 	private Map<String,GemID> 	mSyncedCollection = null;
 	
 
-	public JellyCollection( String ownerID )
+	public JellyCollection( Long ownerID )
 	{
 		this.mOwnerID = ownerID;
 		/**
@@ -79,12 +79,12 @@ public class JellyCollection implements Serializable {
 		
 	}
 	
-	public String getOwner()
+	public Long getOwner()
 	{
 		return this.mOwnerID;
 	}
 	
-	public void setOwner( String owner)
+	public void setOwner( Long owner)
 	{
 		this.mOwnerID = owner;
 	}
