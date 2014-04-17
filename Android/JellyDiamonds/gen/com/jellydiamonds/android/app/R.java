@@ -43,56 +43,83 @@ public final class R {
         public static final int ic_drawer=0x7f020006;
         public static final int ic_launcher=0x7f020007;
         public static final int ic_rubik=0x7f020008;
-        public static final int shape_imageborder=0x7f020009;
+        public static final int picture_rect_selection=0x7f020009;
+        public static final int round_button=0x7f02000a;
+        public static final int shape_imageborder=0x7f02000b;
     }
     public static final class id {
-        public static final int action_delete=0x7f090029;
-        public static final int action_edit=0x7f09002a;
-        public static final int action_new=0x7f090028;
-        public static final int action_remove_jellyuser=0x7f090026;
-        public static final int action_settings=0x7f090025;
-        public static final int action_sync=0x7f090027;
-        public static final int content_frame=0x7f09001f;
-        public static final int desc=0x7f09001a;
-        public static final int distant_options_list=0x7f090024;
-        public static final int distant_title=0x7f090023;
-        public static final int drawer_Linearlayout=0x7f090020;
-        public static final int empty_list=0x7f090017;
-        public static final int gem_detail_view=0x7f090000;
-        public static final int gem_details_certificate=0x7f090013;
-        public static final int gem_details_clarity=0x7f09000d;
-        public static final int gem_details_comments=0x7f090015;
-        public static final int gem_details_cutting=0x7f09000b;
-        public static final int gem_details_dimension=0x7f090007;
-        public static final int gem_details_enhancement=0x7f09000f;
-        public static final int gem_details_imageView=0x7f090001;
-        public static final int gem_details_mass=0x7f090005;
-        public static final int gem_details_origin=0x7f090011;
-        public static final int gem_details_shape=0x7f090009;
-        public static final int gem_details_species=0x7f090003;
-        public static final int icon=0x7f090018;
-        public static final int list_display=0x7f090016;
-        public static final int local_options_list=0x7f090022;
-        public static final int local_title=0x7f090021;
-        public static final int progressBar1=0x7f09001b;
-        public static final int root_drawer_layout=0x7f09001e;
-        public static final int row_preview_gemid_specie=0x7f09001c;
-        public static final int row_preview_gemid_summary=0x7f09001d;
-        public static final int textView1=0x7f090002;
-        public static final int textView10=0x7f090014;
-        public static final int textView2=0x7f090004;
-        public static final int textView3=0x7f090006;
-        public static final int textView4=0x7f090008;
-        public static final int textView5=0x7f09000a;
-        public static final int textView6=0x7f09000c;
-        public static final int textView7=0x7f09000e;
-        public static final int textView8=0x7f090010;
-        public static final int textView9=0x7f090012;
-        public static final int title=0x7f090019;
+        public static final int action_delete=0x7f09003f;
+        public static final int action_edit=0x7f090040;
+        public static final int action_new=0x7f09003e;
+        public static final int action_remove_jellyuser=0x7f09003c;
+        public static final int action_settings=0x7f09003b;
+        public static final int action_sync=0x7f09003d;
+        public static final int button_photo=0x7f090000;
+        public static final int button_selection=0x7f09003a;
+        public static final int camera_preview=0x7f090037;
+        public static final int consigne_zone_layout=0x7f090039;
+        public static final int content_frame=0x7f090031;
+        public static final int desc=0x7f09002c;
+        public static final int distant_options_list=0x7f090036;
+        public static final int distant_title=0x7f090035;
+        public static final int drawer_Linearlayout=0x7f090032;
+        public static final int empty_list=0x7f090029;
+        public static final int gem_detail_view=0x7f090001;
+        public static final int gem_details_certificate=0x7f090014;
+        public static final int gem_details_clarity=0x7f09000e;
+        public static final int gem_details_comments=0x7f090016;
+        public static final int gem_details_cutting=0x7f09000c;
+        public static final int gem_details_dimension=0x7f090008;
+        public static final int gem_details_enhancement=0x7f090010;
+        public static final int gem_details_imageView=0x7f090002;
+        public static final int gem_details_mass=0x7f090006;
+        public static final int gem_details_origin=0x7f090012;
+        public static final int gem_details_shape=0x7f09000a;
+        public static final int gem_details_species=0x7f090004;
+        public static final int gem_edit_certificate=0x7f090025;
+        public static final int gem_edit_clarity=0x7f090022;
+        public static final int gem_edit_comments=0x7f090026;
+        public static final int gem_edit_cutting=0x7f090021;
+        public static final int gem_edit_depth=0x7f09001f;
+        public static final int gem_edit_enhancement=0x7f090023;
+        public static final int gem_edit_height=0x7f09001d;
+        public static final int gem_edit_imageButton=0x7f090017;
+        public static final int gem_edit_mass=0x7f090019;
+        public static final int gem_edit_origin=0x7f090024;
+        public static final int gem_edit_shape=0x7f090020;
+        public static final int gem_edit_species=0x7f090018;
+        public static final int gem_edit_validate=0x7f090027;
+        public static final int gem_edit_width=0x7f09001b;
+        public static final int icon=0x7f09002a;
+        public static final int list_display=0x7f090028;
+        public static final int local_options_list=0x7f090034;
+        public static final int local_title=0x7f090033;
+        public static final int progressBar1=0x7f09002d;
+        public static final int root_drawer_layout=0x7f090030;
+        public static final int row_preview_gemid_specie=0x7f09002e;
+        public static final int row_preview_gemid_summary=0x7f09002f;
+        public static final int selection_layout=0x7f090038;
+        public static final int textView1=0x7f090003;
+        public static final int textView10=0x7f090015;
+        public static final int textView2=0x7f090005;
+        public static final int textView3=0x7f090007;
+        public static final int textView31=0x7f09001a;
+        public static final int textView32=0x7f09001c;
+        public static final int textView33=0x7f09001e;
+        public static final int textView4=0x7f090009;
+        public static final int textView5=0x7f09000b;
+        public static final int textView6=0x7f09000d;
+        public static final int textView7=0x7f09000f;
+        public static final int textView8=0x7f090011;
+        public static final int textView9=0x7f090013;
+        public static final int title=0x7f09002b;
     }
     public static final class layout {
-        public static final int drawer_list_item=0x7f030000;
-        public static final int fragment_gem_details=0x7f030001;
+        public static final int consigne=0x7f030000;
+        public static final int control=0x7f030001;
+        public static final int drawer_list_item=0x7f030002;
+        public static final int fragment_gem_details=0x7f030003;
+        public static final int fragment_gem_edit=0x7f030004;
         /** 
     Layout alias to replace the single-pane version of the layout with a
     two-pane version on Large screens.
@@ -115,59 +142,64 @@ public final class R {
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
     
          */
-        public static final int fragment_item=0x7f030009;
-        public static final int fragment_item_grid=0x7f030002;
-        public static final int fragment_item_list=0x7f030003;
-        public static final int fragment_item_row=0x7f030004;
-        public static final int fragment_pending_task=0x7f030005;
-        public static final int gemid_list_fragment=0x7f030006;
-        public static final int gemid_row_preview_fragment=0x7f030007;
-        public static final int main_screen=0x7f030008;
+        public static final int fragment_item=0x7f03000e;
+        public static final int fragment_item_grid=0x7f030005;
+        public static final int fragment_item_list=0x7f030006;
+        public static final int fragment_item_row=0x7f030007;
+        public static final int fragment_pending_task=0x7f030008;
+        public static final int gemid_list_fragment=0x7f030009;
+        public static final int gemid_row_preview_fragment=0x7f03000a;
+        public static final int main_screen=0x7f03000b;
+        public static final int preview=0x7f03000c;
+        public static final int selection=0x7f03000d;
     }
     public static final class menu {
         public static final int main=0x7f080000;
     }
     public static final class string {
-        public static final int action_delete=0x7f040010;
-        public static final int action_edit=0x7f04000e;
-        public static final int action_new=0x7f040011;
+        public static final int action_delete=0x7f040011;
+        public static final int action_edit=0x7f04000f;
+        public static final int action_new=0x7f040012;
         /**  MENU STRING 
          */
-        public static final int action_remove_jellyuser=0x7f04000c;
-        public static final int action_settings=0x7f04000d;
-        public static final int action_sync=0x7f04000f;
+        public static final int action_remove_jellyuser=0x7f04000d;
+        public static final int action_settings=0x7f04000e;
+        public static final int action_sync=0x7f040010;
         public static final int app_name=0x7f040008;
-        public static final int distant_actions_title=0x7f040013;
-        public static final int drawer_close=0x7f04000a;
-        public static final int drawer_open=0x7f040009;
-        public static final int edit_hint=0x7f040024;
-        public static final int gem_button_ok=0x7f040022;
-        public static final int gem_certificate=0x7f04001d;
-        public static final int gem_clarity=0x7f04001a;
-        public static final int gem_comments=0x7f04001e;
-        public static final int gem_cutting=0x7f040019;
-        public static final int gem_depth=0x7f040021;
-        public static final int gem_dimension=0x7f040017;
-        public static final int gem_empty=0x7f040023;
-        public static final int gem_enhancement=0x7f04001b;
-        public static final int gem_height=0x7f040020;
-        public static final int gem_mass=0x7f040016;
-        public static final int gem_origin=0x7f04001c;
-        public static final int gem_shape=0x7f040018;
+        public static final int camera_activity=0x7f040009;
+        public static final int consigne_picture=0x7f040027;
+        public static final int distant_actions_title=0x7f040014;
+        public static final int drawer_close=0x7f04000b;
+        public static final int drawer_open=0x7f04000a;
+        public static final int edit_hint=0x7f040025;
+        public static final int gem_button_ok=0x7f040023;
+        public static final int gem_certificate=0x7f04001e;
+        public static final int gem_clarity=0x7f04001b;
+        public static final int gem_comments=0x7f04001f;
+        public static final int gem_cutting=0x7f04001a;
+        public static final int gem_depth=0x7f040022;
+        public static final int gem_dimension=0x7f040018;
+        public static final int gem_empty=0x7f040024;
+        public static final int gem_enhancement=0x7f04001c;
+        public static final int gem_height=0x7f040021;
+        public static final int gem_mass=0x7f040017;
+        public static final int gem_origin=0x7f04001d;
+        public static final int gem_shape=0x7f040019;
         /**  Pour les TextView et Button formulaires 
          */
-        public static final int gem_species=0x7f040015;
-        public static final int gem_width=0x7f04001f;
+        public static final int gem_species=0x7f040016;
+        public static final int gem_width=0x7f040020;
         /**  ROW PREVIEW STRING 
          */
-        public static final int image_content_description=0x7f040014;
+        public static final int image_content_description=0x7f040015;
         public static final int jellyuser_pic_dir=0x7f040007;
         public static final int jellyuser_save_dir=0x7f040006;
         public static final int jellyuser_save_file=0x7f040005;
         /**  DRAWER STRINGS 
          */
-        public static final int local_actions_title=0x7f040012;
-        public static final int no_gems=0x7f04000b;
+        public static final int local_actions_title=0x7f040013;
+        public static final int no_gems=0x7f04000c;
+        public static final int snap_button=0x7f040026;
         public static final int url_gems_get=0x7f040003;
         public static final int url_gems_list=0x7f040002;
         public static final int url_gems_post=0x7f040004;

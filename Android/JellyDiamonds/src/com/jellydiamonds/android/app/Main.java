@@ -1,10 +1,12 @@
 package com.jellydiamonds.android.app;
 
 
+import com.jellydiamonds.android.camera.MainActivity;
 import com.jellydiamonds.android.comm.JellySynchronize;
 import com.jellydiamonds.android.metier.JellyUser;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -45,7 +47,13 @@ public class Main extends Activity {
 	 */
 	
 	private JellyUser 			mJellyUser = null;
+	
+	/**
+	 * Camera activity
+	 */
 
+	private Intent mCameraActivity = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -111,6 +119,8 @@ public class Main extends Activity {
         if (savedInstanceState == null) {
         	selectLocalAction( 0 );
         }
+        
+        mCameraActivity = new Intent(this, MainActivity.class);
 
 	}
 	
@@ -183,6 +193,9 @@ public class Main extends Activity {
         		l_jellysync.execute((Void)null);
         	}
         	return true;
+        case R.id.action_new:
+        	setAddGemContext(true);
+        	return true;
         /*case R.id.action_websearch:
             // create intent to perform web search for this planet
             Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
@@ -195,6 +208,7 @@ public class Main extends Activity {
             }
             return true;*/
         case R.id.action_remove_jellyuser:
+        	deleteUser();
         	return true;
         default:
             return super.onOptionsItemSelected(item);
@@ -303,6 +317,26 @@ public class Main extends Activity {
 		// TODO Auto-generated method stub
 		
 	}*/
+    
+    public void startCameraActivity()
+    {
+    	startActivityForResult(mCameraActivity,1);
+    }
+    
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+    	  if (requestCode == 1) {
+
+    	     if(resultCode == RESULT_OK){      
+    	         String result=data.getStringExtra("photoLink");   
+    	         Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+    	     }
+    	     if (resultCode == RESULT_CANCELED) {    
+    	         //Write your code if there's no result
+    	    	 Toast.makeText(this, "Erreur", Toast.LENGTH_LONG).show();
+    	     }
+    	  }
+    	}
 	
 	public void setSyncContext( boolean enabled )
 	{
@@ -324,6 +358,22 @@ public class Main extends Activity {
 		}
 	}
 	
+	public void setAddGemContext( boolean enabled )
+	{
+		android.app.FragmentManager l_fragment_manager = null;
+		GemCreateFragment l_createFragment = null;
+		
+		if( enabled )
+		{
+			l_fragment_manager = getFragmentManager();
+			l_createFragment = GemCreateFragment.newInstance();
+			l_fragment_manager.beginTransaction().replace(R.id.content_frame, l_createFragment).commit();
+		}
+		else
+		{
+			selectLocalAction( 0 );
+		}
+	}
 	
 	public void deleteUser()
 	{

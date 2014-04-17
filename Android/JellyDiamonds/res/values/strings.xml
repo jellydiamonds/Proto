@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">JellyDiamonds</string>
+    <string name="camera_activity">CameraActivity</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     
@@ -32,7 +33,7 @@
     
     <!-- ROW PREVIEW STRING -->
     <string name="image_content_description">Gem picture</string>
-    
+
     
     
         
@@ -52,7 +53,7 @@
     <string name="gem_depth">Depth :</string>
     <string name="gem_button_ok">OK</string>
     <string name="gem_empty">EMPTY</string>
-    <string name="edit_hint">HINT</string>
+    <string name="edit_hint">comments</string>
     
     <!-- Pour les ComboBox -->
     <string-array name="gem_species_values"></string-array>
@@ -63,4 +64,7 @@
     <string-array name="gem_origin_values"></string-array>
     <string-array name="gem_certificate_values"></string-array>
             
+    
+    <string name="snap_button">SNAP</string>
+    <string name="consigne_picture">Gem should stay into the frame !</string>
 </resources>

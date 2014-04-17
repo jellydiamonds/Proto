@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.jellydiamonds.android.app.JellyCollectionAdapter"/>
-<fullyQualifiedTypeName name="com.jellydiamonds.android.app.PendingFragment"/>
-<fullyQualifiedTypeName name="android.widget.BaseAdapter"/>
-<fullyQualifiedTypeName name="com.jellydiamonds.android.app.R.layout"/>
-<fullyQualifiedTypeName name="android.R.layout"/>
-<fullyQualifiedTypeName name="android.app.Fragment"/>
-<fullyQualifiedTypeName name="com.jellydiamonds.android.app.ItemFragment"/>
-<fullyQualifiedTypeName name="android.view.Menu"/>
 <fullyQualifiedTypeName name="android.view.MenuInflater"/>
 <fullyQualifiedTypeName name="android.os.AsyncTask"/>
 <fullyQualifiedTypeName name="org.apache.http.client.HttpClient"/>
@@ -53,11 +45,19 @@
 <fullyQualifiedTypeName name="com.jellydiamonds.android.comm.JellySynchronize"/>
 <fullyQualifiedTypeName name="android.widget.Toast"/>
 <fullyQualifiedTypeName name="android.widget.Adapter"/>
-<fullyQualifiedTypeName name="com.jellydiamonds.android.app.R.id"/>
 <fullyQualifiedTypeName name="android.widget.ImageView"/>
 <fullyQualifiedTypeName name="android.widget.TextView"/>
 <fullyQualifiedTypeName name="com.jellydiamonds.android.metier.GemID"/>
 <fullyQualifiedTypeName name="com.jellydiamonds.android.app.GemDetailedFragment"/>
 <fullyQualifiedTypeName name="android.graphics.BitmapFactory"/>
 <fullyQualifiedTypeName name="com.jellydiamonds.android.app.R.drawable"/>
+<fullyQualifiedTypeName name="android.app.Fragment"/>
+<fullyQualifiedTypeName name="com.jellydiamonds.android.app.GemCreateFragment"/>
+<fullyQualifiedTypeName name="android.widget.ImageButton"/>
+<fullyQualifiedTypeName name="android.widget.Button"/>
+<fullyQualifiedTypeName name="com.jellydiamonds.android.app.R.id"/>
+<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
+<fullyQualifiedTypeName name="com.jellydiamonds.android.app.R"/>
+<fullyQualifiedTypeName name="com.jellydiamonds.android.camera.MainActivity"/>
+<fullyQualifiedTypeName name="android.content.Intent"/>
 </qualifiedTypeNameHistroy>
