@@ -42,6 +42,7 @@ logcat.view.colsize.TID=46
 logcat.view.colsize.Tag=261
 logcat.view.colsize.Text=1166
 logcat.view.colsize.Time=140
+logcat.view.filters.list=name\: 'Jellysynchronize', tag\: '[SYNCHRONIZE]', text\: '', pid\: '', app\: '', level\: 'verbose', 
 networkPanel.rxBytes=87
 networkPanel.rxPackets=87
 networkPanel.title=225

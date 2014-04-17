@@ -1,17 +1,7 @@
 package com.jellydiamonds.android.app;
 
-import java.io.File;
 
-import com.jellydiamonds.android.metier.GemCertificate;
-import com.jellydiamonds.android.metier.GemClarity;
-import com.jellydiamonds.android.metier.GemCurrency;
-import com.jellydiamonds.android.metier.GemCut;
-import com.jellydiamonds.android.metier.GemEnhancement;
-import com.jellydiamonds.android.metier.GemID;
-import com.jellydiamonds.android.metier.GemLight;
-import com.jellydiamonds.android.metier.GemOrigin;
-import com.jellydiamonds.android.metier.GemShape;
-import com.jellydiamonds.android.metier.GemSpecies;
+import com.jellydiamonds.android.comm.JellySynchronize;
 import com.jellydiamonds.android.metier.JellyUser;
 
 import android.app.Activity;
@@ -48,11 +38,13 @@ public class Main extends Activity {
 	private String[]	mDrawerLoalOptionsTitle = null;
 	private String[]	mDrawerDistantOptionsTitle = null;
 	
+	boolean mOnSync = false;
+	
 	/**
 	 * Code Metier
 	 */
 	
-	private JellyUser mJellyUser = null;
+	private JellyUser 			mJellyUser = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +52,9 @@ public class Main extends Activity {
 		setContentView(R.layout.main_screen);
 
 		mAppTitle = getTitle();
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.root_drawer_layout);
+		JellyConst.initialize(this);
+        
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.root_drawer_layout);
         mDrawerLinearLayout = (LinearLayout)findViewById(R.id.drawer_Linearlayout);
         mDrawerLocalOptionList = (ListView) findViewById(R.id.local_options_list);
         mDrawerDistantOptionList = (ListView) findViewById(R.id.distant_options_list);
@@ -95,18 +89,24 @@ public class Main extends Activity {
                 R.string.drawer_close  /* "close drawer" description for accessibility */
                 ) {
             public void onDrawerClosed(View view) {
-                getActionBar().setTitle(mAppTitle);
+                //getActionBar().setTitle(mAppTitle);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
             public void onDrawerOpened(View drawerView) {
-            	getActionBar().setTitle(mAppTitle);
+            	//getActionBar().setTitle(mAppTitle);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         
         mJellyUser = getUser();
+
+        
+        /**
+         * SetDisplayName in title
+         */
+        setApplicationTitle( mJellyUser.getDisplayName() );
         
         if (savedInstanceState == null) {
         	selectLocalAction( 0 );
@@ -115,10 +115,16 @@ public class Main extends Activity {
 	}
 	
 	@Override
+	protected void onResume()
+	{
+		super.onResume();
+	}
+	
+	@Override
 	protected void onPause()
 	{
 		super.onPause();
-		if( JellyUser.saveJellyUserContext("save.jelly", this.getFilesDir().toString(), mJellyUser ) == true )
+		if( JellyUser.saveJellyUserContext(JellyConst.getFileSaveName(), JellyConst.getSaveDir(), mJellyUser ) == true )
 			Log.d(TAG, "Success JellyUser saved!");
 		else
 			Log.d(TAG,"Error while saving JellyUser...");
@@ -127,7 +133,6 @@ public class Main extends Activity {
 	@Override
 	protected void onDestroy()
 	{
-		
 		super.onDestroy();
 	}
 
@@ -136,7 +141,6 @@ public class Main extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
-        
         menu.findItem(R.id.action_sync).setVisible(true);
         menu.findItem(R.id.action_new).setVisible(true);
         menu.findItem(R.id.action_delete).setVisible(false);
@@ -165,7 +169,19 @@ public class Main extends Activity {
         // Handle action buttons
         switch(item.getItemId()) {
         case R.id.action_sync:
-        	setPendingFragment( true );
+        	
+        	if( !mOnSync )
+        	{
+        		JellySynchronize l_jellysync = new JellySynchronize(
+					getResources().getString(R.string.url_hostname), // hostname
+					getResources().getString(R.string.url_webservice_adress), // serviceAddr
+					getResources().getString(R.string.url_gems_list), // listGem
+					getResources().getString(R.string.url_gems_get), // getGem
+					getResources().getString(R.string.url_gems_post), // postGem
+    				mJellyUser);
+        		l_jellysync.setActivity(this);
+        		l_jellysync.execute((Void)null);
+        	}
         	return true;
         /*case R.id.action_websearch:
             // create intent to perform web search for this planet
@@ -204,6 +220,10 @@ public class Main extends Activity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
     
+    private void setApplicationTitle( String ext )
+    {
+    	getActionBar().setTitle( this.mAppTitle + " : " + ext);
+    }
     
     /* Click listener for local actions */
     private class DrawerLocalItemClickListener implements ListView.OnItemClickListener {
@@ -228,7 +248,7 @@ public class Main extends Activity {
     	android.app.FragmentManager l_fragment_manager = getFragmentManager();
     	ItemFragment l_listFragment = ItemFragment.newInstance();
     	JellyCollectionAdapter l_listAdapter = null;
-    	
+    	Log.d(TAG,"position : " + position);
     	switch( position )
     	{
     	case 0:
@@ -284,7 +304,7 @@ public class Main extends Activity {
 		
 	}*/
 	
-	public void setPendingFragment( boolean enabled )
+	public void setSyncContext( boolean enabled )
 	{
 		android.app.FragmentManager l_fragment_manager = null;
 		PendingFragment l_pendingFragment = null;
@@ -294,11 +314,13 @@ public class Main extends Activity {
 			l_fragment_manager = getFragmentManager();
 			l_pendingFragment = PendingFragment.newInstance();
 			l_fragment_manager.beginTransaction().replace(R.id.content_frame, l_pendingFragment).commit();
+			mOnSync = true;
 		}
 		else
 		{
 			// Return to default view
 			selectLocalAction( 0 );
+			mOnSync = false;
 		}
 	}
 	
@@ -306,60 +328,34 @@ public class Main extends Activity {
 	public void deleteUser()
 	{
 		
-		if ( this.deleteFile(this.getFilesDir().getPath() + "/save.jelly.jelly" ))
+		if ( this.deleteFile(JellyConst.getFileSavePath()))
 			Toast.makeText(this, "JellyUser save have been deleted...", Toast.LENGTH_LONG).show();
 	}
 	
 	public JellyUser getUser()
 	{
 		JellyUser l_tmp = null;
-		Log.d(TAG,"Triing to recover previous session from + " + getFilesDir());
-		for( File l_tmp1 : getFilesDir().listFiles())
-			Log.d(TAG,"File " + l_tmp1);
+
 		
-		if( ( l_tmp = JellyUser.recoverJellyUserContext( "save.jelly", this.getFilesDir().toString() ) ) == null )
+		if( ( l_tmp = JellyUser.recoverJellyUserContext( JellyConst.getFileSaveName(), JellyConst.getSaveDir() ) ) == null )
 		{
 			Log.d(TAG,"No previous session retrieved : new JellyUser created.");
 			l_tmp =  new JellyUser();
-			GemID gem1 = new GemID();
-			
-			gem1.setReference("20140409EMER001");
-			gem1.setColor("#123456");
-			gem1.setMass(2.05f);
-			gem1.setSizeX(11.05f);
-			gem1.setSizeY(7.01f);
-			gem1.setSizeZ(4.37f);
-			gem1.setComments("This gem is perfect it's my best one");
-			gem1.setPriceCurrency(GemCurrency.USD);
-			gem1.setPriceValue(300.5f);
-			gem1.setSupplierID(6666L);
-			//gem1.setPhotoLink(l_photo);
-			gem1.setSpecies(GemSpecies.EMERALD);
-			gem1.setShape(GemShape.RECTANGLE);
-			gem1.setCut(GemCut.DIAMOND);
-			gem1.setClarity(GemClarity.EYES_CLEAN_TO_SLIGHTLY_INCLUDED);
-			gem1.setLight(GemLight.FLUORESCENT_LIGHT);
-			gem1.setEnhancement(GemEnhancement.HIGH_PRESSURE);
-			gem1.setCertificate(GemCertificate.GIA);
-			gem1.setOrigin(GemOrigin.MOZAMBIQUE);
-			l_tmp.getCollection().getLocalCollection().add(gem1);
-			l_tmp.getCollection().getLocalCollection().add(gem1);
-			l_tmp.getCollection().getLocalCollection().add(gem1);
-			l_tmp.getCollection().getLocalCollection().add(gem1);
-			l_tmp.getCollection().getLocalCollection().add(gem1);
-			l_tmp.getCollection().getLocalCollection().add(gem1);
-			l_tmp.getCollection().getLocalCollection().add(gem1);
-			l_tmp.getCollection().getLocalCollection().add(gem1);
-			l_tmp.getCollection().getLocalCollection().add(gem1);
-			l_tmp.getCollection().getLocalCollection().add(gem1);
-			l_tmp.getCollection().getLocalCollection().add(gem1);
-			l_tmp.getCollection().getLocalCollection().add(gem1);
-
+			l_tmp.setAddress("6 rue Emile Verhaeren");
+			l_tmp.setCity("Wormhout");
+			l_tmp.setCountry("France");
+			l_tmp.setDisplayName("JohnFox");
+			l_tmp.setEmail("moise.roussel@gmail.com");
+			l_tmp.setFirstName("Mo•se");
+			l_tmp.setLastName("ROUSSEL");
+			l_tmp.setPhone("0677355678");
+			l_tmp.setUserID(3L);
 		}
 		else
 		{
 			Log.d(TAG,"Previous session retrieved : JellyUser recovered from file." + l_tmp.getFirstName());
 		}
+		
 		return l_tmp;
 	}
 }

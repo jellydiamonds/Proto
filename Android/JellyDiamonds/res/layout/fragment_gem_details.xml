@@ -1,4 +1,5 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gem_detail_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#dddddd" >
@@ -9,13 +10,22 @@
         android:layout_margin="5dp"
         android:orientation="vertical" >
 
-        <ImageView
-            android:id="@+id/gem_details_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            android:layout_margin="5dp"
-            android:scaleType="fitCenter"
-            android:contentDescription="@string/image_content_description" />
+        <LinearLayout     
+    		android:layout_width="fill_parent"
+   			android:layout_height="fill_parent"
+   			android:gravity="center"
+    		android:orientation="horizontal" >
+            
+            <ImageView
+            	android:id="@+id/gem_details_imageView"
+            	android:layout_width="200dp"
+            	android:layout_height="200dp"
+            	android:layout_margin="5dp"
+            	android:background="@drawable/shape_imageborder"
+            	android:contentDescription="@string/image_content_description" />
+                    
+        </LinearLayout>
+
             
             <LinearLayout
 	 	       android:layout_width="wrap_content"
@@ -28,6 +38,7 @@
     	            android:layout_width="wrap_content"
         	        android:layout_height="wrap_content"
             	    android:layout_margin="5dp"
+            	    android:textStyle="bold"
                 	android:text="@string/gem_species" />
 
 	            <TextView
@@ -35,6 +46,7 @@
         	        android:layout_width="wrap_content"
             	    android:layout_height="wrap_content"
                 	android:layout_margin="5dp"
+                	android:textStyle="italic"
 	                android:text="@string/gem_empty" />
 	            
             </LinearLayout>
@@ -50,6 +62,7 @@
     	            android:layout_width="wrap_content"
         	        android:layout_height="wrap_content"
             	    android:layout_margin="5dp"
+            	    android:textStyle="bold"
                 	android:text="@string/gem_mass" />
 
 	            <TextView
@@ -57,6 +70,7 @@
         	        android:layout_width="wrap_content"
             	    android:layout_height="wrap_content"
                 	android:layout_margin="5dp"
+                	android:textStyle="italic"
 	                android:text="@string/gem_empty" />
 	            
             </LinearLayout>
@@ -72,6 +86,7 @@
     	            android:layout_width="wrap_content"
         	        android:layout_height="wrap_content"
             	    android:layout_margin="5dp"
+            	    android:textStyle="bold"
                 	android:text="@string/gem_dimension" />
 
 	            <TextView
@@ -79,6 +94,7 @@
         	        android:layout_width="wrap_content"
             	    android:layout_height="wrap_content"
                 	android:layout_margin="5dp"
+                	android:textStyle="italic"
 	                android:text="@string/gem_empty" />
 	            
             </LinearLayout>
@@ -94,6 +110,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="5dp"
+	        android:textStyle="bold"
 	        android:text="@string/gem_shape" />
 	    
         <TextView
@@ -101,6 +118,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="5dp"
+	        android:textStyle="italic"
 	        android:text="@string/gem_empty" />
 	        
     </LinearLayout>
@@ -116,6 +134,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="5dp"
+	        android:textStyle="bold"
 	        android:text="@string/gem_cutting" />
     
         <TextView
@@ -123,6 +142,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="5dp"
+	        android:textStyle="italic"
 	        android:text="@string/gem_empty" />
 
     </LinearLayout>
@@ -138,6 +158,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="5dp"
+	        android:textStyle="bold"
 	        android:text="@string/gem_clarity" />
     
         <TextView
@@ -145,6 +166,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="5dp"
+	        android:textStyle="italic"
 	        android:text="@string/gem_empty" />
 
         </LinearLayout>
@@ -160,6 +182,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="5dp"
+	        android:textStyle="bold"
 	        android:text="@string/gem_enhancement" />
 	    
         <TextView
@@ -167,6 +190,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="5dp"
+	        android:textStyle="italic"
 	        android:text="@string/gem_empty" />
 
     </LinearLayout>
@@ -182,6 +206,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="5dp"
+	        android:textStyle="bold"
 	        android:text="@string/gem_origin" />
 	    
         <TextView
@@ -189,6 +214,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="5dp"
+	        android:textStyle="italic"
 	        android:text="@string/gem_empty" />
 
     </LinearLayout>
@@ -204,6 +230,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="5dp"
+	        android:textStyle="bold"
 	        android:text="@string/gem_certificate" />
 	    
         <TextView
@@ -211,6 +238,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="5dp"
+	        android:textStyle="italic"
 	        android:text="@string/gem_empty" />
 
     </LinearLayout>
@@ -226,6 +254,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="5dp"
+	        android:textStyle="bold"
 	        android:text="@string/gem_comments" />
 	    
         <TextView
@@ -233,6 +262,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="5dp"
+	        android:textStyle="italic"
 	        android:text="@string/gem_empty" />
     
 	</LinearLayout>

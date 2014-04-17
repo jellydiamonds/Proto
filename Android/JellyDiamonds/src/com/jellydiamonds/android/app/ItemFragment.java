@@ -48,7 +48,7 @@ public class ItemFragment extends Fragment implements OnItemClickListener {
 	// TODO: Rename and change types of parameters
 	public static ItemFragment newInstance() {
 		
-		if( ItemFragment.mInstance == null )
+		//if( ItemFragment.mInstance == null )
 			ItemFragment.mInstance = new ItemFragment();
 		
 		return ItemFragment.mInstance;
@@ -119,7 +119,7 @@ public class ItemFragment extends Fragment implements OnItemClickListener {
 		Log.d("ITEMFRAGMENT", " item number " + position + " was clicked (id=" + id +")");
 		l_fragment_manager = getFragmentManager();
 		l_gemDetailedFragment = GemDetailedFragment.newInstance();
-		
+		l_gemDetailedFragment.setData( this.mAdapter.getItem(position));
 		l_fragment_manager.beginTransaction().replace(R.id.content_frame,l_gemDetailedFragment).commit();
 		
 	}

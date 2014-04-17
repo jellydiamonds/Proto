@@ -7,6 +7,7 @@ import com.jellydiamonds.android.metier.GemID;
 
 import android.content.Context;
 import android.database.DataSetObserver;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,12 +24,18 @@ public class JellyCollectionAdapter implements ListAdapter{
 	
 	private LayoutInflater mLayoutInflater = null;
 	
+	private BitmapFactory.Options mBitmapOpt = null;
+	
 	public JellyCollectionAdapter( Context context, Collection<GemID> data )
 	{
 		this.mContext = context;
 		this.mData = new ArrayList<GemID>(data);
 		this.mLayout = R.layout.fragment_item_row;
 		this.mLayoutInflater = ( LayoutInflater )mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		// Optimize picture loading
+		this.mBitmapOpt = new BitmapFactory.Options();
+		this.mBitmapOpt.inPreferQualityOverSpeed = false;
+		this.mBitmapOpt.inSampleSize = 16;
 	}
 	
 	public ArrayList<GemID> getData() {
@@ -87,9 +94,14 @@ public class JellyCollectionAdapter implements ListAdapter{
 		
 		l_title.setText( "Ref : " + currentGem.getReference() ); // Temporary
 		l_summary.setText( currentGem.toString() );
-		//l_picture.setImageBitmap(BitmapFactory.decodeFile( currentGem.getPhotoLink().getPath()));
-		l_picture.setImageDrawable( this.mContext.getResources().getDrawable(R.drawable.ic_rubik));
-		
+		if( currentGem.getPhotoLink() != null)
+		{
+			l_picture.setImageBitmap(BitmapFactory.decodeFile( currentGem.getPhotoLink().getPath(), this.mBitmapOpt));
+		}
+		else
+		{
+			//l_picture.setImageDrawable( this.mContext.getResources().getDrawable(R.drawable.default_gem_image));
+		}
 		return rowView;
 	}
 

@@ -53,8 +53,6 @@ public class MainActivity extends Activity {
 	private Button	 decodeButton = null;
 	private EditText fileGetter = null;
 	
-	//private ArrayList<GemID> gemCollection = null;
-	//private ArrayList<GemID> gemCollectionResult = null;
 	private String ownerCollection = "JohnFox";
 	
 	@Override
@@ -77,17 +75,11 @@ public class MainActivity extends Activity {
 				infobox.setText("");
 				if( l_tmp.exists() && l_tmp.canRead() )
 				{
-					try {
-						String jsonString = fileToString(l_tmp);
-						if(jsonString != null)
-							JellySerialize.UnserializeJellyCollection(new JSONObject(jsonString));
-						else
-							infobox.setText("jsonstring is empty...");
-						
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					String jsonString = fileToString(l_tmp);
+					if(jsonString != null)
+						JellySerialize.UnserializeJellyGemID( jsonString );
+					else
+						infobox.setText("jsonstring is empty...");
 				}
 				else
 				{
@@ -98,81 +90,7 @@ public class MainActivity extends Activity {
 		});
 		
 		JellySerialize.setJellyGemIdDecodeFromJSONEvent(eventDecode);
-		//gemCollectionResult = new ArrayList<GemID>();
-		
-		/*File l_photo = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/test.jpg");
-		Log.d(TAG,"File : " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/test.jpg" );
-		
-		if( l_photo.exists() && l_photo.canRead())
-			Log.d(TAG,l_photo.getName() + " Will be encoded !");
-		else
-			Log.d(TAG,l_photo.getName() + " Will not be encoded...");*/
-		
-		//gemCollection = new ArrayList<GemID>();
-		
-		/*GemID gem1 = new GemID();
-		
-		gem1.setReference("20140409EMER001");
-		gem1.setColor("#123456");
-		gem1.setMass(2.05f);
-		gem1.setSizeX(11.05f);
-		gem1.setSizeY(7.01f);
-		gem1.setSizeZ(4.37f);
-		gem1.setComments("This gem is perfect it's my best one");
-		gem1.setPriceCurrency(0);
-		gem1.setPriceValue(300.5f);
-		gem1.setSupplierID(6666L);
-		//gem1.setPhotoLink(l_photo);
-		gem1.setSpecies(GemSpecies.EMERALD);
-		gem1.setShape(GemShape.RECTANGLE);
-		gem1.setCut(GemCut.DIAMOND);
-		gem1.setClarity(GemClarity.EYES_CLEAN_TO_SLIGHTLY_INCLUDED);
-		gem1.setLight(GemLight.FLUORESCENT_LIGHT);
-		gem1.setEnhancement(GemEnhancement.HIGH_PRESSURE);
-		gem1.setCertificate(GemCertificate.GIA);
-		gem1.setOrigin(GemOrigin.MOZAMBIQUE);
-		gemCollection.add(gem1); 
-		
-		
-		gemCollection.add(new GemID());
-		gemCollection.add(new GemID());
-		gemCollection.add(new GemID());
-		gemCollection.add(new GemID());
-		
-		
-		JellySerialize.setJellyGemIdDecodeFromJSONEvent(eventDecode);
-		String jsonString = "";
-		try {
-			jsonString = JellySerialize.SerializeJellyCollection(ownerCollection, gemCollection ).toString(2);
-		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		infobox.setText(jsonString);*/
-		//stringToFile( jsonString, Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/JSONFormatGemID.txt" );
-		//Toast.makeText(getApplicationContext(), 
-		//		"JSON text file is saved at ' " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/JSONFormatGemID.txt '", 
-		//		Toast.LENGTH_LONG).show();
-		/*
-		try {
-			JellySerialize.UnserializeJellyCollection(new JSONObject(jsonString));
-			
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		Log.d(TAG, "---------------------SOURCE-----------------------");
-		for( GemID l_tmp : gemCollection)
-		{
-			Log.d(TAG, l_tmp.toString());
-		}
-		
-		Log.d(TAG, "---------------------DESTINATION-----------------------");
-		for( GemID l_tmp : gemCollectionResult)
-		{
-			Log.d(TAG,l_tmp.toString());
-		}*/
+
 		
 		JellyUser test = new JellyUser();
 		test.setUserID(10L);
@@ -199,7 +117,8 @@ public class MainActivity extends Activity {
 		
 		JellySynchronize sync;
 
-		sync = new JellySynchronize( 	getResources().getString(R.string.url_hostname), // hostname
+		sync = new JellySynchronize( 	this,
+										getResources().getString(R.string.url_hostname), // hostname
 										getResources().getString(R.string.url_webservice_adress), // serviceAddr
 										getResources().getString(R.string.url_gems_list), // listGem
 										getResources().getString(R.string.url_gems_get), // getGem
@@ -283,7 +202,7 @@ public class MainActivity extends Activity {
 	private JellyGemIdDecodeFromJSONEvent eventDecode = new JellyGemIdDecodeFromJSONEvent() {
 		
 		@Override
-		public boolean onUserDecode(String owner) {
+		public boolean onUserDecode(long owner) {
 			// TODO Auto-generated method stub
 			Log.d(TAG,"Owner of current collection being decoded is " + owner);
 			Log.d(TAG,"Owner of previous collection encoded is " + ownerCollection);
@@ -300,7 +219,7 @@ public class MainActivity extends Activity {
 		}
 
 		@Override
-		public void onPictureDecode(InputStream picture) {
+		public void onPictureDecode(InputStream picture, GemID gem) {
 			// TODO Auto-generated method stub
 			FileOutputStream l_endfile;
 			byte l_buffer[] = new byte[1024];
@@ -331,3 +250,80 @@ public class MainActivity extends Activity {
 	};
 
 }
+
+
+//gemCollectionResult = new ArrayList<GemID>();
+
+/*File l_photo = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/test.jpg");
+Log.d(TAG,"File : " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/test.jpg" );
+
+if( l_photo.exists() && l_photo.canRead())
+	Log.d(TAG,l_photo.getName() + " Will be encoded !");
+else
+	Log.d(TAG,l_photo.getName() + " Will not be encoded...");*/
+
+//gemCollection = new ArrayList<GemID>();
+
+/*GemID gem1 = new GemID();
+
+gem1.setReference("20140409EMER001");
+gem1.setColor("#123456");
+gem1.setMass(2.05f);
+gem1.setSizeX(11.05f);
+gem1.setSizeY(7.01f);
+gem1.setSizeZ(4.37f);
+gem1.setComments("This gem is perfect it's my best one");
+gem1.setPriceCurrency(0);
+gem1.setPriceValue(300.5f);
+gem1.setSupplierID(6666L);
+//gem1.setPhotoLink(l_photo);
+gem1.setSpecies(GemSpecies.EMERALD);
+gem1.setShape(GemShape.RECTANGLE);
+gem1.setCut(GemCut.DIAMOND);
+gem1.setClarity(GemClarity.EYES_CLEAN_TO_SLIGHTLY_INCLUDED);
+gem1.setLight(GemLight.FLUORESCENT_LIGHT);
+gem1.setEnhancement(GemEnhancement.HIGH_PRESSURE);
+gem1.setCertificate(GemCertificate.GIA);
+gem1.setOrigin(GemOrigin.MOZAMBIQUE);
+gemCollection.add(gem1); 
+
+
+gemCollection.add(new GemID());
+gemCollection.add(new GemID());
+gemCollection.add(new GemID());
+gemCollection.add(new GemID());
+
+
+JellySerialize.setJellyGemIdDecodeFromJSONEvent(eventDecode);
+String jsonString = "";
+try {
+	jsonString = JellySerialize.SerializeJellyCollection(ownerCollection, gemCollection ).toString(2);
+} catch (JSONException e1) {
+	// TODO Auto-generated catch block
+	e1.printStackTrace();
+}
+infobox.setText(jsonString);*/
+//stringToFile( jsonString, Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/JSONFormatGemID.txt" );
+//Toast.makeText(getApplicationContext(), 
+//		"JSON text file is saved at ' " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/JSONFormatGemID.txt '", 
+//		Toast.LENGTH_LONG).show();
+/*
+try {
+	JellySerialize.UnserializeJellyCollection(new JSONObject(jsonString));
+	
+} catch (JSONException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+
+Log.d(TAG, "---------------------SOURCE-----------------------");
+for( GemID l_tmp : gemCollection)
+{
+	Log.d(TAG, l_tmp.toString());
+}
+
+Log.d(TAG, "---------------------DESTINATION-----------------------");
+for( GemID l_tmp : gemCollectionResult)
+{
+	Log.d(TAG,l_tmp.toString());
+}*/

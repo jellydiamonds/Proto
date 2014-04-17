@@ -13,18 +13,19 @@
 		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="Ref" key="selection"/>
+		<item value="mAdapter" key="selection"/>
 		<list key="findhistory">
+			<item value="mAdapter"/>
+			<item value="mContext"/>
+			<item value="setTitle"/>
+			<item value="Title"/>
+			<item value="gemSerialized"/>
 			<item value="Ref"/>
 			<item value="setVisible"/>
 			<item value="setVisib"/>
-			<item value="fragment"/>
-			<item value="layout"/>
-			<item value="fragment_item_row"/>
-			<item value="onOptionsItemSelected"/>
-			<item value="menu"/>
 		</list>
 		<list key="replacehistory">
+			<item value="l_jsonObject"/>
 			<item value="mFrameLayoutSelection"/>
 			<item value="mRelativeLayoutSnap"/>
 			<item value="mSurfaceView"/>

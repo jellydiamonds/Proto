@@ -1,0 +1,20 @@
+package com.jellydiamonds.android.app;
+
+import android.content.Context;
+import android.os.Environment;
+
+public class JellyConst {
+
+	private static Context mContext = null;
+	private static String mDirectory = null;
+	private static String mFileSavePath = null;
+	private static String mFileSaveName = null;
+	private static String mPicsDirectory = null;
+	
+	public static void setContext( Context context)
+	{
+		mContext = context;
+		mDirectory = Environment.getExternalStorageDirectory();
+	}
+	
+}

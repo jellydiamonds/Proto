@@ -1,0 +1,28 @@
+package com.jellydiamonds.android.app;
+
+import android.content.Context;
+import android.os.Environment;
+
+public class JellyConst {
+
+	private static Context mContext = null;
+	private static String mDirectory = null;
+	private static String mFileSavePath = null;
+	private static String mFileSaveName = null;
+	private static String mPicsDirectory = null;
+	
+	public static void initialize( Context context)
+	{
+		File l_tmp_dir = null;
+		
+		mContext = context;
+		mDirectory = Environment.getExternalStorageDirectory().toString() + 
+						"/" + mContext.getResources().getString(R.string.jellyuser_save_dir);
+		mFileSaveName = mContext.getResources().getString(R.string.jellyuser_save_file);
+		mFileSavePath = mDirectory + "/" + mFileSaveName;
+		mPicsDirectory = mDirectory + "/" +  mContext.getResources().getString(R.string.jellyuser_pic_dir);
+		
+		
+	}
+	
+}

@@ -1,0 +1,6 @@
+package com.jellydiamonds.android.app;
+
+public class JellyConst {
+
+	private static Context mContext = null;
+}
